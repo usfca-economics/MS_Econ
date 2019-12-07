@@ -1,0 +1,17 @@
+RStudio_setup
+
+1. Go to cran.r-project.org
+
+2. Depending on your computer, click on ‘Download R for (Mac) OS X’ or ‘Download R for Windows.’
+
+	- Mac users: Click on the ‘R-3.6.1.pkg’ link to download R to your machine.
+
+	- PC/Windows users: Click on the ‘base’ link, and on the subsequent page, click on the ‘Download R 3.6.1 for Windows’ link.
+
+3. Go to rstudio.com
+
+4. Click on 'Download RStudio'
+
+5. Select the RStudio Desktop FREE version download, and then click on the download link for either Mac or Windows, depending on your machine.
+
+6. Once both R and RStudio have downloaded, open RStudio on your machine to make sure they have been installed correctly. (RStudio will only work if R and RStudio have been installed correctly.)
