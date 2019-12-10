@@ -7,8 +7,12 @@ output: html_document
 
 <style>
 div.blue pre { background-color:lightblue; }
-div.blue pre.r { background-color:lightgray; }
+div.blue pre.r { background-color:cornsilk; }
 </style>
+
+<div class = "blue">
+
+### R Studio Components ###
 
 Console on the left is for executing code (but not for storing it)
 
@@ -16,17 +20,19 @@ Environment on the top right is the data you have loaded in your current R sessi
 
 Output windows on the bottom right is where help query responses surface, plots and graphs are displayed
 
-For code you want to keep (anything that isn't an ad hoc fix or experiment), open a script - Cmd/Ctrl + Shift + N
+For code you want to keep (anything that isn't an ad hoc fix or experiment), open a script - `Cmd/Ctrl` + `Shift` + `N`
+
+### Customize Your R Studio ###
 
 To customize your R Studio, go to Tools > Global Options and change the Appearance (if you'd like)
-<div class = "blue">
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Explore some data that is built in to R Studio
+### How R Studio Displays Dataframes ###
 
-```{r , echo = T}
+Explore some data that is built in to R Studio
+```
 data()
 data(mtcars)
 ```
@@ -36,4 +42,8 @@ When `mtcars` appears in the Global Environment, you can click on it to surface 
 You can explore some of the other datasets to familiarize yourself with R Studio.
 
 Tomorrow we'll start working with and manipulating datasets like this in R.
+
+#### Acknowledgement ####
+
+This lesson is based in part on Rochelle Terman's _Computational Tools for Social Science_ course materials
 </div>

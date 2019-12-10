@@ -1,0 +1,648 @@
+---
+title: "ECON621: Getting Started in R"
+author: "Adam Gorski"
+date: "Jan. 3, 2020"
+output: html_document
+---
+
+<style>
+div.blue pre { background-color:lightblue; }
+div.blue pre.r { background-color:cornsilk; }
+</style>
+<div class = "blue">
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Using the Console ###
+
+You can type commands directly into the console, but they will be forgotten when you close the session.
+```{r}
+3 + 4
+```
+
+If R is ready to accept commands, the R console shows a `>` prompt. If it receives a command (by typing, copy-pasting or sent from the script editor using `Ctrl`-`Enter`), R will try to execute it, and when ready, show the results and come back with a new `>`-prompt to wait for new commands.
+
+If R is still waiting for you to enter more data because it isn’t complete yet, the console will show a `+` prompt. It means that you haven’t finished entering a complete command. This happens when you have not ‘closed’ a parenthesis or quotation. If you’re in RStudio and this happens, click inside the console window and press `Esc`; this should help get you out of trouble.
+```
+> "Is this the end of the question?
++
+```
+```
+> [Where is the other bracket?
++
+```
+You can scroll up in the console window to see previous commands and output. You can also use the up arrow while in the console window to scroll through and execute previous commands.
+
+For any code that isn't an ad hoc fix or experiment, use a script. 
+
+### Scripting Basics ###
+
+##### Executing Code #####
+`Cmd/Ctrl` + `Enter` executes the current R expression from the script editor in the console.
+```{r}
+# Open a script and write a simple line of code that defines a variable:
+
+favnum <- 3
+
+# Now put your cursor on that line of code and hit Cmd/Ctrl + Enter
+
+# If you look in your Global Environment panel you should have a value 'favnum'
+```
+```{r, include=FALSE}
+favnum <- 3
+```
+
+##### Commenting Code #####
+Use `#` signs to add comments within your code chunks, and you are encouraged to regularly comment within your code. Anything to the right of a `#` is ignored by R. Each line of a comment needs to begin with a `#`.
+```{r}
+#Using my favorite number
+
+#My favorite number minus two
+
+favnum - 2
+```
+
+Always be commenting! Future you will benefit more than anyone.
+
+##### Use of Whitespace #####
+In R, white space is ignored (unlike Python). It is good practice to use spaces, because it makes code easier to read.
+```
+# This is much easier to read
+
+favnum <- 3
+
+#Than this is
+favnum<-3
+```
+##### Errors, Warnings, and Messages #####
+Error = Code is Broken
+
+* When the text is a legitimate error, it will be prefaced with “Error:” and try to explain what went wrong. Generally when there’s an error, the code will not run.
+
+ Warning = Code Will (Usually) Run, But There's Something You Should Know
+
+* When the text is a warning, it will be prefaced with “Warning:” and R will try to explain why there’s a warning. Generally your code will still work, but perhaps not in the way you would expect.
+
+Message = Standard Output, Everything's Fine
+
+* When the text doesn’t start with either “Error” or “Warning”, it’s just a friendly message. These are helpful diagnostic messages and they don’t stop your code from working.
+```
+Add some code to your script that should not work and try to execute
+
+favnum x 2
+
+You should see 'Error: unexpected symbol in "favnum x"' in your Console
+```
+### R Environment ###
+
+##### Listing and Removing Objects #####
+The function `ls()` will list all of the objects in your current environment
+```{r}
+ls()
+```
+`rm` will remove an object you no longer need
+```{r}
+badnum <- 4
+rm(badnum)
+```
+##### Installing and Using Packages ######
+Base R comes with thousands of useful functions pre-installed. But because R is an open-source language, many packages (also called libraries) not included in base R will be crucial for working in R. Packages are collections of functions (and sometimes data) designed for a specific task or set of tasks.
+
+A package in R is similar to an app on your phone: you only need to install it once, but you need to load it every session. You install a package using `install.packages()`. You load an installed package using `library()`.
+```
+Practice installing and loading a package with the packages 'knitr' and 'rmarkdown'. You'll need it later today.
+
+install.packages("knitr")
+install.packages("rmarkdown")
+
+library(knitr)
+library(rmarkdown)
+
+# Note: Always put double quotation marks around the package name when installing; leave them off when loading. R is full of finicky details like that.
+```
+### R Syntax ###
+Frustration is natural when you start programming in R. R is a stickler for punctuation, and even one character out of place will cause it to break. But while you should expect to be a little frustrated, take comfort in that it’s both typical and temporary: it happens to everyone, and the only way to get over it is to keep trying.
+
+* Good quote about learning R: "To understand computations in R, two slogans are helpful: - Everything that exists is an object. - Everything that happens is a function call."
+
+##### Creating Variables #####
+An essential part of programming is creating variables (or objects). Variables are names for values. A variable is created when a value is assigned to it. We do that with `<-`.
+```{r}
+favnum <- 3
+```
+`<-` is the called the assignment operator. It assigns values on the right to objects on the left.
+
+So, after executing `x <- 3`, the value of `x` is 3. The arrow can be read as 3 goes into `x`.
+
+Note: Don’t use `=` for assignments. It will work in some contexts, but will cause confusion later.
+
+We can use variables in calculations just as if they were values.
+```{r}
+favnum * 12
+```
+Additionally, the contents of an object can be printed by simply executing the object name.
+```{r}
+favnum
+```
+##### Naming Variables #####
+Object names can only contain letters, numbers, `_` and `.`.
+
+You want your object names to be descriptive. `x` is not a good variable name. You’ll also need a convention for multiple words. I recommend _snake_case_ where you separate lowercase words with `_`.
+```
+i_use_snake_case
+otherPeopleUseCamelCase
+some.people.use.periods # not recommended - bad for integration with Ruby
+And_aFew.People_RENOUNCEconvention
+```
+```
+Make an assignment using snake_case:
+
+favnum_2 <- 9
+
+Inspect it:
+
+favnum_2nd
+> Error in eval(expr, envir, enclos): object 'favnum_2nd' not found
+Favnum_2
+> Error in eval(expr, envir, enclos): object 'Favnum_2' not found
+```
+R Studio has a useful autocomplete function to help with programming. You can type the beginning of a variable name (or function name, dataset name, etc.), press TAB, find the variable you're looking for, then press return.
+
+##### Functions #####
+R has a large collection of built-in functions that helps us do things. When we use a function, we say we’re _calling_ a function.
+```
+function_name(arg1 = val1, arg2 = val2, ...)
+```
+Some helpful built-in functions:
+```{r}
+my_nums <- c(1, 5, 2, 4, 5)
+
+sum(my_nums)
+```
+```{r}
+length(my_nums)
+```
+```{r}
+min(my_nums)
+```
+```{r}
+max(my_nums)
+```
+```{r}
+unique(my_nums)
+```
+##### Function Arguments #####
+An _argument_ is a value that is passed into a function. Every function returns a _result._
+
+For example, the function `seq()` makes regular sequences of numbers. If you type `seq` into the Console, R Studio will helpfully let you know about all the functions that start with `seq` and what they do. Like many functions, `seq()` has several arguments that do not require a value to execute because they have built in default values. 
+```{r}
+# The first two arguments in seq() are 'from' and 'to'
+
+seq(1, 10)
+```
+```{r}
+seq(10,1)
+```
+```{r}
+# 'by' is an argument that defaults to 1 but can be modified:
+
+seq(1, 5, by = 0.5)
+```
+We can save the output of a function as an object for later use.
+```{r}
+my_seq <- seq(1, 5, by = 0.5)
+```
+Every built-in function comes with documentation, or help files.
+
+`?` + object opens a help page for that specific object
+
+`??` + object searches help pages containing the name of the object
+```
+?seq
+??seq
+```
+All help files are structured the same way. The section **Arguments** tells us exactly what kind of information we can pass into a function. The **Value** section explains what the output of the function is. The **Examples** contain real examples of the function in use.
+
+##### Data Types #####
+Every value has a specific type. In R, those types are called “classes”, and there are 5 of them:
+
+* character (text or “string”)
+
+* numeric (integer or decimal)
+
+* integer (just integer)
+
+* logical (`TRUE` or `FALSE` booleans)
+
+* factor (fixed set of possible values, or 'levels')
+
+Examples
+
+Type  | Example
+------------- | -------------
+character  | “a”, “economics”
+numeric  | 3, 3.333
+integer | 3L, 9L (must add `L` to denote integer)
+logical | `TRUE`, `FALSE`
+factor | can be any set of values
+
+When data is input, R guesses what class a value is. To make sure you and R are on the same page, you can use the function `class()` to see what class a value (or variable) is.
+```{r}
+class(3)
+```
+```{r}
+class(3L)
+```
+```{r}
+class("Three")
+```
+```{r}
+class(T)
+```
+```{r}
+class(favnum)
+```
+```{r}
+favnum_2 <- "9"
+class(favnum_2)
+```
+A value’s class determines what the program can do to it.
+```
+3 - 1
+> [1] 2
+3 - "1"
+> Error in 3 - "1": non-numeric argument to binary operator
+```
+##### Coercion #####
+To convert a value, or set of values, to a different type, use `as.` + name of class as functions to convert to that type.
+```{r}
+3 - as.numeric("1")
+```
+One useful and unintuitive case of coercion is coercing factors into numerics. R stores the possible values of a factor and assigns each an integer as an index. Using `as.numeric` will only return the indices.
+```{r}
+favnums <- as.factor(c("2.3", "9", "3")) # Note: c() is the function 'combine'
+as.numeric(favnums)
+
+```
+Instead, you have to coerce to character first, then numeric
+```{r}
+as.numeric(as.character(favnums))
+```
+##### Other Data Cases #####
+_NA_ are missing values
+
+Missing values are specified with _NA_. _NA_ will always be coerced to the correct type if used inside `c()`.
+```{r}
+x <- c(NA, 1)
+x
+```
+```{r}
+class(NA)
+```
+```{r}
+class(x)
+```
+```{r}
+x <- c(NA, "a")
+x
+```
+```{r}
+class(NA)
+```
+```{r}
+class(x)
+```
+_Inf_ is infinity.
+
+You can have either positive or negative infinity.
+```{r}
+1/0
+```
+```{r}
+1/Inf
+```
+_NaN_ means “Not a number”. It’s an undefined value.
+```{r}
+0/0
+```
+### Data Structures ###
+Much of the value of R to data scientists comes from understanding data structures and how to manipulate them. 
+
+R’s base data structures can be organised by their dimensionality (1d, 2d, or nd) and whether they’re homogeneous (all contents must be of the same type) or heterogeneous (the contents can be of different types). This gives rise to the five data types most often used in data analysis:
+
+Dims | Homogeneous | Heterogeneous
+ - | ------------ | --------------
+ 1d | Vector | List
+ 2d | Matrix | Dataframe
+ nd | array
+ 
+Note: In this class we'll use primarily dataframes and vectors, but it is important to understand the different types of data structures.
+ 
+##### Vectors #####
+Vectors are 1-dimensional chains of values. We call each value an _element_ of a vector.
+
+Vectors are usually created with `c()`, which is short for ‘combine’
+```{r}
+x <- c(1, 2, 3)
+x
+```
+```{r}
+length(x)
+```
+We can also add elements to the end of a vector by passing the original vector into the `c()` function.
+```{r}
+divas <- c("Whitney", "Aretha", "Mariah")
+divas <- c(divas, "Gladys")
+divas
+```
+We can also attach names to our vector. This helps us understand what each element refers to.
+
+You can give a name to the elements of a vector with the `names()` function.
+```{r}
+n_number1hits <- c(20, 18, 14, 13)
+names(n_number1hits) <- c("The Beatles", "Mariah Carey", "Rihanna", "Michael Jackson")
+
+n_number1hits
+```
+There are there are four common types of vectors, depending on the class of the values: 
+
+* Logical: `TRUE`, `FALSE`, or `NA`(missing value)
+
+* Integer: whole numbers
+
+* Numeric: integer or decimal
+
+* Character: text or string
+
+All elements of a vector must be the same type. So when you attempt to combine different types, they will be coerced to the most “flexible” type.
+
+For example, combining a character and an integer yields a character.
+```{r}
+c("a", 1)
+```
+When a logical vector is coerced to an integer or double, `TRUE` becomes 1 and `FALSE` becomes 0. This is very useful in conjunction with `sum()` and `mean()`.
+```{r}
+x <- c(FALSE, FALSE, TRUE)
+as.numeric(x)
+```
+```{r}
+# Total number of TRUEs
+sum(x)
+```
+```{r}
+# Proportion that are TRUE
+mean(x)
+```
+##### Lists #####
+Lists are different from vectors because their elements can be of any type. We will spend more time on lists later in the course.
+```{r}
+x <- list(1, "a", TRUE, c(4, 5, 6))
+x
+```
+Lists are used to build up many of the more complicated data structures in R. For example, both data frames and linear models objects (as produced by `lm()`) are lists.
+
+##### Matrices #####
+Matrices are 2-d vectors. That is, they are a collection of elements of the same data type (numeric, character, or logical), arranged into a fixed number of rows and columns.
+
+By definition, if you want to combine different types of data (one column numbers, another column characters), you want a dataframe, not a matrix.
+
+We can create a matrix using the matrix() function. In this function, we assign dimensions to a vector.
+```{r}
+m <- matrix(1:6, nrow = 2, ncol = 3)
+m
+```
+Another way to create matrices is to bind columns or rows using `cbind()` and `rbind()`.
+```{r}
+x <- 1:3
+y <- 10:12
+
+cbind(x, y)
+```
+or
+```{r}
+rbind(x, y)
+```
+Use `dim()` to find out how many rows or columns are in a matrix (or dataframe).
+```{r}
+m <- matrix(1:6, nrow = 2, ncol = 3)
+dim(m)
+```
+Just like vectors or lists, we can give matrices names that describe the rows and columns.
+```{r}
+m <- matrix(1:6, nrow = 2, ncol = 3)
+
+rownames(m) <- c("row1", "row2")
+colnames(m) <- c("A", "B", "C")
+
+m
+```
+##### Dataframes #####
+A dataframe is a very important data type in R. It’s pretty much the de facto data structure for most tabular data and it’s also what we use for statistics.
+
+Let’s say we’re working with the following survey data:
+
+* ‘Are you married?’ or ‘yes/no’ questions (logical)
+
+* ‘How old are you?’ (numeric)
+
+* ‘What is your opinion on Gavin Newsom?’ or other ‘open-ended’ questions (character)
+
+* Etc, etc...
+
+A matrix won’t work here because the dataset contains different data types.
+
+A dataframe is a 2-dimentional data structure containing heterogeneous data types. Each column is a variable of a dataset, and the rows are observations.
+
+`mtcars` (from yesterday's lecture) is a dataframe
+```{r}
+class(mtcars)
+```
+We can create a dataframe from scratch using `data.frame()`. This function takes vectors as input.
+```{r}
+# First, define some vectors
+name <- c("John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr")
+title <- c("Mr.", "Sir", "Mr.", "Mr.")
+age <- c(77, 40, 58, 79)
+deceased <- c(TRUE, FALSE, TRUE, FALSE)
+
+beatles <- data.frame(title, name, age, deceased)
+beatles
+```
+Beware: `data.frame()`’s default behaviour turns strings into factors. This can trip you up when you try to modify or add new values. Use `stringAsFactors = FALSE` to suppress this behaviour as needed.
+
+Essentially, a dataframe is a list of equal-length vectors. That makes it a two-dimensional structure, similar to a matrix.
+
+The `length()` of a dataframe is the length of the underlying list and so is the same as `ncol()`. `nrow()` gives the number of rows.
+```{r}
+vec1 <- 1:3
+vec2 <- c("a", "b", "c")
+df <- data.frame(vec1, vec2)
+
+# these two are equivalent - number of columns
+length(df)
+
+ncol(df)
+```
+```{r}
+# get number of rows
+nrow(df)
+```
+```{r}
+# get number of both columns and rows
+dim(df)
+```
+
+Also like matrices, dataframes have `colnames()`, and `rownames()`.
+```{r}
+vec1 <- 1:3
+vec2 <- c("a", "b", "c")
+df <- data.frame(vec1, vec2)
+
+colnames(df)
+
+rownames(df)
+```
+```{r}
+# change the column names
+colnames(df) <- c("Number", "Character")
+
+# change the row names
+rownames(df) <- c("apple", "orange", "banana")
+
+df
+```
+### R Markdown ###
+
+We'll use R Markdown throughout this course for lecture notes and lab assignments. R Markdown documents combine executable code, results, and commentary into one document. Files can easily be converted to html, pdf, and other file types for broad sharing. R Markdown is also great for take home exercises when you're on the job market.
+
+You open a new R Markdown file in the same way you open a new script, but instead select 'R Markdown' as the type of file.
+```
+Open an R Markdown file. 
+
+Title it 'ECON 621 - Lab #1,' add your name as Author, and choose html as the output type. 
+
+(You can change any of these fields later)
+```
+A new R Markdown file isn't empty. It contains a template including the three basic components of an R Markdown file:
+
+1. Header
+
+2. Code chunks
+
+3. Text
+
+##### 1. Header #####
+R Markdown autopopulates your header, but you can change any of the fields at any time.
+```
+You should see something like this at the top of your new file:
+---
+title: "ECON 621 - Lab #1"
+author: "Adam Gorski"
+date: "1/3/2020"
+output: html_document
+---
+```
+##### 2. Code Chunks #####
+To run code inside an R Markdown document, you do it inside a “chunk”. Think of a chunk like a step in a larger process. A chunk should be relatively self-contained, and focused around a single task.
+
+Chunks begin with a header which consists of  ` ``` {r` , followed by an optional chunk name, followed by comma separated options, followed by `}`. Next comes your R code and the chunk end is indicated by a final three back ticks.
+
+You can continue to run the code using the keyboard shortcut that we learned earlier: `Cmd/Ctrl` + `Enter`. You can also run the entire chunk by clicking the Run icon (it looks like a play button at the top of the chunk), or by pressing `Cmd/Ctrl` + `Shift` + `Enter`.
+
+RStudio executes the code and displays the results inline with the code.
+```
+Enter a small code chunk in your new R Markdown file and execute it (don't include '#').
+
+#```{r}
+favnum * 12
+#```
+```
+```
+[1] 36
+```
+Note: You should see a chunk of code like this near the top of your file:
+```
+#```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#```
+```
+This is file setup chunk of code, where you would add the code that prepares your environment for what your code will execute (libraries to load, etc.). `include=FALSE` means the code will be executed without being displayed. You should keep this chunk in your file.
+
+##### 3. Text #####
+Text in R Markdown files is written in Markdown, a lightweight set of conventions for formatting plain text files. Markdown is designed to be easy to read and easy to write. It is also very easy to learn. The guide below shows how to use Pandoc’s Markdown, a slightly extended version of Markdown that R Markdown understands.
+</div>
+```
+Text formatting 
+------------------------------------------------------------
+
+*italic*  or _italic_
+**bold**   __bold__
+`code`
+superscript^2^ and subscript~2~
+
+Headings
+------------------------------------------------------------
+
+# 1st Level Header
+
+## 2nd Level Header
+
+### 3rd Level Header
+
+Lists
+------------------------------------------------------------
+
+*   Bulleted list item 1
+
+*   Item 2
+
+    * Item 2a
+
+    * Item 2b
+
+1.  Numbered list item 1
+
+1.  Item 2. The numbers are incremented automatically in the output.
+
+Links and images
+------------------------------------------------------------
+
+<http://example.com>
+
+[linked phrase](http://example.com)
+
+![optional caption text](path/to/img.png)
+
+Tables 
+------------------------------------------------------------
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+```
+<div class = "blue">
+```
+Above your initial code chunk, add a title and some language describing the code below it.
+
+#### Operations with Favorite Number ####
+Here's what happens when my favorite number is multiplied by 12:
+```
+##### Knitting #####
+To produce a complete report containing all text, code, and results, click the “Knit” button at the top of the script editor (looks like a ball of yarn) or press `Cmd/Ctrl` + `Shift` + `K.` This will display the report in the viewer pane, and create a self-contained html file that you can share with others. The .html file is written in the same directory as your .Rmd file. You'll have to specify your directory the first time you knit your file. Modifying and re-knitting the same file will overwrite the existing file.
+```
+Knit your file to an html. 
+
+You should save it to the directory you're using for this class (create one if you haven't yet).
+
+Examine the output
+```
+All of your assignments for this class will be submitted as html files created in R Markdown.
+
+[Here](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is a good overview of R Markdown usage.
+
+#### Acknowledgement ####
+
+This lesson is based on Rochelle Terman's _Computational Tools for Social Science_ course materials
+</div>
