@@ -14,6 +14,20 @@ div.blue pre.r { background-color:cornsilk; }
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Today's Lecture:
+
+* Using the Console
+
+* Scripting Basics
+
+* R Environment
+
+* R Syntax
+
+* Data Structures
+
+* R Markdown
+
 ### Using the Console ###
 
 You can type commands directly into the console, but they will be forgotten when you close the session.
@@ -122,6 +136,7 @@ library(rmarkdown)
 # Note: Always put double quotation marks around the package name when installing; leave them off when loading. R is full of finicky details like that.
 ```
 ### R Syntax ###
+
 Frustration is natural when you start programming in R. R is a stickler for punctuation, and even one character out of place will cause it to break. But while you should expect to be a little frustrated, take comfort in that it’s both typical and temporary: it happens to everyone, and the only way to get over it is to keep trying.
 
 * Good quote about learning R: "To understand computations in R, two slogans are helpful: - Everything that exists is an object. - Everything that happens is a function call."
@@ -327,6 +342,7 @@ _NaN_ means “Not a number”. It’s an undefined value.
 0/0
 ```
 ### Data Structures ###
+
 Much of the value of R to data scientists comes from understanding data structures and how to manipulate them. 
 
 R’s base data structures can be organised by their dimensionality (1d, 2d, or nd) and whether they’re homogeneous (all contents must be of the same type) or heterogeneous (the contents can be of different types). This gives rise to the five data types most often used in data analysis:
@@ -543,6 +559,20 @@ date: "1/3/2020"
 output: html_document
 ---
 ```
+Optional: You can also insert some code below your header to modify the colors of your output file.
+```
+<style>
+div.blue pre { background-color:lightblue; }
+div.blue pre.r { background-color:cornsilk; }
+</style>
+<div class = "blue">
+
+--- All your code and text goes here ---
+
+</div>
+```
+[Here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) is a reference of all of the colors and names of colors in R.
+
 ##### 2. Code Chunks #####
 To run code inside an R Markdown document, you do it inside a “chunk”. Think of a chunk like a step in a larger process. A chunk should be relatively self-contained, and focused around a single task.
 

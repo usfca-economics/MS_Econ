@@ -1,0 +1,28 @@
+---
+title: "ECON621: Processing and Cleaning Data"
+author: "Adam Gorski"
+date: "Jan. 7, 2020"
+output: html_document
+---
+
+<style>
+div.blue pre { background-color:lightblue; }
+div.blue pre.r { background-color:cornsilk; }
+</style>
+<div class = "blue">
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Today's Lecture:
+
+* Exploring and Summarizing Data
+
+* Checking for Anomalies, Edge cases, and Errors
+
+* Merging Disparate Data Sources
+
+
+
+
+</div>

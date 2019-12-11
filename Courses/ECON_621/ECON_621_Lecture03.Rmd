@@ -1,0 +1,343 @@
+---
+title: "ECON621: Accessing and Modifying Data"
+author: "Adam Gorski"
+date: "Jan. 6, 2020"
+output: html_document
+---
+
+<style>
+div.blue pre { background-color:lightblue; }
+div.blue pre.r { background-color:cornsilk; }
+</style>
+<div class = "blue">
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Today's Lecture:
+
+* Working Directory Hygiene
+
+* Accessing Data
+
+* Subsetting Data
+
+* Exporting Data
+
+In yesterday's lecture, we mainly created data so that we could learn how R works. In nearly every professional setting, you'll be accessing and working with _existing_ data.
+
+### Working Directory Hygiene ###
+
+Every R session has a working directory. This is a file path (eg, "/Users/adamgorski/economics_project") that R Studio will use to load files and to save files. The default that R uses is the user home directory (eg, "/Users/adamgorski"). To check which is your current working directory, you can use `getwd()`.
+```{r}
+getwd()
+```
+You can create folders specific to the project you are working on (especially helpful to connect to a git repo), and then set your working directory to that specific folder. `setwd()` changes the working directory of your R session.
+```{r}
+setwd("/Users/adamgorski/MS_Econ/Courses/ECON_621")
+```
+You can also change the working directory by going to Session > Set Working Directory > Choose Directory... This will autopopulate the `setwd()` code in your Console if you would like to use it later.
+
+Note: **Changing the working directory for an R Markdown file once it has been opened requires a different and more complicated process.** I recommend creating a folder for this course and changing your working directory to that folder before opening an R Markdown file.
+
+### Accessing Data ###
+
+There are two common ways to access and work with datasets:
+
+1. Download data and import into R
+
+2. Connect to a database and use a (SQL) query to import the data you need
+
+Note: As we discussed last lecture, data comes in all shapes and sizes. However, dataframes are by far the most common form in data analysis. So we will focus there for today.
+
+##### Importing Existing Data Files #####
+If you already have the data you need as a file (usually a .csv file), make sure the file is in the working directory you specified, and use the `read.csv` (or `read.table`) function to import. Import your data to a named object to store it in your environment.
+```
+You can download the .csv file "wine_components.csv" from the Canvas page, under Files/Data Files.
+```
+```{r}
+wine_data <- read.csv("wine_components.csv")
+head(wine_data) # Note: 'head' function prints the first six rows of a dataframe
+```
+After importing, your data object will appear in the Global Environment pane. If you click on the name of the object, you can view it as spreadsheet. If you click on the arrow to the left of the name, a dropdown will appear summarizing the data.
+```
+wine_type : Factor w/ 3 levels "Red","Rose","White": 1 1 1 1 1 1 ...
+alcohol : num 14.2 13.2 13.2 14.4 13.2 ...
+malic_acid : num 1.71 1.78 2.36 1.95 ...
+...
+```
+This allows you to inspect your data and also see if R has done anything strange with it upon importing. A common issue is for R to convert strings (any text) into factors.
+
+We'll come back to data exploration.
+
+##### Connecting to a Database #####
+It is *far* more common to access your data by connecting to a database. You might be importing stored .csv files if you are in a research position or analyzing a lot of publicly available data, but that data is by definition *static*.
+
+Nearly all companies and organizations have their own database(s), which are increasingly cloud-based (AWS, Azure, GCP). This allows for efficient storage and organization of data in real time. Connecting to and querying a database is much more efficient than asking someone to give you a .csv of the data you need.
+
+In order to access the data this way, you need:
+
+1. Database credentials
+
+2. Query of the specific data you need
+
+Since this class is not about database management or learning SQL, I will provide both of these for you for all assignments. I'll also make each of the datasets available as .csv files on Canvas if you would rather download them to your computer and use `read.csv` to import into R. However, I highly recommend connecting to and querying the database, as it is a much more common approach to doing data analysis in a professional setting.
+
+**Database Credentials**
+
+The database we will use for this class is a cloud-based (Google Cloud Platform) database. Here's how to connect:
+
+  * Download the file "GCP_local_IP_connection_setup.R" from Canvas. It will be under Files/Database Connection.
+
+  * Store the file in your working directory.
+  
+  * Load the file using the `source()` function.
+
+```{r}
+source("/Users/adamgorski/MS_Econ/Courses/GCP_local_IP_connection_setup.R")
+```
+**Note**: Credentials are dependent on the IP address you are connecting from. You should always be able to connect from USF. **If you want to connect to the database from somewhere else (eg, your home), I need to whitelist your IP address.** Type 'get my IP' into google from the location where you'd like to connect from, and email me the IP address so I can grant you access.
+
+**Query**
+
+Now that you're connected to the database, you need to know which data to query. The package you loaded allows you to be able to send SQL queries to the database to pull your specific data request. I'll provide you with the queries you'll need for assignments, but feel free to use this connection to practice SQL queries. *Ability with SQL is the most sought after skill for data positions.*
+
+The package you loaded has the function `dbGetQuery`, which takes a database connection and a SQL query as arguments for pulling a dataframe.
+```{r}
+wine_data_db <- dbGetQuery(con, "SELECT * FROM econ_621.wine_components")
+head(wine_data_db)
+```
+Once your data is imported into your R environment as a dataframe, it is the exact same as if you had imported from a file on your computer.
+
+### Subsetting Data ###
+
+R is very good and very fast at subsetting data.  Mastery of subsetting allows you to succinctly express complex operations in a way that few other languages can match. Subsetting is challenging because you need to master a number of interrelated concepts:
+
+* Subsetting operators: `[]`, `$`, and `[[]]`
+
+* Types of subsetting
+
+* Behavioral differences between different types of data objects (vectors, dataframes, etc.)
+
+* Using subsetting in conjunction with assignment
+
+##### Subsetting a Vector with `[]` #####
+```{r}
+# Start with a vector where the number after the decimal gives the original position of value (to make it easier to keep track of initial positions)
+
+x <- c(2.1, 4.2, 3.3, 5.4)
+```
+Using `[]`, we can use the integer of the value's position to return the value. 
+```{r}
+x[1]
+```
+We can also index multiple values by passing a vector of integers. Note that you have to use `c` inside the `[` for this to work.
+```{r}
+x[c(3, 1)]
+
+# Duplicated indices return duplicated values
+x[c(3, 2, 2)]
+```
+`order` function gives the index positions (not the values) of smallest to largest values.
+```{r}
+order(x)
+
+# You can use use the results to sort the values
+x[order(x)]
+
+# Then you can subset the subset to get the lowest value
+x[order(x)][1]
+```
+Negative integers omit elements at the specified positions
+```{r}
+x[-1]
+
+x[-c(3, 1)]
+```
+However, you can't mix positive and negative numbers in a single subset
+```
+x[c(-1, 2)]
+> Error in x[c(-1, 2)]: only 0's may be mixed with negative subscripts
+```
+Character vectors return elements with matching names. This only works if the vector is named.
+```{r}
+# Add names to the vector
+names(x) <- c("a", "b", "c", "d")
+
+# Subset using (exact) names
+x[c("d", "c", "a")]
+
+# Like integer indices, you can repeat indices
+x[c("a", "a", "a")]
+```
+Logical vectors select elements where the corresponding logical value is `TRUE`.
+```{r}
+x[c(TRUE, TRUE, FALSE, FALSE)]
+```
+##### Subsetting a Vector with Conditionals #####
+Logical subsetting is the most useful type of subsetting, because you use it to subset based on conditional or comparative statements.
+
+The (logical) comparison operators known to R are:
+
+  * `<` for less than
+  * `>` for greater than
+  * `<=` for less than or equal to
+  * `>=` for greater than or equal to
+  * `==` for equal to each other
+  * `!=` not equal to each other
+
+The nice thing about R is that you can use these comparison operators also on vectors.
+```{r}
+x > 3
+```
+This command tests for every element of the vector if the condition stated by the comparison operator is `TRUE` or `FALSE.` And it returns a logical vector.
+
+We can now pass this statement between the square brackets that follow x to subset only those items that match `TRUE`.
+```{r}
+x[x > 3]
+```
+You can combine conditional statements with `&` (and), `|` (or), and `!` (not).
+```{r}
+# Combining two conditional statements with &
+x > 3 & x < 5
+
+x[x > 3 & x < 5]
+```
+```{r}
+# Combining two conditional statements with |
+x < 3 | x > 5 
+
+x[x < 3 | x > 5]
+```
+```{r}
+# Combining conditional statements with !
+!x > 5 
+
+x[!x > 5]
+```
+Another way to generate implicit conditional statements is using the `%in%` operator, which tests whether an item is in a set.
+```{r}
+# Generate implicit logical vectors through the %in% operator
+x %in% c(3.3, 4.2)
+
+x[x %in% c(3.3, 4.2)]
+```
+##### Subsetting Lists #####
+We won't spend too much time here. Remember that lists are one-dimensional data structures that can store different types of data in each component.
+```{r}
+my_list <- list(a = 1:3, b = "a string", c = pi)
+my_list
+```
+`[` extracts a sub-list where the result will always be a list. Like with vectors, you can subset with a logical, integer, or character vector. `[[` extracts a single component from a list. In other words, it removes that hierarchy and returns whatever object is stored inside.
+```{r}
+my_list[1:2]
+```
+```{r}
+my_list[[1]]
+```
+##### Subsetting Matrices #####
+Similar to vectors, you can use the square brackets `[ ]` to select one or multiple elements from a matrix. But whereas vectors have one dimension, matrices have two dimensions. We therefore have to use two subsetting vectors – one for rows to select, another for columns – separated by a comma.
+```{r}
+a <- matrix(1:9, nrow = 3)
+colnames(a) <- c("A", "B", "C")
+a
+```
+```{r}
+# Selects the value at the first row and second column
+a[1, 2] 
+
+# Selects first row, and the first and third columns
+a[1, -2] 
+
+# Selects first two rows, and the first and third columns
+a[c(1,2), c(1, 3)] 
+```
+Blank subsetting is also useful because it lets you keep all rows or all columns.
+```{r}
+# Selects first two rows and all columns
+a[c(1, 2), ]
+```
+##### Subsetting Dataframes #####
+Data from data frames can be addressed like matrices, using two vectors separated by a comma.
+```{r}
+# Print the alcohol content of the first wine
+wine_data_db[1, 2]
+```
+```{r}
+# Print all the data for the first wine
+wine_data_db[1, ]
+```
+```{r}
+# Print the first two rows of the first two columns
+wine_data_db[1:2, 1:2]
+```
+A possible disadvantage of this approach is that you have to know (or look up) the column number of type, which gets hard if you have a lot of variables. Instead of using numerics to select elements of a data frame, you can also use the variable names to select columns of a data frame. It is often easier to just make use of the variable name.
+```{r}
+# Print the type of wine of the first five rows
+wine_data_db[1:5, "wine_type"]
+```
+You will often want to select an entire column, namely one specific variable from a data frame. As long as your columns have names, the best way to select a column is with the `$` sign. Using `$` will also make your life easier through R Studio's autocomplete.
+```{r}
+wine_data_db$wine_type
+```
+Remember that dataframes are really a collection of equal-length vectors. `$` specifies which vector you are interested in.
+```{r}
+# Print the type of wine of the first five rows
+wine_data_db$wine_type[1:5]
+```
+##### Conditional Subsetting #####
+We can combine two powerful subsetting tools: the `$` operator and conditional subsetting.
+```{r}
+# First extract the magnesium column
+magnesium <- wine_data_db$magnesium
+
+# Then find the elements less than 100
+magnesium < 100
+```
+```{r, results = 'hide'}
+# Now we have a boolean vector, which we can use to extract all the wines with magnesium < 100
+wine_data_db[magnesium < 100,]
+```
+```{r}
+# Finally, we can combine these steps into one efficient line of code:
+low_mag_wine <- wine_data_db[wine_data_db$magnesium < 100,]
+```
+It is good practice to create a new data set when subsetting, instead of overwriting the existing one.
+
+##### Sub-assignment #####
+All subsetting operators can be combined with assignment to modify selected values of the input vector.
+```{r}
+x <- 1:5
+x[c(1, 2)] <- 2:3
+x
+```
+This is especially useful when conditionally modifying vectors.
+```{r}
+x <- 1:5
+
+# Replace all values less than 3 with NA
+x[x < 3] <- NA
+x
+```
+This also works on dataframes.
+```{r}
+# We want to replace the term "Rose" with "Rosado"
+wine_data_db$wine_type == "Rose"
+```
+```{r}
+wine_data_db$wine_type[wine_data_db$wine_type == "Rose"] <- "Rosado"
+```
+
+### Exporting Data ###
+
+After doing your modifications or analysis, you might want to export a dataset. This could be a deliverable you are expected to produce or a way for you to save your data for use elsewhere. 
+
+The function `write.csv` takes a data object from your environment and writes it to your working directory with the name you have assigned. The default for this function is to write a column of row names, which you can set to `row.names = F` if you don't want.
+```{r eval=FALSE, include=TRUE}
+write.csv(low_mag_wine, "low_mag_wine_data.csv", row.names = F)
+```
+
+#### Acknowledgement ####
+
+This lesson is based in part on Rochelle Terman's _Computational Tools for Social Science_ course materials
+</div>

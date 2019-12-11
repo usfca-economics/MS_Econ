@@ -1,3 +1,5 @@
+if (!"RPostgreSQL" %in% installed.packages()) {install.packages("RPostgreSQL")}
+
 library(RPostgreSQL)
 drv <- dbDriver("PostgreSQL")
 con <- dbConnect(drv, dbname="don-econ",
