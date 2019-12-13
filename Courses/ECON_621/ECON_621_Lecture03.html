@@ -378,7 +378,7 @@ div.blue pre.r { background-color:cornsilk; }
 <p>Today’s Lecture:</p>
 <ul>
 <li><p>Working Directory Hygiene</p></li>
-<li><p>Accessing Data</p></li>
+<li><p>Importing Data</p></li>
 <li><p>Subsetting Data</p></li>
 <li><p>Exporting Data</p></li>
 </ul>
@@ -391,7 +391,7 @@ div.blue pre.r { background-color:cornsilk; }
 <pre class="r"><code>setwd(&quot;/Users/adamgorski/MS_Econ/Courses/ECON_621&quot;)</code></pre>
 <p>You can also change the working directory by going to Session &gt; Set Working Directory &gt; Choose Directory… This will autopopulate the <code>setwd()</code> code in your Console if you would like to use it later.</p>
 <p>Note: <strong>Changing the working directory for an R Markdown file once it has been opened requires a different and more complicated process.</strong> I recommend creating a folder for this course and changing your working directory to that folder before opening an R Markdown file.</p>
-<h3 id="accessing-data">Accessing Data</h3>
+<h3 id="importing-data">Importing Data</h3>
 <p>There are two common ways to access and work with datasets:</p>
 <ol style="list-style-type: decimal">
 <li><p>Download data and import into R</p></li>
@@ -452,8 +452,8 @@ malic_acid : num 1.71 1.78 2.36 1.95 ...
 <p><strong>Note</strong>: Credentials are dependent on the IP address you are connecting from. You should always be able to connect from USF. <strong>If you want to connect to the database from somewhere else (eg, your home), I need to whitelist your IP address.</strong> Type ‘get my IP’ into google from the location where you’d like to connect from, and email me the IP address so I can grant you access.</p>
 <p><strong>Query</strong></p>
 <p>Now that you’re connected to the database, you need to know which data to query. The package you loaded allows you to be able to send SQL queries to the database to pull your specific data request. I’ll provide you with the queries you’ll need for assignments, but feel free to use this connection to practice SQL queries. <em>Ability with SQL is the most sought after skill for data positions.</em></p>
-<p>The package you loaded has the function <code>dbGetQuery</code>, which takes a database connection and a SQL query as arguments for pulling a dataframe.</p>
-<pre class="r"><code>wine_data_db &lt;- dbGetQuery(con, &quot;SELECT * FROM econ_621.wine_components&quot;)
+<p>The package you loaded has the function <code>dbGetQuery</code>, which takes a database connection and a SQL query as arguments for pulling a dataframe. Note: make sure to use single quotes, not double quotes, around your query.</p>
+<pre class="r"><code>wine_data_db &lt;- dbGetQuery(con, 'SELECT * FROM econ_621.wine_components')
 head(wine_data_db)</code></pre>
 <pre><code>##   wine_type alcohol malic_acid  ash alcalinity_of_ash magnesium
 ## 1       Red   14.23       1.71 2.43              15.6       127

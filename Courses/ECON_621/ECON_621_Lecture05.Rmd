@@ -1,0 +1,27 @@
+---
+title: "ECON621: Summarizing Data, Numerically and Graphically"
+author: "Adam Gorski"
+date: "Jan. 8, 2020"
+output: html_document
+---
+
+<style>
+div.blue pre { background-color:lightblue; }
+div.blue pre.r { background-color:cornsilk; }
+</style>
+<div class = "blue">
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Today's Lecture:
+
+* 
+by
+lapply
+dcast
+
+```{r}
+noquote(paste(",", seq(1800, 1810), "numeric null"))
+```
+</div>

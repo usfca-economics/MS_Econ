@@ -18,7 +18,7 @@ Today's Lecture:
 
 * Working Directory Hygiene
 
-* Accessing Data
+* Importing Data
 
 * Subsetting Data
 
@@ -40,7 +40,7 @@ You can also change the working directory by going to Session > Set Working Dire
 
 Note: **Changing the working directory for an R Markdown file once it has been opened requires a different and more complicated process.** I recommend creating a folder for this course and changing your working directory to that folder before opening an R Markdown file.
 
-### Accessing Data ###
+### Importing Data ###
 
 There are two common ways to access and work with datasets:
 
@@ -102,9 +102,9 @@ source("/Users/adamgorski/MS_Econ/Courses/GCP_local_IP_connection_setup.R")
 
 Now that you're connected to the database, you need to know which data to query. The package you loaded allows you to be able to send SQL queries to the database to pull your specific data request. I'll provide you with the queries you'll need for assignments, but feel free to use this connection to practice SQL queries. *Ability with SQL is the most sought after skill for data positions.*
 
-The package you loaded has the function `dbGetQuery`, which takes a database connection and a SQL query as arguments for pulling a dataframe.
+The package you loaded has the function `dbGetQuery`, which takes a database connection and a SQL query as arguments for pulling a dataframe. Note: make sure to use single quotes, not double quotes, around your query.
 ```{r}
-wine_data_db <- dbGetQuery(con, "SELECT * FROM econ_621.wine_components")
+wine_data_db <- dbGetQuery(con, 'SELECT * FROM econ_621.wine_components')
 head(wine_data_db)
 ```
 Once your data is imported into your R environment as a dataframe, it is the exact same as if you had imported from a file on your computer.

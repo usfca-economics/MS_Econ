@@ -18,11 +18,258 @@ Today's Lecture:
 
 * Exploring and Summarizing Data
 
-* Checking for Anomalies, Edge cases, and Errors
+* Checking for Anomalies, Edge Cases, and Errors
 
 * Merging Disparate Data Sources
 
+### Dataframe characteristics ###
+When you first import data into your environment, it's a good idea to familiarize yourself with the data and make sure it looks the way you expected. An advantage of R Studio is that you can look at the data as spreadsheet and use the built-in filters to do initial data exploration. But there are many characteristics you can't observe just by looking, especially if the dataset is large. If you use a script to do your initial data exploration, you can standardize, and even automate, your processes.
 
+When you're working with text for which you have context (unlike some of the data for this class), you should have some idea of what you expect to see before you open your data:
 
+* Roughly how many observations do you expect?
 
+* What are the variables you are planning to use?
+
+* What is the timeframe this data is from?
+
+* How was this data created/collected, and are there any potential issues to be aware of there?
+
+The better you get at asking those questions, the more likely you are to pick up on issues with the data that could present problems later. No matter how cool your model or visualization is, if it is built on bad data, it will come back on you and create a lot more work or embarassment down the road.
+
+The `dim` function returns the dimensions of a two-dimensional object (eg, a dataframe or matrix). `dim` returns two numbers: number of rows and number of columns.
+```{r, include = F}
+wine_data <- read.csv("wine_components.csv")
+```
+```{r}
+dim(wine_data)
+```
+You can also use the `str` function to get a more complete overview of your dataset's structure. Note: this is the same information R Studio provides you in a dropdown if you click on the arrow next to your data object in the Global Environment pane.
+```{r}
+str(wine_data)
+```
+To return only the columns in your dataset, use `colnames`.
+```{r}
+colnames(wine_data)
+```
+If you have a lot of columns, and you want to see if a specific column is in your dataset, you can use `colnames` along with `%in%`. You can think about the `%in%` operator, and how to use it, as similar to the phrase 'is included in.' For example, 'the needle *is included in* the haystack?' will return you one yes or no answer. The other way around, 'the haystack *is included in* the needle?' will return you one yes or no answer for every element in the haystack.
+```{r}
+# Is ash one of the variables in your dataset?
+"ash" %in% colnames(wine_data)
+```
+```{r}
+# Are each of the columns in your dataset named "ash"?
+colnames(wine_data) %in% "ash"
+```
+If you are checking for more than one column, you can combine the names of the columns you're looking for into a vector and use `%in%` to look for the vector.
+```{r}
+required_cols <- c("color_intensity", "hue", "price")
+required_cols %in% colnames(wine_data)
+```
+If you want a binary response to whether all the columns you are looking for are present, you can use the `all` function. `all` will only return `TRUE` if all values are `TRUE`, otherwise it will return `FALSE`.(`all` is a useful function that works with any set of conditional statements.)
+```{r}
+required_cols <- c("color_intensity", "hue")
+all(required_cols %in% colnames(wine_data))
+```
+```{r}
+required_cols <- c("color_intensity", "hue", "price")
+all(required_cols %in% colnames(wine_data))
+```
+The downside, of course, is that if you get `FALSE` returned, you don't know which value(s) triggered it. If you want to return the names of the columns that you need but that aren't in your dataset, you can use a combined approach.
+```{r}
+# Here we subset the vector of columns were looking for by the conditional responses to the %in% operator
+required_cols[!required_cols %in% colnames(wine_data)]
+```
+We can also use `colnames` to rename columns. We need to use the `which` function, which returns the index or indicies of a conditional vector that are `TRUE`.
+```{r}
+# Imagine we want to change the column 'OD280_OD315_of_diluted_wines' to 'protein_content'
+colnames(wine_data) == "OD280_OD315_of_diluted_wines"
+which(colnames(wine_data) == "OD280_OD315_of_diluted_wines")
+# Now we have the index of the column we want to rename
+colnames(wine_data)[which(colnames(wine_data) == "OD280_OD315_of_diluted_wines")] <- "protein_content"
+colnames(wine_data)
+```
+
+### Examining Variables ###
+
+You should have similar questions about your variables as you do you about your dataset:
+
+* Are variables the appropriate data class? (ie, are date/timestamp variables appearing so, or are they strings or factors? are any variables factors that shouldn't be?)
+
+* Which variables should and should not have NA values?
+
+* What are the approximate bounds of the variables? (ie, a variable that is a percent of total should not be greater than 100)
+
+We'll get to transforming the class of variables later in the course, right now we're staying with exploring and describing our data.
+
+##### Treatment of `NA` Values #####
+`NA`s are a common source of frustration in R. When data is imported into R, any empty values are assumed to be `NA`, which is essentially a missing observation. This can cause some weird results.
+```{r}
+x <- c(1, 2, NA, 4)
+max(x)
+min(x)
+sum(x)
+mean(x)
+```
+`NA` breaks conditional statements too.
+```{r}
+NA > 1
+NA < 1
+NA == 1
+NA == NA
+```
+`NA`s will break your analysis if not handled correctly, so it is important to know how to look for them and where. `NA`s do not respond to a normal conditional statement, so you need to use the `is.na` function instead.
+```{r}
+is.na(x)
+```
+If you want a binary answer whether an `NA` exists in a vector, you can use the `any` function, which is similar to the `all` function. If any value in the set of conditionals is `TRUE`, `any` will return `TRUE`. This will tell you whether a vector (eg, a column of variables) contains any `NA` values.
+```{r}
+any(is.na(x))
+```
+Here again is why context about your data is important. For some variables, finding an `NA` could only be due to error (eg, observation ID, timestamp, etc.). For others, it would be expected (eg, subscription ID for a user who is not a subscriber). In any case, you need to have an approach for how to deal with `NA` values.
+
+Generally, there are two approaches for treating `NA`s: 1. Ignore, and 2. Convert
+
+**Ignore `NA`s**
+
+If you want to ignore an entire row in a dataframe based on the presense of an `NA` value, you can use the `is.na` function to create a subset of your data.
+```{r}
+df <- data.frame(id = c(1:4), x = x, ab = c("a", "a", "a", "b"))
+df
+df <- df[!is.na(df$x),]
+df
+```
+Many basic functions have an `na.rm` argument, which, if set to `TRUE`, will ignore `NA` values and complete the operation with the non-`NA` values.
+```{r}
+max(x, na.rm = T)
+min(x, na.rm = T)
+sum(x, na.rm = T)
+mean(x, na.rm = T)
+```
+**Convert `NA`s**
+Oftentimes, data will contain `NA`s when what was intended was a `0`, or some other similar *actual* value (eg, "no response"). You can use `is.na` to convert `NA` values to `0` or any other value.
+```{r}
+x
+x[is.na(x)] <- 0
+x
+```
+If you believe that `NA`s are actually `0`s in disguise, make sure you know that is consistently the case. Some might be `0`s and some might be actual missing values, and if you don't have a reliable way to know the difference, you might create a new problem by trying to solve another one.
+```{r}
+obs <- c(2, NA, 5, 3, NA)
+names(obs) <- c(letters[1:5])
+# Imagine that observation "b" should be a 0, but "e" is actually a missing value
+obs
+# the mean should be 2.5, because (2 + 0 + 5 + 3)/4 = 2.5
+mean(obs, na.rm = T)
+
+obs[is.na(obs)] <- 0
+mean(obs)
+```
+##### Exploring and Summarizing Numerical and Integer Variables #####
+R is great for exploring numerical data. As long as the vector is numeric or integer, use `summary` to get topline descriptive statistics on any variable. `summary` returns the minimum, maximum, mean, and median values of a vector, along with the first and third quartile values. `sd` returns the standard deviation of the vector, which is useful for anomaly detection.
+```{r}
+summary(wine_data$color_intensity)
+sd(wine_data$color_intensity)
+```
+Again, context is important. Salary and Social Security Number could both be stored as numeric values, but summary statistics on the former will tell you a lot, while on the latter they are meaningless.
+
+For integer variables (dummies, counts, etc.), the function `table` returns a distrbution of counts for each value.
+```{r}
+x <- c(0, 1, 0, 0, 0, 1, 2, 1)
+table(x)
+```
+You can also use the results from `table` to give you proportions of total.
+```{r}
+table(x)/length(x)
+```
+You can use `table` for any vector, but for a continuous variable where (nearly) every value is unique, it is not that useful.
+```{r}
+table(wine_data$malic_acid)
+```
+You can use `table` with conditional statements to make it more useful for continuous variables. Again, knowing which values to use comes from your understanding of the data.
+```{r}
+table(wine_data$malic_acid > 2)
+```
+
+##### Examining Character and Category Variables #####
+Handling variables with qualitative values is some of the most difficult data management. Data work depends on all values being coerced into numbers, whether as a measurement or a category. If a value cannot fit into a member of a category or a measurement, you can't understand its relationship to other values, which makes analysis impossible.
+```
+Date - Weather
+--------
+Sunday - Partly cloudy
+Monday - Rain
+Tuesday - Rain
+Wednesday - Cloudy
+Thursday - A bit weird
+Friday - Partly cloudy
+Saturday - Sunny
+```
+The function `unique` returns all the unique values in a vector. It is very useful in exploring qualitative data, especially category variables.
+```{r}
+unique(wine_data$wine_type)
+```
+Note: `unique` does not tell you all the *possible* values for a variable. Rather it returns all the existing values.
+
+The inverse of the `unique` function is `duplicated`, which returns a conditional on whether a value has already appeared.
+```{r}
+x <- c("a", "a", "b", "c", "c", "c", "d")
+duplicated(x)
+```
+Duplicate records are a common problem in data work, and they can break any analysis you build because they look just like regular records. Building in duplicate checks is an important part of data management.
+
+You can use the conditional vector created by `duplicated` to remove duplicates. Note: this will always keep the *first* instance, in order of appearance.
+```{r}
+x[!duplicated(x)]
+```
+You can also search for duplicates based on mulitple columns. This is useful if, for example, you know there should only be one observation per user per day.
+```{r}
+df <- data.frame(name = x, day = c("M", "T", "M", "M", "T", "T", "T"))
+df
+# Duplicated names
+df[duplicated(df$name),]
+
+# Duplicated name and day combinations
+df[duplicated(df),]
+```
+We can use `table` to look at the frequency of each category
+```{r}
+table(wine_data$wine_type)
+```
+We can add a second dimension to `table` to tell us how a category variable relates to another variable.
+```{r}
+table(wine_data$wine_type, wine_data$magnesium > 100)
+```
+
+### Merging Data Sources ###
+
+The data you import into R is often the product of several data tables blended together for your specific analysis. SQL is much better for merging data, but if your data sources are external or you've created data within your analysis, you could need to merge data within R.
+
+The function `merge` takes two dataframes and merges them based on a common key (or keys) they share.
+```{r}
+ages <- data.frame(user = c("a", "b", "c"), age = c(11, 12, 13))
+levels <- data.frame(user = c("a", "b", "c"), level = c(6, 6, 7))
+merge(ages, levels, by = "user")
+```
+If a key value is present in one dataframe but not the other, the default for `merge` is to drop that value from the output. This is called an 'inner join'
+```{r}
+ages <- data.frame(user = c("a", "b", "c", "d"), age = c(11, 12, 13, 13))
+levels <- data.frame(user = c("a", "b", "c", "e"), level = c(6, 6, 7, 7))
+merge(ages, levels, by = "user")
+```
+If you want to keep all values from one or the other dataframe, or both, you can modify the arguments you send to `merge`.
+```{r}
+# To keep all values from the first dataset (called a 'left join')
+merge(ages, levels, by = "user", all.x = T)
+# To keep all values from the second dataset (called a 'right join')
+merge(ages, levels, by = "user", all.y = T)
+# To keep all values from both datasets (called an 'outer join')
+merge(ages, levels, by = "user", all = T)
+```
+Be aware that `merge` can produce some unexpected results with non-unique keys (ie, duplicates).
+```{r}
+ages <- data.frame(user = c("a", "a", "c", "a"), age = c(11, 12, 13, 13))
+levels <- data.frame(user = c("a", "b", "c", "a"), level = c(6, 6, 7, 7))
+merge(ages, levels, by = "user")
+```
+`merge` will produce a unique row for *every* possible combination of values attributed to a key, which can exponentially blow up your data.
 </div>
