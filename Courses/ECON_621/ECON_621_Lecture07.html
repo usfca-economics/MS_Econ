@@ -12,9 +12,9 @@
 
 <meta name="author" content="Adam Gorski" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-10" />
 
-<title>ECON621: Accessing and Modifying Data</title>
+<title>ECON621: Building Automated Processes</title>
 
 <script>/*! jQuery v1.11.3 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */
 !function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h={},i=h.toString,j=h.hasOwnProperty,k={},l="1.11.3",m=function(a,b){return new m.fn.init(a,b)},n=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,o=/^-ms-/,p=/-([\da-z])/gi,q=function(a,b){return b.toUpperCase()};m.fn=m.prototype={jquery:l,constructor:m,selector:"",length:0,toArray:function(){return d.call(this)},get:function(a){return null!=a?0>a?this[a+this.length]:this[a]:d.call(this)},pushStack:function(a){var b=m.merge(this.constructor(),a);return b.prevObject=this,b.context=this.context,b},each:function(a,b){return m.each(this,a,b)},map:function(a){return this.pushStack(m.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(d.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(0>a?b:0);return this.pushStack(c>=0&&b>c?[this[c]]:[])},end:function(){return this.prevObject||this.constructor(null)},push:f,sort:c.sort,splice:c.splice},m.extend=m.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for("boolean"==typeof g&&(j=g,g=arguments[h]||{},h++),"object"==typeof g||m.isFunction(g)||(g={}),h===i&&(g=this,h--);i>h;h++)if(null!=(e=arguments[h]))for(d in e)a=g[d],c=e[d],g!==c&&(j&&c&&(m.isPlainObject(c)||(b=m.isArray(c)))?(b?(b=!1,f=a&&m.isArray(a)?a:[]):f=a&&m.isPlainObject(a)?a:{},g[d]=m.extend(j,f,c)):void 0!==c&&(g[d]=c));return g},m.extend({expando:"jQuery"+(l+Math.random()).replace(/\D/g,""),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return"function"===m.type(a)},isArray:Array.isArray||function(a){return"array"===m.type(a)},isWindow:function(a){return null!=a&&a==a.window},isNumeric:function(a){return!m.isArray(a)&&a-parseFloat(a)+1>=0},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},isPlainObject:function(a){var b;if(!a||"object"!==m.type(a)||a.nodeType||m.isWindow(a))return!1;try{if(a.constructor&&!j.call(a,"constructor")&&!j.call(a.constructor.prototype,"isPrototypeOf"))return!1}catch(c){return!1}if(k.ownLast)for(b in a)return j.call(a,b);for(b in a);return void 0===b||j.call(a,b)},type:function(a){return null==a?a+"":"object"==typeof a||"function"==typeof a?h[i.call(a)]||"object":typeof a},globalEval:function(b){b&&m.trim(b)&&(a.execScript||function(b){a.eval.call(a,b)})(b)},camelCase:function(a){return a.replace(o,"ms-").replace(p,q)},nodeName:function(a,b){return a.nodeName&&a.nodeName.toLowerCase()===b.toLowerCase()},each:function(a,b,c){var d,e=0,f=a.length,g=r(a);if(c){if(g){for(;f>e;e++)if(d=b.apply(a[e],c),d===!1)break}else for(e in a)if(d=b.apply(a[e],c),d===!1)break}else if(g){for(;f>e;e++)if(d=b.call(a[e],e,a[e]),d===!1)break}else for(e in a)if(d=b.call(a[e],e,a[e]),d===!1)break;return a},trim:function(a){return null==a?"":(a+"").replace(n,"")},makeArray:function(a,b){var c=b||[];return null!=a&&(r(Object(a))?m.merge(c,"string"==typeof a?[a]:a):f.call(c,a)),c},inArray:function(a,b,c){var d;if(b){if(g)return g.call(b,a,c);for(d=b.length,c=c?0>c?Math.max(0,d+c):c:0;d>c;c++)if(c in b&&b[c]===a)return c}return-1},merge:function(a,b){var c=+b.length,d=0,e=a.length;while(c>d)a[e++]=b[d++];if(c!==c)while(void 0!==b[d])a[e++]=b[d++];return a.length=e,a},grep:function(a,b,c){for(var d,e=[],f=0,g=a.length,h=!c;g>f;f++)d=!b(a[f],f),d!==h&&e.push(a[f]);return e},map:function(a,b,c){var d,f=0,g=a.length,h=r(a),i=[];if(h)for(;g>f;f++)d=b(a[f],f,c),null!=d&&i.push(d);else for(f in a)d=b(a[f],f,c),null!=d&&i.push(d);return e.apply([],i)},guid:1,proxy:function(a,b){var c,e,f;return"string"==typeof b&&(f=a[b],b=a,a=f),m.isFunction(a)?(c=d.call(arguments,2),e=function(){return a.apply(b||this,c.concat(d.call(arguments)))},e.guid=a.guid=a.guid||m.guid++,e):void 0},now:function(){return+new Date},support:k}),m.each("Boolean Number String Function Array Date RegExp Object Error".split(" "),function(a,b){h["[object "+b+"]"]=b.toLowerCase()});function r(a){var b="length"in a&&a.length,c=m.type(a);return"function"===c||m.isWindow(a)?!1:1===a.nodeType&&b?!0:"array"===c||0===b||"number"==typeof b&&b>0&&b-1 in a}var s=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u="sizzle"+1*new Date,v=a.document,w=0,x=0,y=ha(),z=ha(),A=ha(),B=function(a,b){return a===b&&(l=!0),0},C=1<<31,D={}.hasOwnProperty,E=[],F=E.pop,G=E.push,H=E.push,I=E.slice,J=function(a,b){for(var c=0,d=a.length;d>c;c++)if(a[c]===b)return c;return-1},K="checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",L="[\\x20\\t\\r\\n\\f]",M="(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",N=M.replace("w","w#"),O="\\["+L+"*("+M+")(?:"+L+"*([*^$|!~]?=)"+L+"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|("+N+"))|)"+L+"*\\]",P=":("+M+")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|"+O+")*)|.*)\\)|)",Q=new RegExp(L+"+","g"),R=new RegExp("^"+L+"+|((?:^|[^\\\\])(?:\\\\.)*)"+L+"+$","g"),S=new RegExp("^"+L+"*,"+L+"*"),T=new RegExp("^"+L+"*([>+~]|"+L+")"+L+"*"),U=new RegExp("="+L+"*([^\\]'\"]*?)"+L+"*\\]","g"),V=new RegExp(P),W=new RegExp("^"+N+"$"),X={ID:new RegExp("^#("+M+")"),CLASS:new RegExp("^\\.("+M+")"),TAG:new RegExp("^("+M.replace("w","w*")+")"),ATTR:new RegExp("^"+O),PSEUDO:new RegExp("^"+P),CHILD:new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\("+L+"*(even|odd|(([+-]|)(\\d*)n|)"+L+"*(?:([+-]|)"+L+"*(\\d+)|))"+L+"*\\)|)","i"),bool:new RegExp("^(?:"+K+")$","i"),needsContext:new RegExp("^"+L+"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\("+L+"*((?:-\\d)?\\d*)"+L+"*\\)|)(?=[^-]|$)","i")},Y=/^(?:input|select|textarea|button)$/i,Z=/^h\d$/i,$=/^[^{]+\{\s*\[native \w/,_=/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,aa=/[+~]/,ba=/'|\\/g,ca=new RegExp("\\\\([\\da-f]{1,6}"+L+"?|("+L+")|.)","ig"),da=function(a,b,c){var d="0x"+b-65536;return d!==d||c?b:0>d?String.fromCharCode(d+65536):String.fromCharCode(d>>10|55296,1023&d|56320)},ea=function(){m()};try{H.apply(E=I.call(v.childNodes),v.childNodes),E[v.childNodes.length].nodeType}catch(fa){H={apply:E.length?function(a,b){G.apply(a,I.call(b))}:function(a,b){var c=a.length,d=0;while(a[c++]=b[d++]);a.length=c-1}}}function ga(a,b,d,e){var f,h,j,k,l,o,r,s,w,x;if((b?b.ownerDocument||b:v)!==n&&m(b),b=b||n,d=d||[],k=b.nodeType,"string"!=typeof a||!a||1!==k&&9!==k&&11!==k)return d;if(!e&&p){if(11!==k&&(f=_.exec(a)))if(j=f[1]){if(9===k){if(h=b.getElementById(j),!h||!h.parentNode)return d;if(h.id===j)return d.push(h),d}else if(b.ownerDocument&&(h=b.ownerDocument.getElementById(j))&&t(b,h)&&h.id===j)return d.push(h),d}else{if(f[2])return H.apply(d,b.getElementsByTagName(a)),d;if((j=f[3])&&c.getElementsByClassName)return H.apply(d,b.getElementsByClassName(j)),d}if(c.qsa&&(!q||!q.test(a))){if(s=r=u,w=b,x=1!==k&&a,1===k&&"object"!==b.nodeName.toLowerCase()){o=g(a),(r=b.getAttribute("id"))?s=r.replace(ba,"\\$&"):b.setAttribute("id",s),s="[id='"+s+"'] ",l=o.length;while(l--)o[l]=s+ra(o[l]);w=aa.test(a)&&pa(b.parentNode)||b,x=o.join(",")}if(x)try{return H.apply(d,w.querySelectorAll(x)),d}catch(y){}finally{r||b.removeAttribute("id")}}}return i(a.replace(R,"$1"),b,d,e)}function ha(){var a=[];function b(c,e){return a.push(c+" ")>d.cacheLength&&delete b[a.shift()],b[c+" "]=e}return b}function ia(a){return a[u]=!0,a}function ja(a){var b=n.createElement("div");try{return!!a(b)}catch(c){return!1}finally{b.parentNode&&b.parentNode.removeChild(b),b=null}}function ka(a,b){var c=a.split("|"),e=a.length;while(e--)d.attrHandle[c[e]]=b}function la(a,b){var c=b&&a,d=c&&1===a.nodeType&&1===b.nodeType&&(~b.sourceIndex||C)-(~a.sourceIndex||C);if(d)return d;if(c)while(c=c.nextSibling)if(c===b)return-1;return a?1:-1}function ma(a){return function(b){var c=b.nodeName.toLowerCase();return"input"===c&&b.type===a}}function na(a){return function(b){var c=b.nodeName.toLowerCase();return("input"===c||"button"===c)&&b.type===a}}function oa(a){return ia(function(b){return b=+b,ia(function(c,d){var e,f=a([],c.length,b),g=f.length;while(g--)c[e=f[g]]&&(c[e]=!(d[e]=c[e]))})})}function pa(a){return a&&"undefined"!=typeof a.getElementsByTagName&&a}c=ga.support={},f=ga.isXML=function(a){var b=a&&(a.ownerDocument||a).documentElement;return b?"HTML"!==b.nodeName:!1},m=ga.setDocument=function(a){var b,e,g=a?a.ownerDocument||a:v;return g!==n&&9===g.nodeType&&g.documentElement?(n=g,o=g.documentElement,e=g.defaultView,e&&e!==e.top&&(e.addEventListener?e.addEventListener("unload",ea,!1):e.attachEvent&&e.attachEvent("onunload",ea)),p=!f(g),c.attributes=ja(function(a){return a.className="i",!a.getAttribute("className")}),c.getElementsByTagName=ja(function(a){return a.appendChild(g.createComment("")),!a.getElementsByTagName("*").length}),c.getElementsByClassName=$.test(g.getElementsByClassName),c.getById=ja(function(a){return o.appendChild(a).id=u,!g.getElementsByName||!g.getElementsByName(u).length}),c.getById?(d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c=b.getElementById(a);return c&&c.parentNode?[c]:[]}},d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){return a.getAttribute("id")===b}}):(delete d.find.ID,d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){var c="undefined"!=typeof a.getAttributeNode&&a.getAttributeNode("id");return c&&c.value===b}}),d.find.TAG=c.getElementsByTagName?function(a,b){return"undefined"!=typeof b.getElementsByTagName?b.getElementsByTagName(a):c.qsa?b.querySelectorAll(a):void 0}:function(a,b){var c,d=[],e=0,f=b.getElementsByTagName(a);if("*"===a){while(c=f[e++])1===c.nodeType&&d.push(c);return d}return f},d.find.CLASS=c.getElementsByClassName&&function(a,b){return p?b.getElementsByClassName(a):void 0},r=[],q=[],(c.qsa=$.test(g.querySelectorAll))&&(ja(function(a){o.appendChild(a).innerHTML="<a id='"+u+"'></a><select id='"+u+"-\f]' msallowcapture=''><option selected=''></option></select>",a.querySelectorAll("[msallowcapture^='']").length&&q.push("[*^$]="+L+"*(?:''|\"\")"),a.querySelectorAll("[selected]").length||q.push("\\["+L+"*(?:value|"+K+")"),a.querySelectorAll("[id~="+u+"-]").length||q.push("~="),a.querySelectorAll(":checked").length||q.push(":checked"),a.querySelectorAll("a#"+u+"+*").length||q.push(".#.+[+~]")}),ja(function(a){var b=g.createElement("input");b.setAttribute("type","hidden"),a.appendChild(b).setAttribute("name","D"),a.querySelectorAll("[name=d]").length&&q.push("name"+L+"*[*^$|!~]?="),a.querySelectorAll(":enabled").length||q.push(":enabled",":disabled"),a.querySelectorAll("*,:x"),q.push(",.*:")})),(c.matchesSelector=$.test(s=o.matches||o.webkitMatchesSelector||o.mozMatchesSelector||o.oMatchesSelector||o.msMatchesSelector))&&ja(function(a){c.disconnectedMatch=s.call(a,"div"),s.call(a,"[s!='']:x"),r.push("!=",P)}),q=q.length&&new RegExp(q.join("|")),r=r.length&&new RegExp(r.join("|")),b=$.test(o.compareDocumentPosition),t=b||$.test(o.contains)?function(a,b){var c=9===a.nodeType?a.documentElement:a,d=b&&b.parentNode;return a===d||!(!d||1!==d.nodeType||!(c.contains?c.contains(d):a.compareDocumentPosition&&16&a.compareDocumentPosition(d)))}:function(a,b){if(b)while(b=b.parentNode)if(b===a)return!0;return!1},B=b?function(a,b){if(a===b)return l=!0,0;var d=!a.compareDocumentPosition-!b.compareDocumentPosition;return d?d:(d=(a.ownerDocument||a)===(b.ownerDocument||b)?a.compareDocumentPosition(b):1,1&d||!c.sortDetached&&b.compareDocumentPosition(a)===d?a===g||a.ownerDocument===v&&t(v,a)?-1:b===g||b.ownerDocument===v&&t(v,b)?1:k?J(k,a)-J(k,b):0:4&d?-1:1)}:function(a,b){if(a===b)return l=!0,0;var c,d=0,e=a.parentNode,f=b.parentNode,h=[a],i=[b];if(!e||!f)return a===g?-1:b===g?1:e?-1:f?1:k?J(k,a)-J(k,b):0;if(e===f)return la(a,b);c=a;while(c=c.parentNode)h.unshift(c);c=b;while(c=c.parentNode)i.unshift(c);while(h[d]===i[d])d++;return d?la(h[d],i[d]):h[d]===v?-1:i[d]===v?1:0},g):n},ga.matches=function(a,b){return ga(a,null,null,b)},ga.matchesSelector=function(a,b){if((a.ownerDocument||a)!==n&&m(a),b=b.replace(U,"='$1']"),!(!c.matchesSelector||!p||r&&r.test(b)||q&&q.test(b)))try{var d=s.call(a,b);if(d||c.disconnectedMatch||a.document&&11!==a.document.nodeType)return d}catch(e){}return ga(b,n,null,[a]).length>0},ga.contains=function(a,b){return(a.ownerDocument||a)!==n&&m(a),t(a,b)},ga.attr=function(a,b){(a.ownerDocument||a)!==n&&m(a);var e=d.attrHandle[b.toLowerCase()],f=e&&D.call(d.attrHandle,b.toLowerCase())?e(a,b,!p):void 0;return void 0!==f?f:c.attributes||!p?a.getAttribute(b):(f=a.getAttributeNode(b))&&f.specified?f.value:null},ga.error=function(a){throw new Error("Syntax error, unrecognized expression: "+a)},ga.uniqueSort=function(a){var b,d=[],e=0,f=0;if(l=!c.detectDuplicates,k=!c.sortStable&&a.slice(0),a.sort(B),l){while(b=a[f++])b===a[f]&&(e=d.push(f));while(e--)a.splice(d[e],1)}return k=null,a},e=ga.getText=function(a){var b,c="",d=0,f=a.nodeType;if(f){if(1===f||9===f||11===f){if("string"==typeof a.textContent)return a.textContent;for(a=a.firstChild;a;a=a.nextSibling)c+=e(a)}else if(3===f||4===f)return a.nodeValue}else while(b=a[d++])c+=e(b);return c},d=ga.selectors={cacheLength:50,createPseudo:ia,match:X,attrHandle:{},find:{},relative:{">":{dir:"parentNode",first:!0}," ":{dir:"parentNode"},"+":{dir:"previousSibling",first:!0},"~":{dir:"previousSibling"}},preFilter:{ATTR:function(a){return a[1]=a[1].replace(ca,da),a[3]=(a[3]||a[4]||a[5]||"").replace(ca,da),"~="===a[2]&&(a[3]=" "+a[3]+" "),a.slice(0,4)},CHILD:function(a){return a[1]=a[1].toLowerCase(),"nth"===a[1].slice(0,3)?(a[3]||ga.error(a[0]),a[4]=+(a[4]?a[5]+(a[6]||1):2*("even"===a[3]||"odd"===a[3])),a[5]=+(a[7]+a[8]||"odd"===a[3])):a[3]&&ga.error(a[0]),a},PSEUDO:function(a){var b,c=!a[6]&&a[2];return X.CHILD.test(a[0])?null:(a[3]?a[2]=a[4]||a[5]||"":c&&V.test(c)&&(b=g(c,!0))&&(b=c.indexOf(")",c.length-b)-c.length)&&(a[0]=a[0].slice(0,b),a[2]=c.slice(0,b)),a.slice(0,3))}},filter:{TAG:function(a){var b=a.replace(ca,da).toLowerCase();return"*"===a?function(){return!0}:function(a){return a.nodeName&&a.nodeName.toLowerCase()===b}},CLASS:function(a){var b=y[a+" "];return b||(b=new RegExp("(^|"+L+")"+a+"("+L+"|$)"))&&y(a,function(a){return b.test("string"==typeof a.className&&a.className||"undefined"!=typeof a.getAttribute&&a.getAttribute("class")||"")})},ATTR:function(a,b,c){return function(d){var e=ga.attr(d,a);return null==e?"!="===b:b?(e+="","="===b?e===c:"!="===b?e!==c:"^="===b?c&&0===e.indexOf(c):"*="===b?c&&e.indexOf(c)>-1:"$="===b?c&&e.slice(-c.length)===c:"~="===b?(" "+e.replace(Q," ")+" ").indexOf(c)>-1:"|="===b?e===c||e.slice(0,c.length+1)===c+"-":!1):!0}},CHILD:function(a,b,c,d,e){var f="nth"!==a.slice(0,3),g="last"!==a.slice(-4),h="of-type"===b;return 1===d&&0===e?function(a){return!!a.parentNode}:function(b,c,i){var j,k,l,m,n,o,p=f!==g?"nextSibling":"previousSibling",q=b.parentNode,r=h&&b.nodeName.toLowerCase(),s=!i&&!h;if(q){if(f){while(p){l=b;while(l=l[p])if(h?l.nodeName.toLowerCase()===r:1===l.nodeType)return!1;o=p="only"===a&&!o&&"nextSibling"}return!0}if(o=[g?q.firstChild:q.lastChild],g&&s){k=q[u]||(q[u]={}),j=k[a]||[],n=j[0]===w&&j[1],m=j[0]===w&&j[2],l=n&&q.childNodes[n];while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if(1===l.nodeType&&++m&&l===b){k[a]=[w,n,m];break}}else if(s&&(j=(b[u]||(b[u]={}))[a])&&j[0]===w)m=j[1];else while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if((h?l.nodeName.toLowerCase()===r:1===l.nodeType)&&++m&&(s&&((l[u]||(l[u]={}))[a]=[w,m]),l===b))break;return m-=e,m===d||m%d===0&&m/d>=0}}},PSEUDO:function(a,b){var c,e=d.pseudos[a]||d.setFilters[a.toLowerCase()]||ga.error("unsupported pseudo: "+a);return e[u]?e(b):e.length>1?(c=[a,a,"",b],d.setFilters.hasOwnProperty(a.toLowerCase())?ia(function(a,c){var d,f=e(a,b),g=f.length;while(g--)d=J(a,f[g]),a[d]=!(c[d]=f[g])}):function(a){return e(a,0,c)}):e}},pseudos:{not:ia(function(a){var b=[],c=[],d=h(a.replace(R,"$1"));return d[u]?ia(function(a,b,c,e){var f,g=d(a,null,e,[]),h=a.length;while(h--)(f=g[h])&&(a[h]=!(b[h]=f))}):function(a,e,f){return b[0]=a,d(b,null,f,c),b[0]=null,!c.pop()}}),has:ia(function(a){return function(b){return ga(a,b).length>0}}),contains:ia(function(a){return a=a.replace(ca,da),function(b){return(b.textContent||b.innerText||e(b)).indexOf(a)>-1}}),lang:ia(function(a){return W.test(a||"")||ga.error("unsupported lang: "+a),a=a.replace(ca,da).toLowerCase(),function(b){var c;do if(c=p?b.lang:b.getAttribute("xml:lang")||b.getAttribute("lang"))return c=c.toLowerCase(),c===a||0===c.indexOf(a+"-");while((b=b.parentNode)&&1===b.nodeType);return!1}}),target:function(b){var c=a.location&&a.location.hash;return c&&c.slice(1)===b.id},root:function(a){return a===o},focus:function(a){return a===n.activeElement&&(!n.hasFocus||n.hasFocus())&&!!(a.type||a.href||~a.tabIndex)},enabled:function(a){return a.disabled===!1},disabled:function(a){return a.disabled===!0},checked:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&!!a.checked||"option"===b&&!!a.selected},selected:function(a){return a.parentNode&&a.parentNode.selectedIndex,a.selected===!0},empty:function(a){for(a=a.firstChild;a;a=a.nextSibling)if(a.nodeType<6)return!1;return!0},parent:function(a){return!d.pseudos.empty(a)},header:function(a){return Z.test(a.nodeName)},input:function(a){return Y.test(a.nodeName)},button:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&"button"===a.type||"button"===b},text:function(a){var b;return"input"===a.nodeName.toLowerCase()&&"text"===a.type&&(null==(b=a.getAttribute("type"))||"text"===b.toLowerCase())},first:oa(function(){return[0]}),last:oa(function(a,b){return[b-1]}),eq:oa(function(a,b,c){return[0>c?c+b:c]}),even:oa(function(a,b){for(var c=0;b>c;c+=2)a.push(c);return a}),odd:oa(function(a,b){for(var c=1;b>c;c+=2)a.push(c);return a}),lt:oa(function(a,b,c){for(var d=0>c?c+b:c;--d>=0;)a.push(d);return a}),gt:oa(function(a,b,c){for(var d=0>c?c+b:c;++d<b;)a.push(d);return a})}},d.pseudos.nth=d.pseudos.eq;for(b in{radio:!0,checkbox:!0,file:!0,password:!0,image:!0})d.pseudos[b]=ma(b);for(b in{submit:!0,reset:!0})d.pseudos[b]=na(b);function qa(){}qa.prototype=d.filters=d.pseudos,d.setFilters=new qa,g=ga.tokenize=function(a,b){var c,e,f,g,h,i,j,k=z[a+" "];if(k)return b?0:k.slice(0);h=a,i=[],j=d.preFilter;while(h){(!c||(e=S.exec(h)))&&(e&&(h=h.slice(e[0].length)||h),i.push(f=[])),c=!1,(e=T.exec(h))&&(c=e.shift(),f.push({value:c,type:e[0].replace(R," ")}),h=h.slice(c.length));for(g in d.filter)!(e=X[g].exec(h))||j[g]&&!(e=j[g](e))||(c=e.shift(),f.push({value:c,type:g,matches:e}),h=h.slice(c.length));if(!c)break}return b?h.length:h?ga.error(a):z(a,i).slice(0)};function ra(a){for(var b=0,c=a.length,d="";c>b;b++)d+=a[b].value;return d}function sa(a,b,c){var d=b.dir,e=c&&"parentNode"===d,f=x++;return b.first?function(b,c,f){while(b=b[d])if(1===b.nodeType||e)return a(b,c,f)}:function(b,c,g){var h,i,j=[w,f];if(g){while(b=b[d])if((1===b.nodeType||e)&&a(b,c,g))return!0}else while(b=b[d])if(1===b.nodeType||e){if(i=b[u]||(b[u]={}),(h=i[d])&&h[0]===w&&h[1]===f)return j[2]=h[2];if(i[d]=j,j[2]=a(b,c,g))return!0}}}function ta(a){return a.length>1?function(b,c,d){var e=a.length;while(e--)if(!a[e](b,c,d))return!1;return!0}:a[0]}function ua(a,b,c){for(var d=0,e=b.length;e>d;d++)ga(a,b[d],c);return c}function va(a,b,c,d,e){for(var f,g=[],h=0,i=a.length,j=null!=b;i>h;h++)(f=a[h])&&(!c||c(f,d,e))&&(g.push(f),j&&b.push(h));return g}function wa(a,b,c,d,e,f){return d&&!d[u]&&(d=wa(d)),e&&!e[u]&&(e=wa(e,f)),ia(function(f,g,h,i){var j,k,l,m=[],n=[],o=g.length,p=f||ua(b||"*",h.nodeType?[h]:h,[]),q=!a||!f&&b?p:va(p,m,a,h,i),r=c?e||(f?a:o||d)?[]:g:q;if(c&&c(q,r,h,i),d){j=va(r,n),d(j,[],h,i),k=j.length;while(k--)(l=j[k])&&(r[n[k]]=!(q[n[k]]=l))}if(f){if(e||a){if(e){j=[],k=r.length;while(k--)(l=r[k])&&j.push(q[k]=l);e(null,r=[],j,i)}k=r.length;while(k--)(l=r[k])&&(j=e?J(f,l):m[k])>-1&&(f[j]=!(g[j]=l))}}else r=va(r===g?r.splice(o,r.length):r),e?e(null,g,r,i):H.apply(g,r)})}function xa(a){for(var b,c,e,f=a.length,g=d.relative[a[0].type],h=g||d.relative[" "],i=g?1:0,k=sa(function(a){return a===b},h,!0),l=sa(function(a){return J(b,a)>-1},h,!0),m=[function(a,c,d){var e=!g&&(d||c!==j)||((b=c).nodeType?k(a,c,d):l(a,c,d));return b=null,e}];f>i;i++)if(c=d.relative[a[i].type])m=[sa(ta(m),c)];else{if(c=d.filter[a[i].type].apply(null,a[i].matches),c[u]){for(e=++i;f>e;e++)if(d.relative[a[e].type])break;return wa(i>1&&ta(m),i>1&&ra(a.slice(0,i-1).concat({value:" "===a[i-2].type?"*":""})).replace(R,"$1"),c,e>i&&xa(a.slice(i,e)),f>e&&xa(a=a.slice(e)),f>e&&ra(a))}m.push(c)}return ta(m)}function ya(a,b){var c=b.length>0,e=a.length>0,f=function(f,g,h,i,k){var l,m,o,p=0,q="0",r=f&&[],s=[],t=j,u=f||e&&d.find.TAG("*",k),v=w+=null==t?1:Math.random()||.1,x=u.length;for(k&&(j=g!==n&&g);q!==x&&null!=(l=u[q]);q++){if(e&&l){m=0;while(o=a[m++])if(o(l,g,h)){i.push(l);break}k&&(w=v)}c&&((l=!o&&l)&&p--,f&&r.push(l))}if(p+=q,c&&q!==p){m=0;while(o=b[m++])o(r,s,g,h);if(f){if(p>0)while(q--)r[q]||s[q]||(s[q]=F.call(i));s=va(s)}H.apply(i,s),k&&!f&&s.length>0&&p+b.length>1&&ga.uniqueSort(i)}return k&&(w=v,j=t),r};return c?ia(f):f}return h=ga.compile=function(a,b){var c,d=[],e=[],f=A[a+" "];if(!f){b||(b=g(a)),c=b.length;while(c--)f=xa(b[c]),f[u]?d.push(f):e.push(f);f=A(a,ya(e,d)),f.selector=a}return f},i=ga.select=function(a,b,e,f){var i,j,k,l,m,n="function"==typeof a&&a,o=!f&&g(a=n.selector||a);if(e=e||[],1===o.length){if(j=o[0]=o[0].slice(0),j.length>2&&"ID"===(k=j[0]).type&&c.getById&&9===b.nodeType&&p&&d.relative[j[1].type]){if(b=(d.find.ID(k.matches[0].replace(ca,da),b)||[])[0],!b)return e;n&&(b=b.parentNode),a=a.slice(j.shift().value.length)}i=X.needsContext.test(a)?0:j.length;while(i--){if(k=j[i],d.relative[l=k.type])break;if((m=d.find[l])&&(f=m(k.matches[0].replace(ca,da),aa.test(j[0].type)&&pa(b.parentNode)||b))){if(j.splice(i,1),a=f.length&&ra(j),!a)return H.apply(e,f),e;break}}}return(n||h(a,o))(f,b,!p,e,aa.test(a)&&pa(b.parentNode)||b),e},c.sortStable=u.split("").sort(B).join("")===u,c.detectDuplicates=!!l,m(),c.sortDetached=ja(function(a){return 1&a.compareDocumentPosition(n.createElement("div"))}),ja(function(a){return a.innerHTML="<a href='#'></a>","#"===a.firstChild.getAttribute("href")})||ka("type|href|height|width",function(a,b,c){return c?void 0:a.getAttribute(b,"type"===b.toLowerCase()?1:2)}),c.attributes&&ja(function(a){return a.innerHTML="<input/>",a.firstChild.setAttribute("value",""),""===a.firstChild.getAttribute("value")})||ka("value",function(a,b,c){return c||"input"!==a.nodeName.toLowerCase()?void 0:a.defaultValue}),ja(function(a){return null==a.getAttribute("disabled")})||ka(K,function(a,b,c){var d;return c?void 0:a[b]===!0?b.toLowerCase():(d=a.getAttributeNode(b))&&d.specified?d.value:null}),ga}(a);m.find=s,m.expr=s.selectors,m.expr[":"]=m.expr.pseudos,m.unique=s.uniqueSort,m.text=s.getText,m.isXMLDoc=s.isXML,m.contains=s.contains;var t=m.expr.match.needsContext,u=/^<(\w+)\s*\/?>(?:<\/\1>|)$/,v=/^.[^:#\[\.,]*$/;function w(a,b,c){if(m.isFunction(b))return m.grep(a,function(a,d){return!!b.call(a,d,a)!==c});if(b.nodeType)return m.grep(a,function(a){return a===b!==c});if("string"==typeof b){if(v.test(b))return m.filter(b,a,c);b=m.filter(b,a)}return m.grep(a,function(a){return m.inArray(a,b)>=0!==c})}m.filter=function(a,b,c){var d=b[0];return c&&(a=":not("+a+")"),1===b.length&&1===d.nodeType?m.find.matchesSelector(d,a)?[d]:[]:m.find.matches(a,m.grep(b,function(a){return 1===a.nodeType}))},m.fn.extend({find:function(a){var b,c=[],d=this,e=d.length;if("string"!=typeof a)return this.pushStack(m(a).filter(function(){for(b=0;e>b;b++)if(m.contains(d[b],this))return!0}));for(b=0;e>b;b++)m.find(a,d[b],c);return c=this.pushStack(e>1?m.unique(c):c),c.selector=this.selector?this.selector+" "+a:a,c},filter:function(a){return this.pushStack(w(this,a||[],!1))},not:function(a){return this.pushStack(w(this,a||[],!0))},is:function(a){return!!w(this,"string"==typeof a&&t.test(a)?m(a):a||[],!1).length}});var x,y=a.document,z=/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,A=m.fn.init=function(a,b){var c,d;if(!a)return this;if("string"==typeof a){if(c="<"===a.charAt(0)&&">"===a.charAt(a.length-1)&&a.length>=3?[null,a,null]:z.exec(a),!c||!c[1]&&b)return!b||b.jquery?(b||x).find(a):this.constructor(b).find(a);if(c[1]){if(b=b instanceof m?b[0]:b,m.merge(this,m.parseHTML(c[1],b&&b.nodeType?b.ownerDocument||b:y,!0)),u.test(c[1])&&m.isPlainObject(b))for(c in b)m.isFunction(this[c])?this[c](b[c]):this.attr(c,b[c]);return this}if(d=y.getElementById(c[2]),d&&d.parentNode){if(d.id!==c[2])return x.find(a);this.length=1,this[0]=d}return this.context=y,this.selector=a,this}return a.nodeType?(this.context=this[0]=a,this.length=1,this):m.isFunction(a)?"undefined"!=typeof x.ready?x.ready(a):a(m):(void 0!==a.selector&&(this.selector=a.selector,this.context=a.context),m.makeArray(a,this))};A.prototype=m.fn,x=m(y);var B=/^(?:parents|prev(?:Until|All))/,C={children:!0,contents:!0,next:!0,prev:!0};m.extend({dir:function(a,b,c){var d=[],e=a[b];while(e&&9!==e.nodeType&&(void 0===c||1!==e.nodeType||!m(e).is(c)))1===e.nodeType&&d.push(e),e=e[b];return d},sibling:function(a,b){for(var c=[];a;a=a.nextSibling)1===a.nodeType&&a!==b&&c.push(a);return c}}),m.fn.extend({has:function(a){var b,c=m(a,this),d=c.length;return this.filter(function(){for(b=0;d>b;b++)if(m.contains(this,c[b]))return!0})},closest:function(a,b){for(var c,d=0,e=this.length,f=[],g=t.test(a)||"string"!=typeof a?m(a,b||this.context):0;e>d;d++)for(c=this[d];c&&c!==b;c=c.parentNode)if(c.nodeType<11&&(g?g.index(c)>-1:1===c.nodeType&&m.find.matchesSelector(c,a))){f.push(c);break}return this.pushStack(f.length>1?m.unique(f):f)},index:function(a){return a?"string"==typeof a?m.inArray(this[0],m(a)):m.inArray(a.jquery?a[0]:a,this):this[0]&&this[0].parentNode?this.first().prevAll().length:-1},add:function(a,b){return this.pushStack(m.unique(m.merge(this.get(),m(a,b))))},addBack:function(a){return this.add(null==a?this.prevObject:this.prevObject.filter(a))}});function D(a,b){do a=a[b];while(a&&1!==a.nodeType);return a}m.each({parent:function(a){var b=a.parentNode;return b&&11!==b.nodeType?b:null},parents:function(a){return m.dir(a,"parentNode")},parentsUntil:function(a,b,c){return m.dir(a,"parentNode",c)},next:function(a){return D(a,"nextSibling")},prev:function(a){return D(a,"previousSibling")},nextAll:function(a){return m.dir(a,"nextSibling")},prevAll:function(a){return m.dir(a,"previousSibling")},nextUntil:function(a,b,c){return m.dir(a,"nextSibling",c)},prevUntil:function(a,b,c){return m.dir(a,"previousSibling",c)},siblings:function(a){return m.sibling((a.parentNode||{}).firstChild,a)},children:function(a){return m.sibling(a.firstChild)},contents:function(a){return m.nodeName(a,"iframe")?a.contentDocument||a.contentWindow.document:m.merge([],a.childNodes)}},function(a,b){m.fn[a]=function(c,d){var e=m.map(this,b,c);return"Until"!==a.slice(-5)&&(d=c),d&&"string"==typeof d&&(e=m.filter(d,e)),this.length>1&&(C[a]||(e=m.unique(e)),B.test(a)&&(e=e.reverse())),this.pushStack(e)}});var E=/\S+/g,F={};function G(a){var b=F[a]={};return m.each(a.match(E)||[],function(a,c){b[c]=!0}),b}m.Callbacks=function(a){a="string"==typeof a?F[a]||G(a):m.extend({},a);var b,c,d,e,f,g,h=[],i=!a.once&&[],j=function(l){for(c=a.memory&&l,d=!0,f=g||0,g=0,e=h.length,b=!0;h&&e>f;f++)if(h[f].apply(l[0],l[1])===!1&&a.stopOnFalse){c=!1;break}b=!1,h&&(i?i.length&&j(i.shift()):c?h=[]:k.disable())},k={add:function(){if(h){var d=h.length;!function f(b){m.each(b,function(b,c){var d=m.type(c);"function"===d?a.unique&&k.has(c)||h.push(c):c&&c.length&&"string"!==d&&f(c)})}(arguments),b?e=h.length:c&&(g=d,j(c))}return this},remove:function(){return h&&m.each(arguments,function(a,c){var d;while((d=m.inArray(c,h,d))>-1)h.splice(d,1),b&&(e>=d&&e--,f>=d&&f--)}),this},has:function(a){return a?m.inArray(a,h)>-1:!(!h||!h.length)},empty:function(){return h=[],e=0,this},disable:function(){return h=i=c=void 0,this},disabled:function(){return!h},lock:function(){return i=void 0,c||k.disable(),this},locked:function(){return!i},fireWith:function(a,c){return!h||d&&!i||(c=c||[],c=[a,c.slice?c.slice():c],b?i.push(c):j(c)),this},fire:function(){return k.fireWith(this,arguments),this},fired:function(){return!!d}};return k},m.extend({Deferred:function(a){var b=[["resolve","done",m.Callbacks("once memory"),"resolved"],["reject","fail",m.Callbacks("once memory"),"rejected"],["notify","progress",m.Callbacks("memory")]],c="pending",d={state:function(){return c},always:function(){return e.done(arguments).fail(arguments),this},then:function(){var a=arguments;return m.Deferred(function(c){m.each(b,function(b,f){var g=m.isFunction(a[b])&&a[b];e[f[1]](function(){var a=g&&g.apply(this,arguments);a&&m.isFunction(a.promise)?a.promise().done(c.resolve).fail(c.reject).progress(c.notify):c[f[0]+"With"](this===d?c.promise():this,g?[a]:arguments)})}),a=null}).promise()},promise:function(a){return null!=a?m.extend(a,d):d}},e={};return d.pipe=d.then,m.each(b,function(a,f){var g=f[2],h=f[3];d[f[1]]=g.add,h&&g.add(function(){c=h},b[1^a][2].disable,b[2][2].lock),e[f[0]]=function(){return e[f[0]+"With"](this===e?d:this,arguments),this},e[f[0]+"With"]=g.fireWith}),d.promise(e),a&&a.call(e,e),e},when:function(a){var b=0,c=d.call(arguments),e=c.length,f=1!==e||a&&m.isFunction(a.promise)?e:0,g=1===f?a:m.Deferred(),h=function(a,b,c){return function(e){b[a]=this,c[a]=arguments.length>1?d.call(arguments):e,c===i?g.notifyWith(b,c):--f||g.resolveWith(b,c)}},i,j,k;if(e>1)for(i=new Array(e),j=new Array(e),k=new Array(e);e>b;b++)c[b]&&m.isFunction(c[b].promise)?c[b].promise().done(h(b,k,c)).fail(g.reject).progress(h(b,j,i)):--f;return f||g.resolveWith(k,c),g.promise()}});var H;m.fn.ready=function(a){return m.ready.promise().done(a),this},m.extend({isReady:!1,readyWait:1,holdReady:function(a){a?m.readyWait++:m.ready(!0)},ready:function(a){if(a===!0?!--m.readyWait:!m.isReady){if(!y.body)return setTimeout(m.ready);m.isReady=!0,a!==!0&&--m.readyWait>0||(H.resolveWith(y,[m]),m.fn.triggerHandler&&(m(y).triggerHandler("ready"),m(y).off("ready")))}}});function I(){y.addEventListener?(y.removeEventListener("DOMContentLoaded",J,!1),a.removeEventListener("load",J,!1)):(y.detachEvent("onreadystatechange",J),a.detachEvent("onload",J))}function J(){(y.addEventListener||"load"===event.type||"complete"===y.readyState)&&(I(),m.ready())}m.ready.promise=function(b){if(!H)if(H=m.Deferred(),"complete"===y.readyState)setTimeout(m.ready);else if(y.addEventListener)y.addEventListener("DOMContentLoaded",J,!1),a.addEventListener("load",J,!1);else{y.attachEvent("onreadystatechange",J),a.attachEvent("onload",J);var c=!1;try{c=null==a.frameElement&&y.documentElement}catch(d){}c&&c.doScroll&&!function e(){if(!m.isReady){try{c.doScroll("left")}catch(a){return setTimeout(e,50)}I(),m.ready()}}()}return H.promise(b)};var K="undefined",L;for(L in m(k))break;k.ownLast="0"!==L,k.inlineBlockNeedsLayout=!1,m(function(){var a,b,c,d;c=y.getElementsByTagName("body")[0],c&&c.style&&(b=y.createElement("div"),d=y.createElement("div"),d.style.cssText="position:absolute;border:0;width:0;height:0;top:0;left:-9999px",c.appendChild(d).appendChild(b),typeof b.style.zoom!==K&&(b.style.cssText="display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1",k.inlineBlockNeedsLayout=a=3===b.offsetWidth,a&&(c.style.zoom=1)),c.removeChild(d))}),function(){var a=y.createElement("div");if(null==k.deleteExpando){k.deleteExpando=!0;try{delete a.test}catch(b){k.deleteExpando=!1}}a=null}(),m.acceptData=function(a){var b=m.noData[(a.nodeName+" ").toLowerCase()],c=+a.nodeType||1;return 1!==c&&9!==c?!1:!b||b!==!0&&a.getAttribute("classid")===b};var M=/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,N=/([A-Z])/g;function O(a,b,c){if(void 0===c&&1===a.nodeType){var d="data-"+b.replace(N,"-$1").toLowerCase();if(c=a.getAttribute(d),"string"==typeof c){try{c="true"===c?!0:"false"===c?!1:"null"===c?null:+c+""===c?+c:M.test(c)?m.parseJSON(c):c}catch(e){}m.data(a,b,c)}else c=void 0}return c}function P(a){var b;for(b in a)if(("data"!==b||!m.isEmptyObject(a[b]))&&"toJSON"!==b)return!1;
@@ -363,9 +363,9 @@ summary {
 
 
 
-<h1 class="title toc-ignore">ECON621: Accessing and Modifying Data</h1>
+<h1 class="title toc-ignore">ECON621: Building Automated Processes</h1>
 <h4 class="author">Adam Gorski</h4>
-<h4 class="date">Jan. 6, 2020</h4>
+<h4 class="date">Jan. 10, 2020</h4>
 
 </div>
 
@@ -377,331 +377,371 @@ div.blue pre.r { background-color:cornsilk; }
 <div class="blue">
 <p>Today’s Lecture:</p>
 <ul>
-<li><p>Working Directory Hygiene</p></li>
-<li><p>Importing Data</p></li>
-<li><p>Subsetting Data</p></li>
-<li><p>Exporting Data</p></li>
+<li><p>Conditional Flow</p></li>
+<li><p>Writing Functions</p></li>
+<li><p>Iterations</p></li>
+<li><p>Storing Your Processes</p></li>
 </ul>
-<p>In yesterday’s lecture, we mainly created data so that we could learn how R works. In nearly every professional setting, you’ll be accessing and working with <em>existing</em> data.</p>
-<h3 id="working-directory-hygiene">Working Directory Hygiene</h3>
-<p>Every R session has a working directory. This is a file path (eg, “/Users/adamgorski/economics_project”) that R Studio will use to load files and to save files. The default that R uses is the user home directory (eg, “/Users/adamgorski”). To check which is your current working directory, you can use <code>getwd()</code>.</p>
-<pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;/Users/adamgorski/MS_Econ/Courses/ECON_621&quot;</code></pre>
-<p>You can create folders specific to the project you are working on (especially helpful to connect to a git repo), and then set your working directory to that specific folder. <code>setwd()</code> changes the working directory of your R session.</p>
-<pre class="r"><code>setwd(&quot;/Users/adamgorski/MS_Econ/Courses/ECON_621&quot;)</code></pre>
-<p>You can also change the working directory by going to Session &gt; Set Working Directory &gt; Choose Directory… This will autopopulate the <code>setwd()</code> code in your Console if you would like to use it later.</p>
-<p>Note: <strong>Changing the working directory for an R Markdown file once it has been opened requires a different and more complicated process.</strong> I recommend creating a folder for this course and changing your working directory to that folder before opening an R Markdown file.</p>
-<h3 id="importing-data">Importing Data</h3>
-<p>There are two common ways to access and work with datasets:</p>
+<p>The main distinction between how R is used for research (eg, in academia) and in business is <em>scalability</em>. Scalability is the difference between providing an answer to a question and providing a tool that can answer future questions. R scripts that scale well are flexible and modular (ie, able to be pulled out and plugged into processes). You could describe this way of writing scripts as programming, and it is not unique to R. We have touched on some of these concepts to this point in the course, but we’ll focus exclusively today on how to build processes and how to think programmatically about your scripts.</p>
+<h3 id="conditional-flow">Conditional Flow</h3>
+<p>Sometimes you only want to execute code if a certain condition is met. To do that, we use an <code>if/else</code> statement.</p>
+<pre><code>if (condition) {# Code executed when condition is TRUE
+
+  } else {# Code executed when condition is FALSE
+
+}</code></pre>
+<p>The condition after the <code>if</code> is a statement that must always evaluate to either <code>TRUE</code> or <code>FALSE</code>. The statement must produce only one value, not a vector of values (eg, <code>TRUE</code> <code>TRUE</code> <code>FALSE</code> ). The resulting command(s) after the <code>if</code> is the first branch; after the <code>else</code> is the second</p>
+<pre class="r"><code>age &lt;- 22
+
+if (age &lt;= 21) {
+  print(&quot;I'm sorry, I can't let you in here.&quot;)
+} else {
+  print(&quot;I have to check everyone. Thanks.&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;I have to check everyone. Thanks.&quot;</code></pre>
+<pre class="r"><code>age &lt;- 20
+
+if (age &lt;= 21) {
+  print(&quot;I'm sorry, I can't let you in here.&quot;)
+} else {
+  print(&quot;I have to check everyone. Thanks.&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;I'm sorry, I can't let you in here.&quot;</code></pre>
+<p>You can chain as many conditional statements together as you would like by using <code>else if</code></p>
+<pre class="r"><code>age &lt;- 21
+
+if (age == 21) {
+  print(&quot;Do you have any other forms of identification?&quot;)
+} else if (age &lt; 21) {
+  print(&quot;I'm sorry, I can't let you in here.&quot;)
+} else {
+  print(&quot;I have to check everyone. Thanks.&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;Do you have any other forms of identification?&quot;</code></pre>
+<p>You can generate more complex conditional statements with boolean operators like <code>&amp;</code> and <code>|</code>.</p>
+<pre class="r"><code>age &lt;- 47
+
+if (age &lt;= 21) {
+  print(&quot;I'm sorry, I can't let you in here.&quot;)
+} else if (age &lt; 55 &amp; age &gt; 45) {
+  print(&quot;Are you a cop?&quot;)
+} else {
+  print(&quot;I have to check everyone. Thanks.&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;Are you a cop?&quot;</code></pre>
+<p>You can also nest conditionals inside of conditionals.</p>
+<pre class="r"><code>age &lt;- 20
+
+if (age == 21) {
+  print(&quot;Do you have any other forms of identification?&quot;)
+} else if (age &lt; 21) {
+  print(&quot;I'm sorry, I can't let you in here.&quot;)
+  if (age &gt; 18) {
+    print(&quot;But you can come back on Friday or Saturday: it's 18+ those nights&quot;)
+  }
+} else {
+  print(&quot;I have to check everyone. Thanks.&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;I'm sorry, I can't let you in here.&quot;
+## [1] &quot;But you can come back on Friday or Saturday: it's 18+ those nights&quot;</code></pre>
+<h5 id="ifelse-function"><code>ifelse</code> function</h5>
+<p>Because <code>if/else</code> conditional statements like the ones outlined above must always resolve to a single <code>TRUE</code> or <code>FALSE</code>, they cannot be used for vector operations. Vector operations are where you make multiple comparisons simultaneously for each value stored inside a vector.</p>
+<p>A common case is the creation of dummy, or flag, variables that can only be either <code>1</code> or <code>0</code>. We give the function <code>ifelse</code> a vector and it will perform our <code>if/else</code> process to every value in the vector. So you need to give it two possible operations: the first if the condition is <code>TRUE</code> and the second if it is <code>FALSE</code>.</p>
+<pre class="r"><code># We want to create a binary variable for whether a wine has less than 14% alcohol
+ifelse(wine_data$alcohol &lt; 14, 1, 0)</code></pre>
+<pre><code>##  [1] 0 1 1 0 1 0 0 0 0 1 0 0 1 0 0 1 0 1 0 1 0 1 1 1 1</code></pre>
+<pre class="r"><code># We can easily add that vector to our dataframe as a new variable
+wine_data$low_alcohol &lt;- ifelse(wine_data$alcohol &lt; 14, 1, 0)</code></pre>
+<p>Just like <code>if/else</code> statements, we can nest <code>ifelse</code> functions inside each other to create a category variable.</p>
+<pre class="r"><code>wine_data$alcohol_level &lt;- ifelse(wine_data$alcohol &lt; 13, &quot;Less than 13%&quot;, 
+                                  ifelse(wine_data$alcohol &lt; 14,
+                                         &quot;Between 13% and 14%&quot;, &quot;More than 14%&quot;))
+head(wine_data[, c(&quot;wine_type&quot;, &quot;alcohol&quot;, &quot;alcohol_level&quot;)])</code></pre>
+<pre><code>##   wine_type alcohol       alcohol_level
+## 1       Red   14.23       More than 14%
+## 2       Red   13.20 Between 13% and 14%
+## 3       Red   13.16 Between 13% and 14%
+## 4       Red   14.37       More than 14%
+## 5       Red   13.24 Between 13% and 14%
+## 6       Red   14.20       More than 14%</code></pre>
+<h3 id="writing-functions">Writing Functions</h3>
+<p>Functions are the basic building blocks of programs. Think of them as “mini-scripts.” We’ve already used dozens of functions created by others (eg, <code>mean</code>, <code>split</code>, etc.). Functions allow you to automate common tasks in a more powerful and general way than copy-and-pasting.</p>
+<pre><code># Consider this approach to adding columns to a dataframe:
+df &lt;- data.frame(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+
+df$a &lt;- (df$a - min(df$a)) / (max(df$a) - min(df$a))
+df$b &lt;- (df$b - min(df$b)) / (max(df$b) - min(df$a))
+df$c &lt;- (df$c - min(df$c)) / (max(df$c) - min(df$c))
+df$d &lt;- (df$d - min(df$d)) / (max(df$d) - min(df$d))
+
+# You might be able to puzzle out that this rescales each column to have a range from 0 to 1. But did you spot the mistake? I made an error when copying-and-pasting the code for df$b: I forgot to change an 'a' to a 'b'.</code></pre>
+<p>Functions have a number of advantages over this “copy-and-paste” approach:</p>
+<ul>
+<li><p>They are easy to reuse. If you need to change things, you only have to update code in one place, instead of many.</p></li>
+<li><p>They are self-documenting. Functions name pieces of code the way variables name strings and numbers. Give your function a good name and you will easily remember the function and its purpose.</p></li>
+<li><p>They are easier to debug. There are fewer chances to make mistakes because the code only exists in one location (ie, updating a variable name in one place, but not in another).</p></li>
+</ul>
+<p>Functions have four key components:</p>
 <ol style="list-style-type: decimal">
-<li><p>Download data and import into R</p></li>
-<li><p>Connect to a database and use a (SQL) query to import the data you need</p></li>
+<li><p>A <strong>name</strong>. This should be informative and describe what the function does.</p></li>
+<li><p>The <strong>arguments</strong>, or list of inputs, to the function. They go inside the parentheses in <code>function</code>.</p></li>
+<li><p>The <strong>body</strong>. This is the block of code within <code>{}</code> that immediately follows <code>function(</code>…<code>)</code>, and is the code that you develop to perform the action described in the name using the arguments you provide.</p></li>
+<li>The <strong>output</strong>. This is what your function returns. The output can be almost any kind of object: a single value, a vector, a dataframe, etc.</li>
 </ol>
-<p>Note: As we discussed last lecture, data comes in all shapes and sizes. However, dataframes are by far the most common form in data analysis. So we will focus there for today.</p>
-<h5 id="importing-existing-data-files">Importing Existing Data Files</h5>
-<p>If you already have the data you need as a file (usually a .csv file), make sure the file is in the working directory you specified, and use the <code>read.csv</code> (or <code>read.table</code>) function to import. Import your data to a named object to store it in your environment.</p>
-<pre><code>You can download the .csv file &quot;wine_components.csv&quot; from the Canvas page, under Files/Data Files.</code></pre>
-<pre class="r"><code>wine_data &lt;- read.csv(&quot;wine_components.csv&quot;)
-head(wine_data) # Note: 'head' function prints the first six rows of a dataframe</code></pre>
-<pre><code>##   wine_type alcohol malic_acid  ash alcalinity_of_ash magnesium
-## 1       Red   14.23       1.71 2.43              15.6       127
-## 2       Red   13.20       1.78 2.14              11.2       100
-## 3       Red   13.16       2.36 2.67              18.6       101
-## 4       Red   14.37       1.95 2.50              16.8       113
-## 5       Red   13.24       2.59 2.87              21.0       118
-## 6       Red   14.20       1.76 2.45              15.2       112
-##   total_phenols flavanoids nonflavanoid_phenols proanthocyanins
-## 1          2.80       3.06                 0.28            2.29
-## 2          2.65       2.76                 0.26            1.28
-## 3          2.80       3.24                 0.30            2.81
-## 4          3.85       3.49                 0.24            2.18
-## 5          2.80       2.69                 0.39            1.82
-## 6          3.27       3.39                 0.34            1.97
-##   color_intensity  hue OD280_OD315_of_diluted_wines proline
-## 1            5.64 1.04                         3.92    1065
-## 2            4.38 1.05                         3.40    1050
-## 3            5.68 1.03                         3.17    1185
-## 4            7.80 0.86                         3.45    1480
-## 5            4.32 1.04                         2.93     735
-## 6            6.75 1.05                         2.85    1450</code></pre>
-<p>After importing, your data object will appear in the Global Environment pane. If you click on the name of the object, you can view it as spreadsheet. If you click on the arrow to the left of the name, a dropdown will appear summarizing the data.</p>
-<pre><code>wine_type : Factor w/ 3 levels &quot;Red&quot;,&quot;Rose&quot;,&quot;White&quot;: 1 1 1 1 1 1 ...
-alcohol : num 14.2 13.2 13.2 14.4 13.2 ...
-malic_acid : num 1.71 1.78 2.36 1.95 ...
-...</code></pre>
-<p>This allows you to inspect your data and also see if R has done anything strange with it upon importing. A common issue is for R to convert strings (any text) into factors.</p>
-<p>We’ll come back to data exploration.</p>
-<h5 id="connecting-to-a-database">Connecting to a Database</h5>
-<p>It is <em>far</em> more common to access your data by connecting to a database. You might be importing stored .csv files if you are in a research position or analyzing a lot of publicly available data, but that data is by definition <em>static</em>.</p>
-<p>Nearly all companies and organizations have their own database(s), which are increasingly cloud-based (AWS, Azure, GCP). This allows for efficient storage and organization of data in real time. Connecting to and querying a database is much more efficient than asking someone to give you a .csv of the data you need.</p>
-<p>In order to access the data this way, you need:</p>
-<ol style="list-style-type: decimal">
-<li><p>Database credentials</p></li>
-<li><p>Query of the specific data you need</p></li>
-</ol>
-<p>Since this class is not about database management or learning SQL, I will provide both of these for you for all assignments. I’ll also make each of the datasets available as .csv files on Canvas if you would rather download them to your computer and use <code>read.csv</code> to import into R. However, I highly recommend connecting to and querying the database, as it is a much more common approach to doing data analysis in a professional setting.</p>
-<p><strong>Database Credentials</strong></p>
-<p>The database we will use for this class is a cloud-based (Google Cloud Platform) database. Here’s how to connect:</p>
+<pre><code># Here the nameof the function is 'my_function', the arguments are 'x' and 'y', the body is everything between '{' and '}', and the output is 'result'.
+
+my_function &lt;- function(x, y){
+  # commands acting on 'x' and 'y'
+  return(result)
+}</code></pre>
+<p>The time to write a function is when you find yourself doing some similar set of steps repeatedly. Data cleaning, data generation, and visualization generation are examples of processes that can grow long and complicated, and so are good candidates to turn into functions.</p>
+<pre><code># Imagine we have a process for importing and cleaning data that looks like this:
+
+# 1. Read data in
+data &lt;- read.csv(&quot;data_we_need.csv&quot;)
+# 2. Check for the required columns
+c(&quot;the columns we need for our analysis&quot;) %in% colnames(data)
+# 3. Rename one of the columns
+colnames(data)[which(colnames(data) == &quot;wrong_name&quot;)] &lt;- &quot;right_name&quot;
+# 4. Convert all factor variables to characters
+data[, sapply(data, is.factor)] &lt;- sapply(data[, sapply(data, is.factor)], as.character)
+# 5. Convert numeric columns to numeric
+data[, &quot;numeric columns&quot;] &lt;- sapply(data[, c(&quot;numeric columns&quot;)], as.numeric)
+# 6. Create a z_score variable
+data$z_score &lt;- scale(data$&quot;some_variable&quot;)
+# 7. Reorder the columns
+data[, c(&quot;order of specific columns we want&quot;)]</code></pre>
+<pre class="r"><code># We can convert this whole process to a function
+
+  # Any of the strings above (eg, &quot;order of the columns we want&quot;, etc.) 
+  # could be arguments if they vary with each iteration
+
+data_clean &lt;- function(csv) {
+  data &lt;- read.csv(csv)
+  print(all(c(&quot;wine_type&quot;, &quot;alcohol&quot;, &quot;magnesium&quot;, &quot;color_intensity&quot;, &quot;hue&quot;) %in% colnames(data)))
+  colnames(data)[which(colnames(data) == &quot;OD280_OD315_of_diluted_wines&quot;)] &lt;- &quot;protein_content&quot;
+  data[, sapply(data, is.factor)] &lt;- sapply(data[, sapply(data, is.factor)], as.character)
+  numeric_cols &lt;- c(&quot;alcohol&quot;, &quot;malic_acid&quot;, &quot;ash&quot;, &quot;alcalinity_of_ash&quot;, &quot;magnesium&quot;, &quot;total_phenols&quot;, &quot;flavanoids&quot;, &quot;nonflavanoid_phenols&quot;, &quot;proanthocyanins&quot;, &quot;color_intensity&quot;, &quot;hue&quot;, &quot;protein_content&quot;)
+  data[, numeric_cols] &lt;- sapply(data[, c(numeric_cols)], as.numeric)
+  data$z_score_malic_acid &lt;- scale(data$malic_acid)
+  data[, c(&quot;wine_type&quot;, &quot;alcohol&quot;, &quot;magnesium&quot;, &quot;color_intensity&quot;, &quot;hue&quot;, &quot;z_score_malic_acid&quot;, &quot;proline&quot;)]
+}
+
+head(data_clean(&quot;wine_components.csv&quot;))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre><code>##   wine_type alcohol magnesium color_intensity  hue z_score_malic_acid
+## 1       Red   14.23       127            5.64 1.04       -0.454046509
+## 2       Red   13.20       100            4.38 1.05       -0.323143480
+## 3       Red   13.16       101            5.68 1.03        0.761481625
+## 4       Red   14.37       113            7.80 0.86       -0.005236121
+## 5       Red   13.24       118            4.32 1.04        1.191591581
+## 6       Red   14.20       112            6.75 1.05       -0.360544345
+##   proline
+## 1    1065
+## 2    1050
+## 3    1185
+## 4    1480
+## 5     735
+## 6    1450</code></pre>
+<h5 id="more-tips-for-building-functions">More Tips for Building Functions</h5>
+<p><strong>Make use of conditionals and <code>print</code> statements</strong></p>
+<p>Conditional statements make your function more flexible and efficient by allowing it to handle more variation and execute fewer commands.</p>
+<pre><code>data_clean &lt;- function(csv) {
+  data &lt;- read.csv(csv)
+  all(c(&quot;wine_type&quot;, &quot;alcohol&quot;, &quot;magnesium&quot;, &quot;color_intensity&quot;, &quot;hue&quot;) %in% colnames(data))
+  colnames(data)[which(colnames(data) == &quot;OD280_OD315_of_diluted_wines&quot;)] &lt;- &quot;protein_content&quot;
+  if (any(sapply(data, is.factor))) {
+    data[, sapply(data, is.factor)] &lt;- sapply(data[, sapply(data, is.factor)], as.character)
+  }
+  if (&quot;malic_acid&quot; %in% colnames(data)) {
+    data$z_score_malic_acid &lt;- scale(data$malic_acid)
+    data[, c(&quot;wine_type&quot;, &quot;alcohol&quot;, &quot;magnesium&quot;, &quot;color_intensity&quot;, &quot;hue&quot;, &quot;z_score_malic_acid&quot;, &quot;proline&quot;)]
+  } else {
+  data[, c(&quot;wine_type&quot;, &quot;alcohol&quot;, &quot;magnesium&quot;, &quot;color_intensity&quot;, &quot;hue&quot;, &quot;proline&quot;)]
+  }
+}</code></pre>
+<p><code>print</code> statements let you know how your function is progressing. They can be combined with conditional statements, which is especially helpful if the process is long and involves many branches.</p>
+<pre class="r"><code>data_clean &lt;- function(csv) {
+  print(&quot;Importing data&quot;)
+  data &lt;- read.csv(csv)
+  if (all(c(&quot;wine_type&quot;, &quot;alcohol&quot;, &quot;magnesium&quot;, &quot;color_intensity&quot;, &quot;hue&quot;) %in% colnames(data))) {
+    print(&quot;All required columns found&quot;)
+  } else {
+    print(&quot;Columns missing&quot;)
+    }
+  print(&quot;Converting columns&quot;)
+  colnames(data)[which(colnames(data) == &quot;OD280_OD315_of_diluted_wines&quot;)] &lt;- &quot;protein_content&quot;
+  data[, sapply(data, is.factor)] &lt;- sapply(data[, sapply(data, is.factor)], as.character)
+  numeric_cols &lt;- c(&quot;alcohol&quot;, &quot;malic_acid&quot;, &quot;ash&quot;, &quot;alcalinity_of_ash&quot;, &quot;magnesium&quot;, &quot;total_phenols&quot;, &quot;flavanoids&quot;, &quot;nonflavanoid_phenols&quot;, &quot;proanthocyanins&quot;, &quot;color_intensity&quot;, &quot;hue&quot;, &quot;protein_content&quot;)
+  data[, numeric_cols] &lt;- sapply(data[, c(numeric_cols)], as.numeric)
+  data$z_score_malic_acid &lt;- scale(data$malic_acid)
+  data[, c(&quot;wine_type&quot;, &quot;alcohol&quot;, &quot;magnesium&quot;, &quot;color_intensity&quot;, &quot;hue&quot;, &quot;z_score_malic_acid&quot;, &quot;proline&quot;)]
+}
+
+head(data_clean(&quot;wine_components.csv&quot;))</code></pre>
+<pre><code>## [1] &quot;Importing data&quot;
+## [1] &quot;All required columns found&quot;
+## [1] &quot;Converting columns&quot;</code></pre>
+<pre><code>##   wine_type alcohol magnesium color_intensity  hue z_score_malic_acid
+## 1       Red   14.23       127            5.64 1.04       -0.454046509
+## 2       Red   13.20       100            4.38 1.05       -0.323143480
+## 3       Red   13.16       101            5.68 1.03        0.761481625
+## 4       Red   14.37       113            7.80 0.86       -0.005236121
+## 5       Red   13.24       118            4.32 1.04        1.191591581
+## 6       Red   14.20       112            6.75 1.05       -0.360544345
+##   proline
+## 1    1065
+## 2    1050
+## 3    1185
+## 4    1480
+## 5     735
+## 6    1450</code></pre>
+<p><strong>Think of the space inside the <code>{}</code> as its own mini-environment</strong></p>
+<p>Any object the function creates that is not part of the output exists only within the function.</p>
+<pre class="r"><code># Consider a simple function:
+
+pythagorean &lt;- function(a, b){
+  hypotenuse &lt;- sqrt(a^2 + b^2)
+  return(hypotenuse)
+}
+
+# If we run the function and then decide that we want the hypotenuse value, we'll get an error if we try to call it
+pythagorean(a = 3, b = 4)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre><code>hypotenuse
+
+&gt; Error in eval(expr, envir, enclos): object 'hypotenuse' not found</code></pre>
+<p>When you call a function, a temporary workspace is set up that will be destroyed when the function returns, either by:</p>
 <ul>
-<li><p>Download the file “GCP_local_IP_connection_setup.R” from Canvas. It will be under Files/Database Connection.</p></li>
-<li><p>Store the file in your working directory.</p></li>
-<li><p>Load the file using the <code>source()</code> function.</p></li>
+<li><p>Getting to the end, or</p></li>
+<li><p>An explicit return statement</p></li>
 </ul>
-<pre class="r"><code>source(&quot;/Users/adamgorski/MS_Econ/Courses/GCP_local_IP_connection_setup.R&quot;)</code></pre>
-<pre><code>## Loading required package: DBI</code></pre>
-<p><strong>Note</strong>: Credentials are dependent on the IP address you are connecting from. You should always be able to connect from USF. <strong>If you want to connect to the database from somewhere else (eg, your home), I need to whitelist your IP address.</strong> Type ‘get my IP’ into google from the location where you’d like to connect from, and email me the IP address so I can grant you access.</p>
-<p><strong>Query</strong></p>
-<p>Now that you’re connected to the database, you need to know which data to query. The package you loaded allows you to be able to send SQL queries to the database to pull your specific data request. I’ll provide you with the queries you’ll need for assignments, but feel free to use this connection to practice SQL queries. <em>Ability with SQL is the most sought after skill for data positions.</em></p>
-<p>The package you loaded has the function <code>dbGetQuery</code>, which takes a database connection and a SQL query as arguments for pulling a dataframe. Note: make sure to use single quotes, not double quotes, around your query.</p>
-<pre class="r"><code>wine_data_db &lt;- dbGetQuery(con, 'SELECT * FROM econ_621.wine_components')
-head(wine_data_db)</code></pre>
-<pre><code>##   wine_type alcohol malic_acid  ash alcalinity_of_ash magnesium
-## 1       Red   14.23       1.71 2.43              15.6       127
-## 2       Red   13.20       1.78 2.14              11.2       100
-## 3       Red   13.16       2.36 2.67              18.6       101
-## 4       Red   14.37       1.95 2.50              16.8       113
-## 5       Red   13.24       2.59 2.87              21.0       118
-## 6       Red   14.20       1.76 2.45              15.2       112
-##   total_phenols flavanoids nonflavanoid_phenols proanthocyanins
-## 1          2.80       3.06                 0.28            2.29
-## 2          2.65       2.76                 0.26            1.28
-## 3          2.80       3.24                 0.30            2.81
-## 4          3.85       3.49                 0.24            2.18
-## 5          2.80       2.69                 0.39            1.82
-## 6          3.27       3.39                 0.34            1.97
-##   color_intensity  hue od280_od315_of_diluted_wines proline
-## 1            5.64 1.04                         3.92    1065
-## 2            4.38 1.05                         3.40    1050
-## 3            5.68 1.03                         3.17    1185
-## 4            7.80 0.86                         3.45    1480
-## 5            4.32 1.04                         2.93     735
-## 6            6.75 1.05                         2.85    1450</code></pre>
-<p>Once your data is imported into your R environment as a dataframe, it is the exact same as if you had imported from a file on your computer.</p>
-<h3 id="subsetting-data">Subsetting Data</h3>
-<p>R is very good and very fast at subsetting data. Mastery of subsetting allows you to succinctly express complex operations in a way that few other languages can match. Subsetting is challenging because you need to master a number of interrelated concepts:</p>
-<ul>
-<li><p>Subsetting operators: <code>[]</code>, <code>$</code>, and <code>[[]]</code></p></li>
-<li><p>Types of subsetting</p></li>
-<li><p>Behavioral differences between different types of data objects (vectors, dataframes, etc.)</p></li>
-<li><p>Using subsetting in conjunction with assignment</p></li>
-</ul>
-<h5 id="subsetting-a-vector-with">Subsetting a Vector with <code>[]</code></h5>
-<pre class="r"><code># Start with a vector where the number after the decimal gives the original position of value (to make it easier to keep track of initial positions)
+<p>Think of functions as an alternative reality, where objects are created and destroyed in a function call.</p>
+<p>Note: functions can access <em>external</em> sources of data, but take caution in doing so within a function, as you want your function to be as self-contained/self-reliant as possible.</p>
+<p><strong>Be thoughtful in your naming conventions</strong></p>
+<p>Keeping track of which objects exist within your function environment and which exist in your Global Environment can get confusing, as can the various names of different functions and their arguments. Within a function environment, define as few objects as possible, or continually overwrite the same object name.</p>
+<pre><code>my_func &lt;- function(x) {
+  tmp &lt;- read.csv(x)
+  tmp[, sapply(tmp, is.factor)] &lt;- sapply(tmp[, sapply(tmp, is.factor)], as.character)
+  tmp[, numeric_cols] &lt;- sapply(tmp[, c(numeric_cols)], as.numeric)
+  tmp[, c(&quot;wine_type&quot;, &quot;alcohol&quot;, &quot;magnesium&quot;, &quot;color_intensity&quot;, &quot;hue&quot;, &quot;z_score_malic_acid&quot;, &quot;proline&quot;)]
+}</code></pre>
+<p>For function names and argument names, don’t be afraid to use long descriptors: the extra time it takes you to type will be made up for in the time it saves you having to remember what the function does.</p>
+<pre><code>func_splits_by_user_id_week &lt;- function(user_data, date_range)</code></pre>
+<p><strong>Use defaults</strong></p>
+<p>Defaults are a good way to keep a function flexible but limit the number of arguments required for most cases. You create a default by setting an argument equal to its default value initially.</p>
+<pre><code>data_clean &lt;- function(csv, z_score = &quot;malic_acid&quot;){
+  data &lt;- read.csv(csv)
+  ...
+  If (!is.null(z_score)){
+    data$z_score &lt;- scale(data[, z_score])
+  }
+  ...
+}</code></pre>
+<h5 id="best-practices-for-coding-if-and-function">Best Practices for Coding <code>if</code> and <code>function</code></h5>
+<p><code>if</code> and <code>function</code> should (almost) always be followed by squiggly brackets (<code>{}</code>), and the contents should be indented. This makes it easier to see the hierarchy in your code by skimming the left-hand margin.</p>
+<p>An opening curly brace should never go on its own line and should always be followed by a new line. A closing curly brace should always go on its own line, unless it’s followed by else. Always indent the code inside curly braces.</p>
+<pre><code># Bad practice
+if (y &lt; 0)
+message(&quot;Y is negative&quot;)
 
-x &lt;- c(2.1, 4.2, 3.3, 5.4)</code></pre>
-<p>Using <code>[]</code>, we can use the integer of the value’s position to return the value.</p>
-<pre class="r"><code>x[1]</code></pre>
-<pre><code>## [1] 2.1</code></pre>
-<p>We can also index multiple values by passing a vector of integers. Note that you have to use <code>c</code> inside the <code>[</code> for this to work.</p>
-<pre class="r"><code>x[c(3, 1)]</code></pre>
-<pre><code>## [1] 3.3 2.1</code></pre>
-<pre class="r"><code># Duplicated indices return duplicated values
-x[c(3, 2, 2)]</code></pre>
-<pre><code>## [1] 3.3 4.2 4.2</code></pre>
-<p><code>order</code> function gives the index positions (not the values) of smallest to largest values.</p>
-<pre class="r"><code>order(x)</code></pre>
-<pre><code>## [1] 1 3 2 4</code></pre>
-<pre class="r"><code># You can use use the results to sort the values
-x[order(x)]</code></pre>
-<pre><code>## [1] 2.1 3.3 4.2 5.4</code></pre>
-<pre class="r"><code># Then you can subset the subset to get the lowest value
-x[order(x)][1]</code></pre>
-<pre><code>## [1] 2.1</code></pre>
-<p>Negative integers omit elements at the specified positions</p>
-<pre class="r"><code>x[-1]</code></pre>
-<pre><code>## [1] 4.2 3.3 5.4</code></pre>
-<pre class="r"><code>x[-c(3, 1)]</code></pre>
-<pre><code>## [1] 4.2 5.4</code></pre>
-<p>However, you can’t mix positive and negative numbers in a single subset</p>
-<pre><code>x[c(-1, 2)]
-&gt; Error in x[c(-1, 2)]: only 0's may be mixed with negative subscripts</code></pre>
-<p>Character vectors return elements with matching names. This only works if the vector is named.</p>
-<pre class="r"><code># Add names to the vector
-names(x) &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;)
+if (y == 0) {
+log(x)
+} 
+else {
+y ^ x
+}
 
-# Subset using (exact) names
-x[c(&quot;d&quot;, &quot;c&quot;, &quot;a&quot;)]</code></pre>
-<pre><code>##   d   c   a 
-## 5.4 3.3 2.1</code></pre>
-<pre class="r"><code># Like integer indices, you can repeat indices
-x[c(&quot;a&quot;, &quot;a&quot;, &quot;a&quot;)]</code></pre>
-<pre><code>##   a   a   a 
-## 2.1 2.1 2.1</code></pre>
-<p>Logical vectors select elements where the corresponding logical value is <code>TRUE</code>.</p>
-<pre class="r"><code>x[c(TRUE, TRUE, FALSE, FALSE)]</code></pre>
-<pre><code>##   a   b 
-## 2.1 4.2</code></pre>
-<h5 id="subsetting-a-vector-with-conditionals">Subsetting a Vector with Conditionals</h5>
-<p>Logical subsetting is the most useful type of subsetting, because you use it to subset based on conditional or comparative statements.</p>
-<p>The (logical) comparison operators known to R are:</p>
-<ul>
-<li><code>&lt;</code> for less than</li>
-<li><code>&gt;</code> for greater than</li>
-<li><code>&lt;=</code> for less than or equal to</li>
-<li><code>&gt;=</code> for greater than or equal to</li>
-<li><code>==</code> for equal to each other</li>
-<li><code>!=</code> not equal to each other</li>
-</ul>
-<p>The nice thing about R is that you can use these comparison operators also on vectors.</p>
-<pre class="r"><code>x &gt; 3</code></pre>
-<pre><code>##     a     b     c     d 
-## FALSE  TRUE  TRUE  TRUE</code></pre>
-<p>This command tests for every element of the vector if the condition stated by the comparison operator is <code>TRUE</code> or <code>FALSE.</code> And it returns a logical vector.</p>
-<p>We can now pass this statement between the square brackets that follow x to subset only those items that match <code>TRUE</code>.</p>
-<pre class="r"><code>x[x &gt; 3]</code></pre>
-<pre><code>##   b   c   d 
-## 4.2 3.3 5.4</code></pre>
-<p>You can combine conditional statements with <code>&amp;</code> (and), <code>|</code> (or), and <code>!</code> (not).</p>
-<pre class="r"><code># Combining two conditional statements with &amp;
-x &gt; 3 &amp; x &lt; 5</code></pre>
-<pre><code>##     a     b     c     d 
-## FALSE  TRUE  TRUE FALSE</code></pre>
-<pre class="r"><code>x[x &gt; 3 &amp; x &lt; 5]</code></pre>
-<pre><code>##   b   c 
-## 4.2 3.3</code></pre>
-<pre class="r"><code># Combining two conditional statements with |
-x &lt; 3 | x &gt; 5 </code></pre>
-<pre><code>##     a     b     c     d 
-##  TRUE FALSE FALSE  TRUE</code></pre>
-<pre class="r"><code>x[x &lt; 3 | x &gt; 5]</code></pre>
-<pre><code>##   a   d 
-## 2.1 5.4</code></pre>
-<pre class="r"><code># Combining conditional statements with !
-!x &gt; 5 </code></pre>
-<pre><code>##     a     b     c     d 
-##  TRUE  TRUE  TRUE FALSE</code></pre>
-<pre class="r"><code>x[!x &gt; 5]</code></pre>
-<pre><code>##   a   b   c 
-## 2.1 4.2 3.3</code></pre>
-<p>Another way to generate implicit conditional statements is using the <code>%in%</code> operator, which tests whether an item is in a set.</p>
-<pre class="r"><code># Generate implicit logical vectors through the %in% operator
-x %in% c(3.3, 4.2)</code></pre>
-<pre><code>## [1] FALSE  TRUE  TRUE FALSE</code></pre>
-<pre class="r"><code>x[x %in% c(3.3, 4.2)]</code></pre>
-<pre><code>##   b   c 
-## 4.2 3.3</code></pre>
-<h5 id="subsetting-lists">Subsetting Lists</h5>
-<p>We won’t spend too much time here. Remember that lists are one-dimensional data structures that can store different types of data in each component.</p>
-<pre class="r"><code>my_list &lt;- list(a = 1:3, b = &quot;a string&quot;, c = pi)
-my_list</code></pre>
-<pre><code>## $a
-## [1] 1 2 3
+# Good practice
+if (y &lt; 0) {
+  message(&quot;Y is negative&quot;)
+}
+
+if (y == 0) {
+  log(x)
+} else {
+  y ^ x
+}</code></pre>
+<h3 id="iterations">Iterations</h3>
+<p>A similar concept to functions are iterative processes, which are a bit like one-off functions written to iterate the same process over the same dataset several times.</p>
+<p>We’ve spent some time on <code>lapply</code>, which is a function that iterates a chosen function across all items in a list.</p>
+<pre class="r"><code>lst &lt;- list(title = &quot;Model Summary&quot;, parameters = c(3.4, 6.1), output = data.frame(n = c(1:3), x = c(7, 5, 3)))
+lapply(lst, class)</code></pre>
+<pre><code>## $title
+## [1] &quot;character&quot;
 ## 
-## $b
-## [1] &quot;a string&quot;
+## $parameters
+## [1] &quot;numeric&quot;
 ## 
-## $c
-## [1] 3.141593</code></pre>
-<p><code>[</code> extracts a sub-list where the result will always be a list. Like with vectors, you can subset with a logical, integer, or character vector. <code>[[</code> extracts a single component from a list. In other words, it removes that hierarchy and returns whatever object is stored inside.</p>
-<pre class="r"><code>my_list[1:2]</code></pre>
-<pre><code>## $a
-## [1] 1 2 3
+## $output
+## [1] &quot;data.frame&quot;</code></pre>
+<p>The function you choose to apply to every list element can be one of your own design. The difference is that the input, or argument, will be the list element.</p>
+<pre class="r"><code># We want to rearrange these names so we have 'Last Name, First Name'
+esq_names &lt;- list(&quot;Robert Shapiro&quot;, &quot;Johnnie Cochran&quot;, &quot;Alan Dershowitz&quot;, &quot;Barry Scheck&quot;)
+lapply(esq_names, function(x) {
+  paste(strsplit(x, &quot; &quot;)[[1]][2], &quot;, &quot;, strsplit(x, &quot; &quot;)[[1]][1], sep = &quot;&quot;)
+})</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;Shapiro, Robert&quot;
 ## 
-## $b
-## [1] &quot;a string&quot;</code></pre>
-<pre class="r"><code>my_list[[1]]</code></pre>
-<pre><code>## [1] 1 2 3</code></pre>
-<h5 id="subsetting-matrices">Subsetting Matrices</h5>
-<p>Similar to vectors, you can use the square brackets <code>[ ]</code> to select one or multiple elements from a matrix. But whereas vectors have one dimension, matrices have two dimensions. We therefore have to use two subsetting vectors – one for rows to select, another for columns – separated by a comma.</p>
-<pre class="r"><code>a &lt;- matrix(1:9, nrow = 3)
-colnames(a) &lt;- c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
-a</code></pre>
-<pre><code>##      A B C
-## [1,] 1 4 7
-## [2,] 2 5 8
-## [3,] 3 6 9</code></pre>
-<pre class="r"><code># Selects the value at the first row and second column
-a[1, 2] </code></pre>
-<pre><code>## B 
-## 4</code></pre>
-<pre class="r"><code># Selects first row, and the first and third columns
-a[1, -2] </code></pre>
-<pre><code>## A C 
-## 1 7</code></pre>
-<pre class="r"><code># Selects first two rows, and the first and third columns
-a[c(1,2), c(1, 3)] </code></pre>
-<pre><code>##      A C
-## [1,] 1 7
-## [2,] 2 8</code></pre>
-<p>Blank subsetting is also useful because it lets you keep all rows or all columns.</p>
-<pre class="r"><code># Selects first two rows and all columns
-a[c(1, 2), ]</code></pre>
-<pre><code>##      A B C
-## [1,] 1 4 7
-## [2,] 2 5 8</code></pre>
-<h5 id="subsetting-dataframes">Subsetting Dataframes</h5>
-<p>Data from data frames can be addressed like matrices, using two vectors separated by a comma.</p>
-<pre class="r"><code># Print the alcohol content of the first wine
-wine_data_db[1, 2]</code></pre>
-<pre><code>## [1] 14.23</code></pre>
-<pre class="r"><code># Print all the data for the first wine
-wine_data_db[1, ]</code></pre>
-<pre><code>##   wine_type alcohol malic_acid  ash alcalinity_of_ash magnesium
-## 1       Red   14.23       1.71 2.43              15.6       127
-##   total_phenols flavanoids nonflavanoid_phenols proanthocyanins
-## 1           2.8       3.06                 0.28            2.29
-##   color_intensity  hue od280_od315_of_diluted_wines proline
-## 1            5.64 1.04                         3.92    1065</code></pre>
-<pre class="r"><code># Print the first two rows of the first two columns
-wine_data_db[1:2, 1:2]</code></pre>
-<pre><code>##   wine_type alcohol
-## 1       Red   14.23
-## 2       Red   13.20</code></pre>
-<p>A possible disadvantage of this approach is that you have to know (or look up) the column number of type, which gets hard if you have a lot of variables. Instead of using numerics to select elements of a data frame, you can also use the variable names to select columns of a data frame. It is often easier to just make use of the variable name.</p>
-<pre class="r"><code># Print the type of wine of the first five rows
-wine_data_db[1:5, &quot;wine_type&quot;]</code></pre>
-<pre><code>## [1] &quot;Red&quot; &quot;Red&quot; &quot;Red&quot; &quot;Red&quot; &quot;Red&quot;</code></pre>
-<p>You will often want to select an entire column, namely one specific variable from a data frame. As long as your columns have names, the best way to select a column is with the <code>$</code> sign. Using <code>$</code> will also make your life easier through R Studio’s autocomplete.</p>
-<pre class="r"><code>wine_data_db$wine_type</code></pre>
-<pre><code>##  [1] &quot;Red&quot;   &quot;Red&quot;   &quot;Red&quot;   &quot;Red&quot;   &quot;Red&quot;   &quot;Red&quot;   &quot;Red&quot;   &quot;White&quot;
-##  [9] &quot;Red&quot;   &quot;White&quot; &quot;Red&quot;   &quot;White&quot; &quot;Red&quot;   &quot;Red&quot;   &quot;Red&quot;   &quot;Rose&quot; 
-## [17] &quot;Red&quot;   &quot;Rose&quot;  &quot;Red&quot;   &quot;Rose&quot;  &quot;Red&quot;   &quot;Red&quot;   &quot;Red&quot;   &quot;Red&quot;  
-## [25] &quot;Red&quot;</code></pre>
-<p>Remember that dataframes are really a collection of equal-length vectors. <code>$</code> specifies which vector you are interested in.</p>
-<pre class="r"><code># Print the type of wine of the first five rows
-wine_data_db$wine_type[1:5]</code></pre>
-<pre><code>## [1] &quot;Red&quot; &quot;Red&quot; &quot;Red&quot; &quot;Red&quot; &quot;Red&quot;</code></pre>
-<h5 id="conditional-subsetting">Conditional Subsetting</h5>
-<p>We can combine two powerful subsetting tools: the <code>$</code> operator and conditional subsetting.</p>
-<pre class="r"><code># First extract the magnesium column
-magnesium &lt;- wine_data_db$magnesium
-
-# Then find the elements less than 100
-magnesium &lt; 100</code></pre>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE
-## [12]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [23] FALSE  TRUE  TRUE</code></pre>
-<pre class="r"><code># Now we have a boolean vector, which we can use to extract all the wines with magnesium &lt; 100
-wine_data_db[magnesium &lt; 100,]</code></pre>
-<pre class="r"><code># Finally, we can combine these steps into one efficient line of code:
-low_mag_wine &lt;- wine_data_db[wine_data_db$magnesium &lt; 100,]</code></pre>
-<p>It is good practice to create a new data set when subsetting, instead of overwriting the existing one.</p>
-<h5 id="sub-assignment">Sub-assignment</h5>
-<p>All subsetting operators can be combined with assignment to modify selected values of the input vector.</p>
-<pre class="r"><code>x &lt;- 1:5
-x[c(1, 2)] &lt;- 2:3
-x</code></pre>
-<pre><code>## [1] 2 3 3 4 5</code></pre>
-<p>This is especially useful when conditionally modifying vectors.</p>
-<pre class="r"><code>x &lt;- 1:5
-
-# Replace all values less than 3 with NA
-x[x &lt; 3] &lt;- NA
-x</code></pre>
-<pre><code>## [1] NA NA  3  4  5</code></pre>
-<p>This also works on dataframes.</p>
-<pre class="r"><code># We want to replace the term &quot;Rose&quot; with &quot;Rosado&quot;
-wine_data_db$wine_type == &quot;Rose&quot;</code></pre>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [12] FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE
-## [23] FALSE FALSE FALSE</code></pre>
-<pre class="r"><code>wine_data_db$wine_type[wine_data_db$wine_type == &quot;Rose&quot;] &lt;- &quot;Rosado&quot;</code></pre>
-<h3 id="exporting-data">Exporting Data</h3>
-<p>After doing your modifications or analysis, you might want to export a dataset. This could be a deliverable you are expected to produce or a way for you to save your data for use elsewhere.</p>
-<p>The function <code>write.csv</code> takes a data object from your environment and writes it to your working directory with the name you have assigned. The default for this function is to write a column of row names, which you can set to <code>row.names = F</code> if you don’t want.</p>
-<pre class="r"><code>write.csv(low_mag_wine, &quot;low_mag_wine_data.csv&quot;, row.names = F)</code></pre>
+## [[2]]
+## [1] &quot;Cochran, Johnnie&quot;
+## 
+## [[3]]
+## [1] &quot;Dershowitz, Alan&quot;
+## 
+## [[4]]
+## [1] &quot;Scheck, Barry&quot;</code></pre>
+<p>The logic of a <code>for</code> loop is similar: ’for each ___, do x.’ You define the index, usually <code>i</code>, and the number of iterations, usually the length or size of the data you’re working with.</p>
+<pre class="r"><code>esq_names &lt;- c(&quot;Robert Shapiro&quot;, &quot;Johnnie Cochran&quot;, &quot;Alan Dershowitz&quot;, &quot;Barry Scheck&quot;)
+for (i in 1:length(esq_names)) {
+  print(paste(strsplit(esq_names[i], &quot; &quot;)[[1]][2], &quot;, &quot;,
+              strsplit(esq_names[i], &quot; &quot;)[[1]][1], sep = &quot;&quot;))
+}</code></pre>
+<pre><code>## [1] &quot;Shapiro, Robert&quot;
+## [1] &quot;Cochran, Johnnie&quot;
+## [1] &quot;Dershowitz, Alan&quot;
+## [1] &quot;Scheck, Barry&quot;</code></pre>
+<p>Between these two, you should try to use <code>lapply</code> whenever possible. <code>for</code> loops handle one iteration at a time, while <code>lapply</code> uses parallel processing, and is therefore much faster and more efficient. Imagine needing to buy something from six different stores. One person visiting each store will take far longer than six people each visiting one store each.</p>
+<p>The only case where <code>for</code> loops are preferable is when you need the output from a previous iteration to execute the current iteration.</p>
+<pre class="r"><code>vec &lt;- runif(10)
+# Here we want to take a numeric vector and create a dataframe where one of the columns is the differnce between the previous value and the current value
+for (i in 1:length(vec)) {
+  if (i == 1) {
+    df &lt;- data.frame(n = i, value = vec[i], diff = NA)
+  } else {
+    tmp &lt;- data.frame(n = i, value = vec[i], diff = vec[i -1] - vec[i])
+    df &lt;- rbind(df, tmp)
+    }
+}
+df</code></pre>
+<pre><code>##     n      value       diff
+## 1   1 0.70431210         NA
+## 2   2 0.19596336  0.5083487
+## 3   3 0.88801998 -0.6920566
+## 4   4 0.49330008  0.3947199
+## 5   5 0.00456077  0.4887393
+## 6   6 0.28253553 -0.2779748
+## 7   7 0.14061133  0.1419242
+## 8   8 0.26034268 -0.1197313
+## 9   9 0.61320693 -0.3528642
+## 10 10 0.19978579  0.4134211</code></pre>
+<p>An <code>lapply</code> would run these iterations in parallel, making it more difficult to set up correctly.</p>
+<h3 id="storing-your-processes">Storing Your Processes</h3>
+<p>Try to think about each script you write as containing only the commands you need for that specific work. Any process you might repeat could be it’s own script or function that you can call to when you need.</p>
+<p>It’s good practice to have a functions library where you store the functions you’ve created. To do so, create a new folder on your computer (eg, “/Users/adamgorski/R_functions”). That way, you can load all your functions easily everytime you start a new project.</p>
+<pre class="r"><code>fns_lib &lt;- &quot;/Users/adamgorski/MS_ECON/Courses/R_functions&quot;
+print(list.files(fns_lib))</code></pre>
+<pre><code>## [1] &quot;don_econ_connect.R&quot;</code></pre>
+<pre class="r"><code>for (i in 1:length(list.files(fns_lib))) {source(paste(fns_lib, &quot;/&quot;, list.files(fns_lib)[i], sep = &quot;&quot;))}
+# Now all the files in the folder have been loaded into our global environment</code></pre>
 <h4 id="acknowledgement">Acknowledgement</h4>
-<p>This lesson is based in part on <a href="https://plsc-31101.github.io/course/"><em>PLSC 31101: Computational Tools for Social Science</em></a> by Rochelle Terman</p>
+<p>This lesson is based in part on <a href="https://plsc-31101.github.io/course/"><em>PLSC 31101: Computational Tools for Social Science</em></a> by Rochelle Terman.</p>
 </div>
 
 

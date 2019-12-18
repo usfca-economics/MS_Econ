@@ -265,7 +265,7 @@ Beyond that, try to think about how your visualizations would handle dynamic dat
 
 This lesson is based in part on:
 
-* Rochelle Terman's _Computational Tools for Social Science_ course materials
+* [*PLSC 31101: Computational Tools for Social Science*](https://plsc-31101.github.io/course/) by Rochelle Terman
 
-* Mel Moreno and Mathieu Basille's _Drawing beautiful maps programmatically with R, sf and ggplot2_
-</div>
+* [*Drawing beautiful maps programmatically with R, sf and ggplot2*](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html)
+by Mel Moreno and Mathieu Basille's </div>

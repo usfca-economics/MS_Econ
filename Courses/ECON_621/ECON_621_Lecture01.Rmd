@@ -32,7 +32,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ### How R Studio Displays Dataframes ###
 
 Explore some data that is built in to R Studio
-```
+```{r}
 data()
 data(mtcars)
 ```
@@ -42,8 +42,4 @@ When `mtcars` appears in the Global Environment, you can click on it to surface 
 You can explore some of the other datasets to familiarize yourself with R Studio.
 
 Tomorrow we'll start working with and manipulating datasets like this in R.
-
-#### Acknowledgement ####
-
-This lesson is based in part on Rochelle Terman's _Computational Tools for Social Science_ course materials
 </div>

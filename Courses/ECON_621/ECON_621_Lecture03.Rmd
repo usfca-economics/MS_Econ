@@ -339,5 +339,5 @@ write.csv(low_mag_wine, "low_mag_wine_data.csv", row.names = F)
 
 #### Acknowledgement ####
 
-This lesson is based in part on Rochelle Terman's _Computational Tools for Social Science_ course materials
+This lesson is based in part on [*PLSC 31101: Computational Tools for Social Science*](https://plsc-31101.github.io/course/) by Rochelle Terman
 </div>

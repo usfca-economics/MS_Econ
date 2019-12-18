@@ -1,0 +1,26 @@
+<p>Each lab assignment needs to be submitted as the html output of an R Markdown file. At the top of each submission should be the title (eg, <em>ECON 621 - Lab #1</em>) and the student's name. File names should use the following structure: StudentLastName_ECON621_Lab_LabNumber. For example, <em>Gorski_ECON621_Lab_01</em>.</p>
+<p>Assignments are due before the beginning of the following class.</p>
+<p>Note: This assignment is based on a take home exercise we used at my previous company when we were hiring for a position focused on data visualization.</p>
+<p><strong>Scenario &amp; Data&nbsp;</strong></p>
+<p>In this hypothetical scenario, you work for a company which stores and organizes digital photographs for users. One of the features of the product is image recognition software, which surfaces suggestions to users for what to name their photographs. Prior research has revealed that users who name their photographs are much more likely to continue using the product, so the success of the feature is considered critical the health of the company.&nbsp;</p>
+<p>Currently, the company pays a third party provider to track the use, success, and impact of this feature, but now your company would like to be able to do so in house. The first priority is to generate an internal version of this dashboard, which is used throughout the company to track progress towards goals:</p>
+<div class="page" title="Page 2">
+<div class="section"><img src="https://usfca.instructure.com/users/4115806/files/66137714/preview?verifier=SOy325MPH6i2XzvVvMdz2sqpyxqTIr3GscEpIbTX" alt="user_metrics_dashboard" width="1785" height="1429" data-api-endpoint="https://usfca.instructure.com/api/v1/users/4115806/files/66137714" data-api-returntype="File" /></div>
+<div class="section">
+<p>The dashboard shows two visualizations. The visualization on top reflects the proportion of users who are active in their first week on the product, with the date on the x-axis. A user is considered &lsquo;active&rsquo; if they have named a photograph, either by doing so manually or accepting a suggestion. This metric is shown for all users (in gray) and is also broken out for users for whom at least one name suggestion was surfaced (orange) and for whom none were (blue). The visual on the bottom shows the proportion of users for whom at least one name suggestion was surfaced (orange for at least one, blue for none) in their first week on the product. Again, the date is on x-axis.&nbsp;</p>
+<p>The data you have available to reproduce the dashboard is a user events table. The table contains one row for every "event" in the product, including actions taken by the user and name suggestions surfaced to a user. Each event contains an event_id, user_id, event_type, and timestamp. Here is the query to pull the first two months worth of data from the table:</p>
+<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>WITH three_months_on AS (<br />	SELECT date_trunc('month', min(timestamp)) + INTERVAL '3 months' AS date<br />	FROM econ_621.photoname_event_data)<br />SELECT * FROM econ_621.photoname_event_data<br />WHERE timestamp &lt; (SELECT date FROM three_months_on)</pre>
+<p>Note: This query will take a long time to run (~3 to 5 minutes). Remember to pull your data while on campus, or to request that your home IP address be whitelisted.</p>
+<p><strong>Goals &amp; Deliverables&nbsp;</strong></p>
+<p>The first goal of this challenge is to transform and clean the data from its current state into a table or tables which will provide the information needed to provide the information contained the dashboard above. It is up to you to determine appropriate table structure and content.</p>
+<p>The second goal is to build a dashboard or series of visualizations which describe the data and provide similar metrics to those contained in the dashboard above. Again, it is up to you how to approach these visualizations: you can create a similar set of visuals as the dashboard or take a different approach, but the information conveyed should be the same.</p>
+<p>The entire process should be contained in a single function that:</p>
+<ul>
+<li>Takes a SQL query (provided above) as its sole argument</li>
+<li>Produces the data visualizations as its output (along with any other messages or content you think are appropriate)</li>
+</ul>
+<p>&nbsp;Ensure that your function is flexible by running it on this query:</p>
+<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>WITH three_months_back AS (<br />	SELECT date_trunc('month', max(timestamp)) - INTERVAL '3 months' AS date<br />	FROM econ_621.photoname_event_data)<br />SELECT * FROM econ_621.photoname_event_data<br />WHERE timestamp &lt; (SELECT date FROM three_months_back)</pre>
+<p>&nbsp;</p>
+</div>
+</div>

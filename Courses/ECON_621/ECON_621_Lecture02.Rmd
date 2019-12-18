@@ -674,5 +674,5 @@ All of your assignments for this class will be submitted as html files created i
 
 #### Acknowledgement ####
 
-This lesson is based on Rochelle Terman's _Computational Tools for Social Science_ course materials
+This lesson is based on [*PLSC 31101: Computational Tools for Social Science*](https://plsc-31101.github.io/course/) by Rochelle Terman
 </div>
