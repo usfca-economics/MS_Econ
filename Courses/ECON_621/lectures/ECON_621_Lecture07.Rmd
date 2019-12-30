@@ -1,0 +1,386 @@
+---
+title: "ECON621: Building Automated Processes"
+author: "Adam Gorski"
+date: "Jan. 10, 2020"
+output: html_document
+---
+
+<style>
+div.blue pre { background-color:lightblue; }
+div.blue pre.r { background-color:cornsilk; }
+</style>
+<div class = "blue">
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Today's Lecture:
+
+* Conditional Flow
+
+* Writing Functions
+
+* Iterations
+
+* Storing Your Processes
+
+The main distinction between how R is used for research (eg, in academia) and in business is *scalability*. Scalability is the difference between providing an answer to a question and providing a tool that can answer future questions. R scripts that scale well are flexible and modular (ie, able to be pulled out and plugged into processes). You could describe this way of writing scripts as programming, and it is not unique to R. We have touched on some of these concepts to this point in the course, but we'll focus exclusively today on how to build processes and how to think programmatically about your scripts.
+
+### Conditional Flow ###
+
+Sometimes you only want to execute code if a certain condition is met. To do that, we use an `if/else` statement.
+```
+if (condition) {# Code executed when condition is TRUE
+
+  } else {# Code executed when condition is FALSE
+
+}
+```
+The condition after the `if` is a statement that must always evaluate to either `TRUE` or `FALSE`. The statement must produce only one value, not a vector of values (eg, `TRUE` `TRUE` `FALSE` ). The resulting command(s) after the `if` is the first branch; after the `else` is the second
+```{r}
+age <- 22
+
+if (age <= 21) {
+  print("I'm sorry, I can't let you in here.")
+} else {
+  print("I have to check everyone. Thanks.")
+}
+```
+```{r}
+age <- 20
+
+if (age <= 21) {
+  print("I'm sorry, I can't let you in here.")
+} else {
+  print("I have to check everyone. Thanks.")
+}
+```
+You can chain as many conditional statements together as you would like by using `else if`
+```{r}
+age <- 21
+
+if (age == 21) {
+  print("Do you have any other forms of identification?")
+} else if (age < 21) {
+  print("I'm sorry, I can't let you in here.")
+} else {
+  print("I have to check everyone. Thanks.")
+}
+```
+You can generate more complex conditional statements with boolean operators like `&` and `|`.
+```{r}
+age <- 47
+
+if (age <= 21) {
+  print("I'm sorry, I can't let you in here.")
+} else if (age < 55 & age > 45) {
+  print("Are you a cop?")
+} else {
+  print("I have to check everyone. Thanks.")
+}
+```
+You can also nest conditionals inside of conditionals.
+```{r}
+age <- 20
+
+if (age == 21) {
+  print("Do you have any other forms of identification?")
+} else if (age < 21) {
+  print("I'm sorry, I can't let you in here.")
+  if (age > 18) {
+    print("But you can come back on Friday or Saturday: it's 18+ those nights")
+  }
+} else {
+  print("I have to check everyone. Thanks.")
+}
+```
+##### `ifelse` function #####
+Because `if/else` conditional statements like the ones outlined above must always resolve to a single `TRUE` or `FALSE`, they cannot be used for vector operations. Vector operations are where you make multiple comparisons simultaneously for each value stored inside a vector.
+
+A common case is the creation of dummy, or flag, variables that can only be either `1` or `0`. We give the function `ifelse` a vector and it will perform our `if/else` process to every value in the vector. So you need to give it two possible operations: the first if the condition is `TRUE` and the second if it is `FALSE`.
+```{r, include = F}
+wine_data <- read.csv("wine_components.csv")
+```
+```{r}
+# We want to create a binary variable for whether a wine has less than 14% alcohol
+ifelse(wine_data$alcohol < 14, 1, 0)
+```
+```{r, eval = F}
+# We can easily add that vector to our dataframe as a new variable
+wine_data$low_alcohol <- ifelse(wine_data$alcohol < 14, 1, 0)
+```
+Just like `if/else` statements, we can nest `ifelse` functions inside each other to create a category variable.
+```{r}
+wine_data$alcohol_level <- ifelse(wine_data$alcohol < 13, "Less than 13%", 
+                                  ifelse(wine_data$alcohol < 14,
+                                         "Between 13% and 14%", "More than 14%"))
+head(wine_data[, c("wine_type", "alcohol", "alcohol_level")])
+```
+
+### Writing Functions ###
+
+Functions are the basic building blocks of programs. Think of them as “mini-scripts.” We’ve already used dozens of functions created by others (eg, `mean`, `split`, etc.). Functions allow you to automate common tasks in a more powerful and general way than copy-and-pasting.
+```
+# Consider this approach to adding columns to a dataframe:
+df <- data.frame(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+
+df$a <- (df$a - min(df$a)) / (max(df$a) - min(df$a))
+df$b <- (df$b - min(df$b)) / (max(df$b) - min(df$a))
+df$c <- (df$c - min(df$c)) / (max(df$c) - min(df$c))
+df$d <- (df$d - min(df$d)) / (max(df$d) - min(df$d))
+
+# You might be able to puzzle out that this rescales each column to have a range from 0 to 1. But did you spot the mistake? I made an error when copying-and-pasting the code for df$b: I forgot to change an 'a' to a 'b'.
+```
+Functions have a number of advantages over this “copy-and-paste” approach:
+
+* They are easy to reuse. If you need to change things, you only have to update code in one place, instead of many.
+
+* They are self-documenting. Functions name pieces of code the way variables name strings and numbers. Give your function a good name and you will easily remember the function and its purpose.
+
+* They are easier to debug. There are fewer chances to make mistakes because the code only exists in one location (ie, updating a variable name in one place, but not in another).
+
+Functions have four key components:
+
+1. A **name**. This should be informative and describe what the function does.
+
+2. The **arguments**, or list of inputs, to the function. They go inside the parentheses in `function`.
+
+3. The **body**. This is the block of code within `{}` that immediately follows `function(`...`)`, and is the code that you develop to perform the action described in the name using the arguments you provide.
+
+4. The **output**. This is what your function returns. The output can be almost any kind of object: a single value, a vector, a dataframe, etc.
+```
+# Here the nameof the function is 'my_function', the arguments are 'x' and 'y', the body is everything between '{' and '}', and the output is 'result'.
+
+my_function <- function(x, y){
+  # commands acting on 'x' and 'y'
+  return(result)
+}
+```
+The time to write a function is when you find yourself doing some similar set of steps repeatedly. Data cleaning, data generation, and visualization generation are examples of processes that can grow long and complicated, and so are good candidates to turn into functions.
+```
+# Imagine we have a process for importing and cleaning data that looks like this:
+
+# 1. Read data in
+data <- read.csv("data_we_need.csv")
+# 2. Check for the required columns
+c("the columns we need for our analysis") %in% colnames(data)
+# 3. Rename one of the columns
+colnames(data)[which(colnames(data) == "wrong_name")] <- "right_name"
+# 4. Convert all factor variables to characters
+data[, sapply(data, is.factor)] <- sapply(data[, sapply(data, is.factor)], as.character)
+# 5. Convert numeric columns to numeric
+data[, "numeric columns"] <- sapply(data[, c("numeric columns")], as.numeric)
+# 6. Create a z_score variable
+data$z_score <- scale(data$"some_variable")
+# 7. Reorder the columns
+data[, c("order of specific columns we want")]
+```
+```{r}
+# We can convert this whole process to a function
+
+  # Any of the strings above (eg, "order of the columns we want", etc.) 
+  # could be arguments if they vary with each iteration
+
+data_clean <- function(csv) {
+  data <- read.csv(csv)
+  print(all(c("wine_type", "alcohol", "magnesium", "color_intensity", "hue") %in% colnames(data)))
+  colnames(data)[which(colnames(data) == "OD280_OD315_of_diluted_wines")] <- "protein_content"
+  data[, sapply(data, is.factor)] <- sapply(data[, sapply(data, is.factor)], as.character)
+  numeric_cols <- c("alcohol", "malic_acid", "ash", "alcalinity_of_ash", "magnesium", "total_phenols", "flavanoids", "nonflavanoid_phenols", "proanthocyanins", "color_intensity", "hue", "protein_content")
+  data[, numeric_cols] <- sapply(data[, c(numeric_cols)], as.numeric)
+  data$z_score_malic_acid <- scale(data$malic_acid)
+  data[, c("wine_type", "alcohol", "magnesium", "color_intensity", "hue", "z_score_malic_acid", "proline")]
+}
+
+head(data_clean("wine_components.csv"))
+```
+##### More Tips for Building Functions #####
+
+**Make use of conditionals and `print` statements**
+
+Conditional statements make your function more flexible and efficient by allowing it to handle more variation and execute fewer commands.
+```
+data_clean <- function(csv) {
+  data <- read.csv(csv)
+  all(c("wine_type", "alcohol", "magnesium", "color_intensity", "hue") %in% colnames(data))
+  colnames(data)[which(colnames(data) == "OD280_OD315_of_diluted_wines")] <- "protein_content"
+  if (any(sapply(data, is.factor))) {
+    data[, sapply(data, is.factor)] <- sapply(data[, sapply(data, is.factor)], as.character)
+  }
+  if ("malic_acid" %in% colnames(data)) {
+    data$z_score_malic_acid <- scale(data$malic_acid)
+    data[, c("wine_type", "alcohol", "magnesium", "color_intensity", "hue", "z_score_malic_acid", "proline")]
+  } else {
+  data[, c("wine_type", "alcohol", "magnesium", "color_intensity", "hue", "proline")]
+  }
+}
+```
+`print` statements let you know how your function is progressing. They can be combined with conditional statements, which is especially helpful if the process is long and involves many branches.
+```{r}
+data_clean <- function(csv) {
+  print("Importing data")
+  data <- read.csv(csv)
+  if (all(c("wine_type", "alcohol", "magnesium", "color_intensity", "hue") %in% colnames(data))) {
+    print("All required columns found")
+  } else {
+    print("Columns missing")
+    }
+  print("Converting columns")
+  colnames(data)[which(colnames(data) == "OD280_OD315_of_diluted_wines")] <- "protein_content"
+  data[, sapply(data, is.factor)] <- sapply(data[, sapply(data, is.factor)], as.character)
+  numeric_cols <- c("alcohol", "malic_acid", "ash", "alcalinity_of_ash", "magnesium", "total_phenols", "flavanoids", "nonflavanoid_phenols", "proanthocyanins", "color_intensity", "hue", "protein_content")
+  data[, numeric_cols] <- sapply(data[, c(numeric_cols)], as.numeric)
+  data$z_score_malic_acid <- scale(data$malic_acid)
+  data[, c("wine_type", "alcohol", "magnesium", "color_intensity", "hue", "z_score_malic_acid", "proline")]
+}
+
+head(data_clean("wine_components.csv"))
+```
+**Think of the space inside the `{}` as its own mini-environment**
+
+Any object the function creates that is not part of the output exists only within the function.
+```{r}
+# Consider a simple function:
+
+pythagorean <- function(a, b){
+  hypotenuse <- sqrt(a^2 + b^2)
+  return(hypotenuse)
+}
+
+# If we run the function and then decide that we want the hypotenuse value, we'll get an error if we try to call it
+pythagorean(a = 3, b = 4)
+```
+```
+hypotenuse
+
+> Error in eval(expr, envir, enclos): object 'hypotenuse' not found
+```
+When you call a function, a temporary workspace is set up that will be destroyed when the function returns, either by:
+
+* Getting to the end, or
+
+* An explicit return statement
+
+Think of functions as an alternative reality, where objects are created and destroyed in a function call.
+
+Note: functions can access *external* sources of data, but take caution in doing so within a function, as you want your function to be as self-contained/self-reliant as possible.
+
+**Be thoughtful in your naming conventions**
+
+Keeping track of which objects exist within your function environment and which exist in your Global Environment can get confusing, as can the various names of different functions and their arguments. Within a function environment, define as few objects as possible, or continually overwrite the same object name.
+```
+my_func <- function(x) {
+  tmp <- read.csv(x)
+  tmp[, sapply(tmp, is.factor)] <- sapply(tmp[, sapply(tmp, is.factor)], as.character)
+  tmp[, numeric_cols] <- sapply(tmp[, c(numeric_cols)], as.numeric)
+  tmp[, c("wine_type", "alcohol", "magnesium", "color_intensity", "hue", "z_score_malic_acid", "proline")]
+}
+```
+For function names and argument names, don't be afraid to use long descriptors: the extra time it takes you to type will be made up for in the time it saves you having to remember what the function does.
+```
+func_splits_by_user_id_week <- function(user_data, date_range)
+```
+**Use defaults**
+
+Defaults are a good way to keep a function flexible but limit the number of arguments required for most cases. You create a default by setting an argument equal to its default value initially.
+```
+data_clean <- function(csv, z_score = "malic_acid"){
+  data <- read.csv(csv)
+  ...
+  If (!is.null(z_score)){
+    data$z_score <- scale(data[, z_score])
+  }
+  ...
+}
+```
+##### Best Practices for Coding `if` and `function` #####
+
+`if` and `function` should (almost) always be followed by squiggly brackets (`{}`), and the contents should be indented. This makes it easier to see the hierarchy in your code by skimming the left-hand margin.
+
+An opening curly brace should never go on its own line and should always be followed by a new line. A closing curly brace should always go on its own line, unless it’s followed by else. Always indent the code inside curly braces.
+```
+# Bad practice
+if (y < 0)
+message("Y is negative")
+
+if (y == 0) {
+log(x)
+} 
+else {
+y ^ x
+}
+
+# Good practice
+if (y < 0) {
+  message("Y is negative")
+}
+
+if (y == 0) {
+  log(x)
+} else {
+  y ^ x
+}
+```
+
+### Iterations ###
+A similar concept to functions are iterative processes, which are a bit like one-off functions written to iterate the same process over the same dataset several times.
+
+We've spent some time on `lapply`, which is a function that iterates a chosen function across all items in a list.
+```{r}
+lst <- list(title = "Model Summary", parameters = c(3.4, 6.1), output = data.frame(n = c(1:3), x = c(7, 5, 3)))
+lapply(lst, class)
+```
+The function you choose to apply to every list element can be one of your own design. The difference is that the input, or argument, will be the list element.
+```{r}
+# We want to rearrange these names so we have 'Last Name, First Name'
+esq_names <- list("Robert Shapiro", "Johnnie Cochran", "Alan Dershowitz", "Barry Scheck")
+lapply(esq_names, function(x) {
+  paste(strsplit(x, " ")[[1]][2], ", ", strsplit(x, " ")[[1]][1], sep = "")
+})
+```
+The logic of a `for` loop is similar: 'for each ___, do x.' You define the index, usually `i`, and the number of iterations, usually the length or size of the data you're working with.
+```{r}
+esq_names <- c("Robert Shapiro", "Johnnie Cochran", "Alan Dershowitz", "Barry Scheck")
+for (i in 1:length(esq_names)) {
+  print(paste(strsplit(esq_names[i], " ")[[1]][2], ", ",
+              strsplit(esq_names[i], " ")[[1]][1], sep = ""))
+}
+```
+Between these two, you should try to use `lapply` whenever possible. `for` loops handle one iteration at a time, while `lapply` uses parallel processing, and is therefore much faster and more efficient. Imagine needing to buy something from six different stores. One person visiting each store will take far longer than six people each visiting one store each.
+
+The only case where `for` loops are preferable is when you need the output from a previous iteration to execute the current iteration. 
+```{r}
+vec <- runif(10)
+# Here we want to take a numeric vector and create a dataframe where one of the columns is the differnce between the previous value and the current value
+for (i in 1:length(vec)) {
+  if (i == 1) {
+    df <- data.frame(n = i, value = vec[i], diff = NA)
+  } else {
+    tmp <- data.frame(n = i, value = vec[i], diff = vec[i -1] - vec[i])
+    df <- rbind(df, tmp)
+    }
+}
+df
+```
+An `lapply` would run these iterations in parallel, making it more difficult to set up correctly.
+
+### Storing Your Processes ###
+Try to think about each script you write as containing only the commands you need for that specific work. Any process you might repeat could be it's own script or function that you can call to when you need. 
+
+It's good practice to have a functions library where you store the functions you've created. To do so, create a new folder on your computer (eg, "/Users/adamgorski/R_functions"). That way, you can load all your functions easily everytime you start a new project.
+```{r}
+fns_lib <- "/Users/adamgorski/MS_ECON/Courses/R_functions"
+print(list.files(fns_lib))
+for (i in 1:length(list.files(fns_lib))) {source(paste(fns_lib, "/", list.files(fns_lib)[i], sep = ""))}
+# Now all the files in the folder have been loaded into our global environment
+```
+
+#### Acknowledgement ####
+
+This lesson is based in part on [*PLSC 31101: Computational Tools for Social Science*](https://plsc-31101.github.io/course/) by Rochelle Terman.
+</div>

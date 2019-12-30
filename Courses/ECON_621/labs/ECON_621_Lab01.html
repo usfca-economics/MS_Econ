@@ -1,0 +1,54 @@
+<p>Each lab assignment needs to be submitted as the html output of an R Markdown file. At the top of each submission should be the title (eg, <em>ECON 621 - Lab #1</em>) and the student's name. File names should use the following structure: StudentLastName_ECON621_Lab_LabNumber. For example, <em>Gorski_ECON621_Lab_01</em>.</p>
+<p>Assignments are due before the beginning of the following class.</p>
+<p>1. Make 3 variables: name (with your full name), city (where you were born) and year (when you were born).</p>
+<p>2. Run these lines of code and add a commented (#) line above each describing what it is doing.</p>
+<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>lowest &lt;- 1.0
+highest &lt;- 3.0
+temp &lt;- lowest
+lowest &lt;- highest
+highest &lt;- temp</pre>
+<p>3. Explain, in simple terms, the order of operations in the following program: when does the addition happen, when does the subtraction happen, when is each function called, etc.</p>
+<p>What is the final value of&nbsp;<code>radiance</code>?</p>
+<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>radiance &lt;- 1.0
+radiance &lt;-max(<span class="fl">2.1</span>, <span class="fl">2.0</span> <span class="op">+</span> <span class="kw">min</span>(radiance, <span class="fl">1.1</span> <span class="op">*</span> radiance <span class="op">-</span> <span class="fl">0.5</span>))</pre>
+<p>4. Execute the following code:</p>
+<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>rich &lt;- "gold"
+poor &lt;- "tin"
+max(rich, poor)<a id="cb39-1" data-line-number="1"></a></pre>
+<p>Using the help files for&nbsp;<code>max</code>, explain why it returns the result it does.</p>
+<p>5.</p>
+<p style="padding-left: 40px;">1) Make a variable <code>year</code> and assign it as the year you were born.</p>
+<p style="padding-left: 40px;">2) Coerce that variable to a string, and assign it to a new variable&nbsp;<code>year_string</code>.</p>
+<p style="padding-left: 40px;">3) Someone in your class says they were born in 2001. Find out what your age difference is, using only <code>year_string</code>.</p>
+<p>6. Change the following code to make the output&nbsp;<code>TRUE</code>.</p>
+<pre class="sourceCode r" style="padding-left: 80px;"><code class="sourceCode r"><a id="cb48-1" class="sourceLine" data-line-number="1"></a>val_<span class="dv">1</span> &lt;- F
+<a id="cb48-2" class="sourceLine" data-line-number="2"></a>val_<span class="dv">2</span> &lt;-<span class="st"> "F"</span>
+<a id="cb48-3" class="sourceLine" data-line-number="3"></a>
+<a id="cb48-4" class="sourceLine" data-line-number="4"></a><span class="kw">class</span>(val_<span class="dv">1</span>) <span class="op">==</span> <span class="kw">class</span>(val_<span class="dv">2</span>)
+<a id="cb48-5" class="sourceLine" data-line-number="5"></a><span class="co">&gt; [1] FALSE</span></code></pre>
+<p>7. Create a character vector called&nbsp;<code>fruit</code>&nbsp;that contain 4 of your favorite fruits. Then evaluate its structure using the commands below.</p>
+<pre class="sourceCode r" style="padding-left: 80px;"><code class="sourceCode r"><a id="cb65-7" class="sourceLine" data-line-number="7"></a><span class="kw">length</span>(fruit)
+<a id="cb65-8" class="sourceLine" data-line-number="8"></a><span class="kw">class</span>(fruit)
+<a id="cb65-9" class="sourceLine" data-line-number="9"></a><span class="kw">dim</span>(fruit)</code></pre>
+<p>8.</p>
+<p style="padding-left: 40px;">1) Create a vector of a sequence of numbers between 1 and 10.</p>
+<p style="padding-left: 40px;">2) Coerce that vector into a character vector.</p>
+<p style="padding-left: 40px;">3) Add the element "11" to the end of the vector.</p>
+<p style="padding-left: 40px;">4) Coerce it back to a numeric vector.</p>
+<p>9. Create a vector of the numbers 11-20, and multiply it by the original vector from 8 (above).</p>
+<p>10. Consider the vectors below about the box office sales for the first three Harry Potter Movies:</p>
+<pre class="sourceCode r" style="padding-left: 80px;"><code class="sourceCode r"><a id="cb91-1" class="sourceLine" data-line-number="1"></a><span class="co"># Box office sales (in millions)</span>
+<a id="cb91-2" class="sourceLine" data-line-number="2"></a>philosophers_stone &lt;- <span class="kw">c</span>(<span class="fl">66.1</span>, <span class="fl">317.6</span>, <span class="fl">657.2</span>)
+<a id="cb91-3" class="sourceLine" data-line-number="3"></a>chamber_secrets &lt;- <span class="kw">c</span>(<span class="fl">54.7</span>, <span class="fl">261.9</span>, <span class="fl">616.9</span>)
+<a id="cb91-4" class="sourceLine" data-line-number="4"></a>prisoner_azkaban &lt;- <span class="kw">c</span>(<span class="fl">45.6</span>, <span class="fl">249.5</span>, <span class="fl">547.1</span>)
+<a id="cb91-5" class="sourceLine" data-line-number="5"></a>
+<a id="cb91-6" class="sourceLine" data-line-number="6"></a><span class="co"># Vectors region and titles, used for naming</span>
+<a id="cb91-7" class="sourceLine" data-line-number="7"></a>region &lt;- <span class="kw">c</span>(<span class="st">"UK"</span>, <span class="st">"US"</span>, <span class="st">"Other"</span>)
+<a id="cb91-8" class="sourceLine" data-line-number="8"></a>titles &lt;- <span class="kw">c</span>(<span class="st">"Philosopher's Stone"</span>, <span class="st">"Chamber of Secrets"</span>, <span class="st">"Prisoner of Azkaban"</span>)</code></pre>
+<p style="padding-left: 40px;">1)Combine the first three vectors into a matrix</p>
+<p style="padding-left: 40px;">2) Add names for the matrix&rsquo;s rows (<code>titles</code>) and columns (<code>region</code>)</p>
+<p style="padding-left: 40px;">3) Use <code>rowSums()</code>&nbsp;to find the total Worldwide Box Office sales for each movie.</p>
+<p>11.</p>
+<p style="padding-left: 40px;">1) Create a 3x2 data frame called&nbsp;<code>basket</code>. The first column should contain the names of 3 fruits. The second column should contain the price of those fruits.</p>
+<p style="padding-left: 40px;">2) Now give your dataframe appropriate column and row names.</p>
+<p style="padding-left: 40px;">3) Add a third column called&nbsp;<code>color</code>, that tells me what color each fruit is.</p>

@@ -1,0 +1,11 @@
+<p>Each lab assignment needs to be submitted as the html output of an R Markdown file. At the top of each submission should be the title (eg, <em>ECON 621 - Lab #1</em>) and the student's name. File names should use the following structure: StudentLastName_ECON621_Lab_LabNumber. For example, <em>Gorski_ECON621_Lab_01</em>.</p>
+<p>Assignments are due before the beginning of the following class.</p>
+<p>Note: This assignment is a modified version of a take home exercise given to a candidate for a data scientist role.</p>
+<p>Start by downloading the resale item data and resale pageviews datasets from the course database with these queries (you need to run each query separately):</p>
+<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>SELECT * FROM econ_621.resale_item_data;<br />SELECT * FROM econ_621.resale_pageviews;</pre>
+<p>Build a predictive model for the percent of original price of the used items in this dataset that have been sold.&nbsp; An item's sale price is the used_list_price and original price is <code>msrp_new</code>. Items with an <code>NA</code> value for <code>first_ordered_date</code> have not been sold and should not be part of this analysis</p>
+<p style="padding-left: 40px;">a. Describe your independent variables (<code>pageviews</code> should be included):</p>
+<p style="padding-left: 80px;">What types of variables are they? Which is the default value for binary/category variables?</p>
+<p style="padding-left: 80px;">Are there any variables you want to create (eg, discount offered)?</p>
+<p style="padding-left: 40px;">b. Create training, testing, and validation subsets. Construct, constrain, and tune a simple linear regression model. Describe your process.</p>
+<p style="padding-left: 40px;">c. How well does your model perform on the test set compared to the training set? Are you able to improve performance in any way?</p>

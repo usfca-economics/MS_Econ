@@ -1,0 +1,25 @@
+<p>Each lab assignment needs to be submitted as the html output of an R Markdown file. At the top of each submission should be the title (eg, <em>ECON 621 - Lab #1</em>) and the student's name. File names should use the following structure: StudentLastName_ECON621_Lab_LabNumber. For example, <em>Gorski_ECON621_Lab_01</em>.</p>
+<p>Assignments are due before the beginning of the following class.</p>
+<p>Start by downloading the ag data, airports, and test scores datasets from the course database with these queries (you need to run each query separately):</p>
+<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>SELECT * FROM econ_621.ag_data;<br />SELECT * FROM econ_621.airports;<br />SELECT * FROM econ_621.test_scores;</pre>
+<p>1. Using the ag data dataset, calculate the year-to-year change in 'Food Availability per capita' for Total Grains and Cereals and Root Crops for Vietnam and Cambodia.</p>
+<p style="padding-left: 40px;">a. What is the effect size of the difference between the two countries?</p>
+<p style="padding-left: 40px;">b. Interpret the results. How confident are you that there is an actual difference between the two countries and how their food availability per capita changed over time?</p>
+<p style="padding-left: 40px;">c. To observe the same effect size at a 90% confidence level, how many *more* years of data would be needed for each country? (Assume alpha = 0.05 and power = 0.8.)</p>
+<p>2. I am interested in conducting an experiment on 10% of the airports in the dataset. The expected effect size is 0.4.</p>
+<p style="padding-left: 40px;">a. What level of power can I expect from this experiment? Interpret this result.</p>
+<p style="padding-left: 40px;">b. Given that the US has far more airports than any other country, I would like the proportion of US/non-US airports to be the same in treatment group as the overall population. How will you construct your treatment group of airports?</p>
+<p>3. The school district is experimenting between two different student-level interventions for 5th grade math test scores: one at Wiggs, the other at Charles Middle. The 'Benchmark' test will be used to evaluate. The district needs a dashboard they can use to monitor the progress of the experiment. The dashboard needs to:</p>
+<ul>
+<li>Take in a SQL query (which will be provided) that returns the test scores and school names for students</li>
+<li>Plot the distribution of the two schools' scores and the mean of the scores</li>
+<li>Display the number of observations, the level of power of the experiment, and how many more observations from each school will be necessary to achieve 80% power, at which point, the experiment will be concluded.&nbsp;</li>
+</ul>
+<p>Note of all the 5th graders in the two schools, 64% attend Wiggs, 36% attend Charles Middle.</p>
+<p>This query gives you the first 100 students in the experiment:</p>
+<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>SELECT * school, testscore FROM (<br />          	SELECT student_id, school, testscore, random() AS exp_order<br />          	FROM econ_621.test_scores<br />          	WHERE gradelevel = 5<br />          	AND school IN ('Wiggs', 'Charles Middle')<br />          	AND academic_year = 2015<br />          	AND subject = 'Math'<br />          	AND testname = 'Benchmark') a<br />          ORDER BY exp_order<br />          LIMIT 100</pre>
+<p style="padding-left: 40px;">a. Given the results of your dashboard, what is your advice to the district at this point?</p>
+<p style="padding-left: 40px;">b. Provide an updated dashboard with more observations using this query:</p>
+<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>SELECT * school, testscore FROM (<br />          	SELECT student_id, school, testscore, random() AS exp_order<br />          	FROM econ_621.test_scores<br />          	WHERE gradelevel = 5<br />          	AND school IN ('Wiggs', 'Charles Middle')<br />          	AND academic_year = 2015<br />          	AND subject = 'Math'<br />          	AND testname = 'Benchmark') a<br />          ORDER BY exp_order<br />          LIMIT 300</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

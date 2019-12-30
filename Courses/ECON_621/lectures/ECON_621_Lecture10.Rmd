@@ -1,0 +1,289 @@
+---
+title: "ECON621: Simple Linear Regression Analysis and Predicitive Modeling"
+author: "Adam Gorski"
+date: "Jan. 15, 2020"
+output: html_document
+---
+
+<style>
+div.blue pre { background-color:lightblue; }
+div.blue pre.r { background-color:cornsilk; }
+</style>
+<div class = "blue">
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Today's Lecture:
+
+* Simple Linear Regression
+
+* Estimating and Constraining the Model
+
+* Building a Prediction Engine and Tuning the Model
+
+To this point, the analytic techniques we have covered have been limited to the relationship between two variables. This is sometimes referred to as univariate analysis. However, nearly all modeling and predictive approaches consider that more than one variable could be affecting the outcome of concern. Analysis involving the relationship between an outcome variable and multiple variables is called multi-variate analysis.
+
+There are entire courses just on this concept, so our coverage here will be relatively brief. We'll cover some underlying theory and then get into how to use multi-variate regression models to build and iterate a prediction engine.
+
+### Simple Linear Regression ###
+
+Think about the concept of a best-fit line through a scatterplot. 
+```{r, include = F}
+wine_data <- read.csv("../wine_components.csv")
+library(ggplot2)
+```
+```{r}
+ggplot(wine_data, aes(x = magnesium, y = total_phenols)) + geom_point() +
+  geom_smooth(method = 'lm', se = F)
+```
+
+The line is found by minimizing the distance between each point and the line. The line, with its intercept and slope, *best describes the relationship between the two variables*. It provides a guide, or prediction, for where unknown 'y' values would be located *if* you know the 'x' value. In this way, the best fit line is a model of the relationship between the two variables.
+
+To calculate a linear relationship between variables in R, use the `lm` function.
+```{r}
+lm(total_phenols ~ magnesium, data = wine_data)
+```
+The outputs from the `lm` function are the characteristics of the best fit line, called coefficients. Algebraically, they are the y-intercept and slope, and they can be used to predict an unknown 'y' value for a given 'x' value. If you store the output of `lm` as an object, you can extract the model coefficients (along with several other characteristics of the model).
+```{r}
+# Store the model object
+model <- lm(total_phenols ~ magnesium, data = wine_data)
+
+# Examine stored coefficient values
+model$coefficients
+
+# Write a small function to generate predictions
+intercept <- unname(model$coefficients["(Intercept)"])
+mag_coefficient <- unname(model$coefficients["magnesium"])
+pred_total_phenols <- function(mag_level){intercept + (mag_level * mag_coefficient)}
+pred_total_phenols(110)
+```
+Conceptually, a multi-variate model is the same: it calculates a best fit line to describe the relationship between an outcome variable and a group of independent variables. That line is defined by an intercept term and a coefficent term for each independent variable. 
+```{r}
+lm(total_phenols ~ magnesium + ash, data = wine_data)
+```
+##### Arranging Data for Modeling #####
+Programmatically and conceptually, wide form data is better for running regressions. You should contstruct your data to have one row per observation and one column for each variable. Here it is especially important to follow data management best practices (eg, remove duplicates, check for NAs, etc.). Poor quality data will give you a poor quality model.
+```{r}
+# Build a dataset to model 4th grade Math SBAC scores for students in 2015
+source("../../R_functions/don_econ_connect.R")
+don_econ_connect()
+test_scores <- dbGetQuery(con, "SELECT * FROM econ_621.test_scores
+                                WHERE gradelevel = 4
+                                AND academic_year = 2015")
+
+# Remove duplicated rows, duplicated columns, and strange anomaly
+test_scores <- test_scores[, -which(colnames(test_scores) %in% c("gradelevel", "academic_year", "percentile"))]
+test_scores <- test_scores[!duplicated(test_scores[, -which(colnames(test_scores) %in% c("testscore", "proficiency", "percentile"))]),]
+test_scores <- test_scores[test_scores$student_id != 1031535,]
+head(test_scores)
+
+# Change some testnames for simplicity
+test_scores$testname[test_scores$testname == "SBAC Preliminary"] <- "SBAC"
+test_scores$testname[test_scores$testname == "NWEA MAP"] <- "MAP"
+
+# Granularity of the data should be student-level
+  # id variables: student_id, gender, race_ethnicity
+library(reshape2)
+test_scores_wide <- dcast(test_scores, student_id + gender + race_ethnicity + school ~ 
+                            testname + subject + testperiod, value.var = "testscore")
+
+# Convert category variables to factors
+factor_vars <- c("gender", "race_ethnicity", "school")
+test_scores_wide[, factor_vars] <- data.frame(sapply(test_scores_wide[, factor_vars],  as.factor))
+
+# Change race/ethnicity categories for space
+levels(test_scores_wide$race_ethnicity)
+levels(test_scores_wide$race_ethnicity) <- c("AI", "AS", "AA", "FI", "HI", "PI", "MR", "WH")
+  
+head(test_scores_wide)
+```
+##### Types of Variables #####
+Once you have your data in wide format, examine the independent (also called 'predictor') variables in your data. There are many types of variables, but we will focus on three:
+
+* Continuous variable: can take on any value between its minimum and maximum value
+
+* Binary variable (also called 'dummy' variable or 'flag'): can be one of two values, usually 1 or 0
+
+* Category variable (also called 'discrete' variable): can be one of a set of values, numeric or otherwise
+
+The default for the `lm` function is to model a continuous variable as the outcome variable. This is a simple linear regression. The independent variables however, can be any class. It is worth spending a minute on how to think about binary and category variables when building and evaluating a model. For a continuous independent variable, imagining a line is straight forward: the value for 'y' is the intercept term plus the value for 'x' times the slope, and if 'x' is 0, the value for 'y' is the intercept term. 
+
+For binary and category variables, it is important to understand which value reflects 'x' being equal to 0, because that value will end up in the intercept term of the model. You should think of that value as the default value. The model will produce a coefficient for all other possible values to analyze the impact of that category on the outcome variable. But the default value cannot be isolated in the same way. For binary variables, the default value is nearly always 0 or `FALSE`. For example, if you have a binary variable for military service, the observations where the individual had served in the military would have a 1 and all others a 0. The coefficient for military service would tell you what the impact of an individual having served in the military had on the outcome variable. 
+
+Defining the default for category variables is more difficult. There isn't an obvious default for common categories such as political party, blood type, race/ethnicity, etc. A good way to handle category variables in R is to convert each possible category into its own binary variable. If you take this approach, you will need to exclude one binary for each category variable when you run your model, which the regression will then treat as the default value. In the `varhandle` package, there is a convenient function called `to.dummy` that does exactly that.
+```{r}
+library(varhandle)
+
+# Define which variables are category variables
+category_cols <- c("gender", "school", "race_ethnicity")
+
+# For each category variable, create a set of dummies and append to the data set
+for (i in 1:length(category_cols)) {
+  dummies <- to.dummy(test_scores_wide[, category_cols[i]], category_cols[i])
+test_scores_wide <- cbind(test_scores_wide, dummies)
+}
+```
+One approach to choosing default values is to choose the modal (most common value). Unfortunately, there isn't a dedicated function in R for finding the mode, so the best way to do it is to use the `table` function and sort by frequency.
+```{r}
+# Examine category variables by sorting by frequency
+sapply(test_scores_wide[, category_cols], function(x) {
+  names(table(x))[order(table(x), decreasing = T)]
+  })
+```
+Once you have decided how to arrange your variables, you can add them to the `lm` function using a formula. Write a formula of variable names with this structure:
+
+    outcome variable ~ independent variable #1 + independent variable #2 + ...
+
+Generally, you include all potential independent variables at first and then pare down. However, any `NA` value in any column will cause the entire row to be removed from the model, so it is a good idea to look into your independent variables before modeling.
+```{r}
+sapply(test_scores_wide, function(x) {sum(is.na(x))})
+# We might want to leave out Benchmark_Math_4 due to a high number of NAs
+lm(SBAC_Math_5 ~ gender.F + 
+     race_ethnicity.AI + race_ethnicity.AS + race_ethnicity.AA + race_ethnicity.FI + 
+     race_ethnicity.PI + race_ethnicity.MR + race_ethnicity.WH + 
+     school.Charles_Middle + school.Indian_Ridge + school.Nolan_Richardson + school.Parkland +
+     Benchmark_ELA_2 + Benchmark_ELA_4 + Benchmark_ELA_5 + Benchmark_Math_2 + Benchmark_Math_5 +
+     MAP_English_1 + MAP_English_3 + MAP_Math_1 + MAP_Math_3, data = test_scores_wide)
+```
+##### Creating Train, Test, and Validation Subsets #####
+To avoid estimating a model that is overfitted on the data, it is good practice to subset your data into a training set, a test set, and a validation set. The training set is for estimating the original model, the test set is for tuning the model, and the validation set is for evaluating the final model.
+The subsets can be chosen randomly, but you should be aware of variables that should be distributed proportionally across the subsets.
+```{r, include = F}
+library(dplyr)
+```
+```{r}
+# Subset the data: 70% training, 20% test, 10% validation
+  # Create a dataframe of student ids and random values
+sets <- data.frame(student_id = unique(test_scores_wide$student_id),
+                   rand = runif(length(unique(test_scores_wide$student_id))))
+
+  # Assign status based on unique values and merge into data
+sets$set <- ifelse(sets$rand < 0.7, 'train', ifelse(sets$rand >= 0.9, 'validate', 'test'))
+test_scores_wide <- merge(test_scores_wide, sets[, c('student_id', 'set')], by = 'student_id')
+
+  # Subset by status
+train <- test_scores_wide[test_scores_wide$set == "train",]
+test <- test_scores_wide[test_scores_wide$set == "test",]
+validate <- test_scores_wide[test_scores_wide$set == "validate",]
+
+# Evaluate distributions of some variables we might want to stratify by
+strats <- c("gender", "school", "race_ethnicity")
+for (i in 1:length(strats)){
+  print(table(test_scores_wide[, strats[i]])/nrow(test_scores_wide))
+  print(table(train[, strats[i]])/nrow(train))
+  print(table(test[, strats[i]])/nrow(test))
+  print(table(validate[, strats[i]])/nrow(validate))
+}
+
+# Note: For a small data set, this process of subsetting can produce sets that are too small to properly test and validate a model due to the levels of variance
+```
+### Estimating and Constraining the Model ###
+
+##### Estimating the Unconstrained Model #####
+The strength of the predictions you can derive from the model's coefficients depend on how strong the relationships are between the independent variables and the outcome variable. You can use the `summary` function to surface test statistics - similar to the t-test for a hypothesis test - for each independent variable.
+```{r}
+model <- lm(SBAC_Math_5 ~ gender.F + 
+         race_ethnicity.AI + race_ethnicity.AS + race_ethnicity.AA + race_ethnicity.FI + 
+         race_ethnicity.PI + race_ethnicity.MR + race_ethnicity.WH + 
+         school.Charles_Middle + school.Indian_Ridge + school.Nolan_Richardson + school.Parkland +
+         Benchmark_ELA_2 + Benchmark_ELA_4 + Benchmark_ELA_5 + Benchmark_Math_2 + Benchmark_Math_5 +
+         MAP_English_1 + MAP_English_3 + MAP_Math_1 + MAP_Math_3, data = train)
+summary(model)
+```
+In the two columns on the right, `summary` shows the test statistic and the p-value for each independent variable. The 'Estimates' column shows the magnitude of a one unit increase in the independent variabke to the outcome variable. At the bottom of the output are statistics on the goodness of fit of the model, essentially, how good of a job does the model do of defining the variation in the outcome variable. R-squared is a useful metric (there's not too much difference between 'Multiple R-squared' and 'Adjusted R-squared') that explains the percent of the total variation captured by the model. 
+
+##### Constraining the Model #####
+If you are planning on using the model to generate predictions, you want to remove the independent variables with statistically insignificant coefficients. Using insignificant coefficients to calculate predictions reduces the accuracy of the model. The stepwise backward regression is a common approach to model constraint. Starting with all the candidate independent variables, the process builds the model  by removing independent variables based on p values, in a stepwise manner until there is no variable left to remove. The function `ols_step_backward_p` from the `olsrr` package will ingest a model object and return a constrained version. (The inverse of this process, where independent variables are added stepwise, is called 'stepwise forward'; the analogous function is `ols_step_forward_p`.)
+```{r}
+library(olsrr)
+constrained_model <- ols_step_backward_p(model)$model
+summary(constrained_model)
+```
+
+### Building a Prediction Engine and Tuning the Model ###
+##### Calculating Predicted Values for New Data #####
+Once you have a constrained model and its coefficient values, you can calculate predictions for the outcome variable given different values for the independent variables. 
+```{r, include = F}
+library(plyr)
+```
+```{r}
+coefficients <- constrained_model$coefficients[!is.na(constrained_model$coefficients)]
+pred_score <- function(obs, coefficients) 
+  {pred <- rbind.fill(obs[names(train) %in% names(coefficients)],
+                      as.data.frame(t(coefficients))) %>% t %>% as.data.frame %>% subset(!is.na(V1))
+  pred$product <- pred$V1 * pred$V2
+  sum(pred$product, unname(constrained_model$coefficients["(Intercept)"]))
+}
+
+# Test prediction function on a single row from the 'train' data set
+i <- 1
+pred_score(train[i,], coefficients)
+```
+For comparison, you can see the predicted values for each row that are stored in the the model object `fitted.values`.
+```{r}
+constrained_model$fitted.values[i]
+```
+
+##### Tuning the Model #####
+You can use this process of calculating predicted values to evaluate and tune your model using the 'test' subset. To do this you need to compare the performance of the model on the intial data ('train' subset) and the 'test' subset. Root Mean Squared Error (RMSE) is a good metric for comparing the predictive power of linear models. What is nice about RMSE is that the value is interpretability. The value is in the same units as the outcome variable, representing approximately how far off the average model prediction is. The package `Metrics` has an `rmse` function which ingests a vector of actual values and predicted values and returns the value.
+```{r}
+library(Metrics)
+train_rmse <- rmse(constrained_model$model$SBAC_Math_5, constrained_model$fitted.values)
+train_rmse
+train_rmse/sd(constrained_model$model$SBAC_Math_5)
+
+# Calculate predicted values for test data set
+test_pred <- ldply(lapply(split(test, test$student_id), function(x) {
+  data.frame(pred = pred_score(x, coefficients), actual = x$SBAC_Math_5)
+}), rbind)
+test_pred <- test_pred[!is.na(test_pred$pred) & !is.na(test_pred$actual),]
+test_rmse <- rmse(test_pred$actual, test_pred$pred)
+test_rmse
+test_rmse/sd(test_pred$actual)
+```
+If the RMSE is significantly higher for the predicted values on the testing data set, the model might be overfitted on the training data set. This means that the model is picking up on both the signal in the data, ie, the variance related to the independent variables, *and* the noise, ie, the variance due to randomness. Including too many independent variables can be a cause of overfitting, so you can try modifying how you constrain your initial model to allow for fewer variables.
+```{r, results = F, warning = F, message = F}
+# Increase p-value requirement
+constrained_model_2 <- ols_step_backward_p(model, prem = 0.1, details = F)$model
+```
+```{r}
+train_rmse_2 <- rmse(constrained_model_2$model$SBAC_Math_5, constrained_model_2$fitted.values)
+train_rmse_2
+train_rmse_2/sd(constrained_model$model$SBAC_Math_5)
+
+coefficients <- constrained_model_2$coefficients[!is.na(constrained_model_2$coefficients)]
+test_pred <- ldply(lapply(split(test, test$student_id), function(x) {
+  data.frame(pred = pred_score(x, coefficients), actual = x$SBAC_Math_5)
+}), rbind)
+test_pred <- test_pred[!is.na(test_pred$pred) & !is.na(test_pred$actual),]
+test_rmse_2 <- rmse(test_pred$actual, test_pred$pred)
+test_rmse_2
+test_rmse_2/sd(test_pred$actual)
+```
+
+```{r, results = F, warning = F, message = F}
+# Increase p-value requirement and step forward instead of backward
+constrained_model_3 <- ols_step_forward_p(model, prem = 0.1)$model
+```
+```{r}
+train_rmse_3 <- rmse(constrained_model_3$model$SBAC_Math_5, constrained_model_3$fitted.values)
+train_rmse_3
+train_rmse_3/sd(constrained_model$model$SBAC_Math_5)
+
+coefficients <- constrained_model_3$coefficients[!is.na(constrained_model_3$coefficients)]
+test_pred <- ldply(lapply(split(test, test$student_id), function(x) {
+  data.frame(pred = pred_score(x, coefficients), actual = x$SBAC_Math_5)
+}), rbind)
+test_pred <- test_pred[!is.na(test_pred$pred) & !is.na(test_pred$actual),]
+test_rmse_3 <- rmse(test_pred$actual, test_pred$pred)
+test_rmse_3
+test_rmse_3/sd(test_pred$actual)
+```
+You can also try re-sampling your subsets to see if your results change significantly. The predictive power of the model will generally increase as you feed it more data, but its performance will always be stronger on the 'train' data set than 'test.' The goal of a predictive model is not to be 100% accurate but to add value through its predictions.
+
+
+#### Acknowledgement ####
+
+This lesson is based in part on [*Variable Selection Methods*](https://cran.r-project.org/web/packages/olsrr/vignettes/variable_selection.html) from the CRAN.R-Project
+</dev>

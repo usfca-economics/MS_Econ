@@ -1,0 +1,21 @@
+---
+title: "ECON 621 Lab Template"
+author: "Adam Gorski"
+date: Jan. 1, 2020
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### 1. ####
+
+Text can go before or after code
+
+```{r}
+# code separated into chunks
+summary(cars)
+```
+
+Text can go before or after code
