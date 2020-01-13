@@ -1,5 +1,5 @@
 ---
-title: "ECON621: Simple Linear Regression Analysis and Predicitive Modeling"
+title: "ECON621: Simple Linear Regression Analysis and Predictive Modeling"
 author: "Adam Gorski"
 date: "Jan. 15, 2020"
 output: html_document
@@ -176,7 +176,7 @@ for (i in 1:length(strats)){
   print(table(validate[, strats[i]])/nrow(validate))
 }
 
-# Note: For a small data set, this process of subsetting can produce sets that are too small to properly test and validate a model due to the levels of variance
+# Note: For a small data set, this process of subsetting can produce sets that are too small to properly test and validate a model
 ```
 ### Estimating and Constraining the Model ###
 
@@ -197,7 +197,8 @@ In the two columns on the right, `summary` shows the test statistic and the p-va
 If you are planning on using the model to generate predictions, you want to remove the independent variables with statistically insignificant coefficients. Using insignificant coefficients to calculate predictions reduces the accuracy of the model. The stepwise backward regression is a common approach to model constraint. Starting with all the candidate independent variables, the process builds the model  by removing independent variables based on p values, in a stepwise manner until there is no variable left to remove. The function `ols_step_backward_p` from the `olsrr` package will ingest a model object and return a constrained version. (The inverse of this process, where independent variables are added stepwise, is called 'stepwise forward'; the analogous function is `ols_step_forward_p`.)
 ```{r}
 library(olsrr)
-constrained_model <- ols_step_backward_p(model)$model
+constrained_model <- step(model, direction = 'backward')$model
+#constrained_model <- ols_step_backward_p(model)$model
 summary(constrained_model)
 ```
 

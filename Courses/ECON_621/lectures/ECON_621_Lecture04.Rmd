@@ -84,9 +84,8 @@ We can also use `colnames` to rename columns. We need to use the `which` functio
 ```{r}
 # Imagine we want to change the column 'OD280_OD315_of_diluted_wines' to 'protein_content'
 colnames(wine_data) == "OD280_OD315_of_diluted_wines"
-which(colnames(wine_data) == "OD280_OD315_of_diluted_wines")
 # Now we have the index of the column we want to rename
-colnames(wine_data)[which(colnames(wine_data) == "OD280_OD315_of_diluted_wines")] <- "protein_content"
+colnames(wine_data)[colnames(wine_data) == "OD280_OD315_of_diluted_wines"] <- "protein_content"
 colnames(wine_data)
 ```
 
