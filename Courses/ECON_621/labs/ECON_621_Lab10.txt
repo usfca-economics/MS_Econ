@@ -1,0 +1,13 @@
+<p>Each lab assignment needs to be submitted as the html output of an R Markdown file. At the top of each submission should be the title (eg, <em>ECON 621 - Lab #1</em>) and the student's name. File names should use the following structure: StudentLastName_ECON621_Lab_LabNumber. For example, <em>Gorski_ECON621_Lab_01</em>.</p>
+<p>Assignments are due before the beginning of the following class.</p>
+<p>Start by downloading a subset of the test scores data with this query:</p>
+<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>SELECT * FROM econ_621.test_scores<br />WHERE gradelevel = 4<br />AND academic_year = 2015;</pre>
+<p>Build a predictive model for whether a student achieves proficiency on the SBAC Math test. A student is considered proficient if they receive 'Standard Met' or 'Standard Achieved' for the exam.</p>
+<p>Your process should include these steps:</p>
+<p>1. Clean and reformat your data, and describe your reasoning along the way. Hint: we did much of this reformatting in lecture 10.</p>
+<p>2. Create subsets of your data for training, testing, and validation</p>
+<p>3. Estimate a logit model on the training dataset.</p>
+<p>4. Constrain the model.</p>
+<p>5. Write a function to create predicted values from the model's parameters, and check the function against model's fitted values.</p>
+<p>6. Calculate an optimized threshold for model predictions.</p>
+<p>7. Evaluate the model's performance on training and testing datasets.</p>
