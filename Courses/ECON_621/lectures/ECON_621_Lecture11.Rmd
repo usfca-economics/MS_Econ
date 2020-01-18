@@ -239,6 +239,8 @@ To that end, don't worry too much about the time constraints given. Typically, y
 
 The creator of the assignment will often be the one who interviews you about your output. They likely have specific answers or approaches they are expecting to see, so it benefits you to take a broad approach. Do your research.
 
+Be creative with your approach. There are many ways to make your submission stand out: technical competency, strength of model, thoroughness of process, etc. Creativity (in feature engineering, for example) is a great way to make your submission unique and get the attention of a hiring committee that is reviewing many nearly identical submissions. This is also a way to gain an advantage over more technical or more experienced candidates.
+
 Think about how you would present your results to a non-technical audience. A common question might be, 'say someone on the product team asked you to help them develop a similar process: how would you explain your approach and what kinds of questions would you ask to help them guide you?'
 
 The assignment is for the hiring team to understand how you think about completed data problems, so make sure that you have a process that you've thought through. And be prepared to defend your process. Being careful and thorough is much more important than having the 'right' answer.

@@ -1,25 +1,66 @@
-<p>Each lab assignment needs to be submitted as the html output of an R Markdown file. At the top of each submission should be the title (eg, <em>ECON 621 - Lab #1</em>) and the student's name. File names should use the following structure: StudentLastName_ECON621_Lab_LabNumber. For example, <em>Gorski_ECON621_Lab_01</em>.</p>
-<p>Assignments are due before the beginning of the following class.</p>
-<p>Start by downloading the ag data, airports, and test scores datasets from the course database with these queries (you need to run each query separately):</p>
-<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>SELECT * FROM econ_621.ag_data;<br />SELECT * FROM econ_621.airports;<br />SELECT * FROM econ_621.test_scores;</pre>
-<p>1. Using the ag data dataset, calculate the year-to-year change in 'Food Availability per capita' for Total Grains and Cereals and Root Crops for Vietnam and Cambodia.</p>
-<p style="padding-left: 40px;">a. What is the effect size of the difference between the two countries?</p>
-<p style="padding-left: 40px;">b. Interpret the results. How confident are you that there is an actual difference between the two countries and how their food availability per capita changed over time?</p>
-<p style="padding-left: 40px;">c. To observe the same effect size at a 90% confidence level, how many *more* years of data would be needed for each country? (Assume alpha = 0.05 and power = 0.8.)</p>
-<p>2. I am interested in conducting an experiment on 10% of the airports in the dataset. The expected effect size is 0.4.</p>
-<p style="padding-left: 40px;">a. What level of power can I expect from this experiment? Interpret this result.</p>
-<p style="padding-left: 40px;">b. Given that the US has far more airports than any other country, I would like the proportion of US/non-US airports to be the same in treatment group as the overall population. How will you construct your treatment group of airports?</p>
-<p>3. The school district is experimenting between two different student-level interventions for 5th grade math test scores: one at Wiggs, the other at Charles Middle. The 'Benchmark' test will be used to evaluate. The district needs a dashboard they can use to monitor the progress of the experiment. The dashboard needs to:</p>
-<ul>
-<li>Take in a SQL query (which will be provided) that returns the test scores and school names for students</li>
-<li>Plot the distribution of the two schools' scores and the mean of the scores</li>
-<li>Display the number of observations, the level of power of the experiment, and how many more observations from each school will be necessary to achieve 80% power, at which point, the experiment will be concluded.&nbsp;</li>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 12.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Courier; color: #000000; -webkit-text-stroke: #000000}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    span.s1 {font-kerning: none}
+    span.s2 {-webkit-text-stroke: 0px #000000}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">Each lab assignment needs to be submitted as the html output of an R Markdown file. At the top of each submission should be the title (eg, <i>ECON 621 - Lab #1</i>) and the student's name. File names should use the following structure: StudentLastName_ECON621_Lab_LabNumber. For example, <i>Gorski_ECON621_Lab_01</i>.</span></p>
+<p class="p1"><span class="s1">Assignments are due before the beginning of the following class.</span></p>
+<p class="p1"><span class="s1">Start by downloading the ag data, airports, and test scores datasets from the course database with these queries (you need to run each query separately):</span></p>
+<p class="p2"><span class="s1">SELECT * FROM econ_621.ag_data;</span></p>
+<p class="p2"><span class="s1">SELECT * FROM econ_621.airports;</span></p>
+<p class="p2"><span class="s1">SELECT * FROM econ_621.test_scores;</span></p>
+<p class="p1"><span class="s1">1. Using the ag data dataset, calculate the year-to-year change in 'Food Availability per capita' for Total Grains and Cereals and Root Crops for Vietnam and Cambodia.</span></p>
+<p class="p1"><span class="s1">a. What is the effect size of the difference between the two countries?</span></p>
+<p class="p1"><span class="s1">b. Interpret the results. How confident are you that there is an actual difference between the two countries and how their food availability per capita changed over time?</span></p>
+<p class="p1"><span class="s1">c. To observe the same effect size at a 90% confidence level, how many *more* years of data would be needed for each country? (Assume alpha = 0.05 and power = 0.8.)</span></p>
+<p class="p1"><span class="s1">2. I am interested in conducting an experiment on 10% of the airports in the dataset. The expected effect size is 0.4.</span></p>
+<p class="p1"><span class="s1">a. What level of power can I expect from this experiment? Interpret this result.</span></p>
+<p class="p1"><span class="s1">b. Given that the US has far more airports than any other country, I would like the proportion of US/non-US airports to be the same in treatment group as the overall population. How will you construct your treatment group of airports?</span></p>
+<p class="p1"><span class="s1">3. The school district is experimenting between two different student-level interventions for 5th grade math test scores: one at Wiggs, the other at Charles Middle. The 'Benchmark' test will be used to evaluate. The district needs a dashboard they can use to monitor the progress of the experiment. The dashboard needs to:</span></p>
+<ul class="ul1">
+  <li class="li3"><span class="s2"></span><span class="s1">Take in a SQL query (which will be provided) that returns the test scores and school names for students</span></li>
+  <li class="li3"><span class="s2"></span><span class="s1">Plot the distribution of the two schools' scores and the mean of the scores</span></li>
+  <li class="li3"><span class="s2"></span><span class="s1">Display the number of observations, the level of power of the experiment, and how many more observations from each school will be necessary to achieve 80% power, at which point, the experiment will be concluded. </span></li>
 </ul>
-<p>Note of all the 5th graders in the two schools, 64% attend Wiggs, 36% attend Charles Middle.</p>
-<p>This query gives you the first 100 students in the experiment:</p>
-<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>SELECT * school, testscore FROM (<br />          	SELECT student_id, school, testscore, random() AS exp_order<br />          	FROM econ_621.test_scores<br />          	WHERE gradelevel = 5<br />          	AND school IN ('Wiggs', 'Charles Middle')<br />          	AND academic_year = 2015<br />          	AND subject = 'Math'<br />          	AND testname = 'Benchmark') a<br />          ORDER BY exp_order<br />          LIMIT 100</pre>
-<p style="padding-left: 40px;">a. Given the results of your dashboard, what is your advice to the district at this point?</p>
-<p style="padding-left: 40px;">b. Provide an updated dashboard with more observations using this query:</p>
-<pre style="padding-left: 80px;"><a id="cb39-1" data-line-number="1"></a>SELECT * school, testscore FROM (<br />          	SELECT student_id, school, testscore, random() AS exp_order<br />          	FROM econ_621.test_scores<br />          	WHERE gradelevel = 5<br />          	AND school IN ('Wiggs', 'Charles Middle')<br />          	AND academic_year = 2015<br />          	AND subject = 'Math'<br />          	AND testname = 'Benchmark') a<br />          ORDER BY exp_order<br />          LIMIT 300</pre>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+<p class="p1"><span class="s1">Note of all the 5th graders in the two schools, 64% attend Wiggs, 36% attend Charles Middle.</span></p>
+<p class="p1"><span class="s1">This query gives you the first 100 students in the experiment:</span></p>
+<p class="p2"><span class="s1">SELECT school, testscore FROM (</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>SELECT student_id, school, testscore, random() AS exp_order</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>FROM econ_621.test_scores</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>WHERE gradelevel = 5</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>AND school IN ('Wiggs', 'Charles Middle')</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>AND academic_year = 2015</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>AND subject = 'Math'</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>AND testname = 'Benchmark') a</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          </span>ORDER BY exp_order</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          </span>LIMIT 100</span></p>
+<p class="p1"><span class="s1">a. Given the results of your dashboard, what is your advice to the district at this point?</span></p>
+<p class="p1"><span class="s1">b. Provide an updated dashboard with more observations using this query:</span></p>
+<p class="p2"><span class="s1">SELECT school, testscore FROM (</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>SELECT student_id, school, testscore, random() AS exp_order</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>FROM econ_621.test_scores</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>WHERE gradelevel = 5</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>AND school IN ('Wiggs', 'Charles Middle')</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>AND academic_year = 2015</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>AND subject = 'Math'</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          <span class="Apple-tab-span">	</span></span>AND testname = 'Benchmark') a</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          </span>ORDER BY exp_order</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">          </span>LIMIT 300</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1"> </span></p>
+</body>
+</html>

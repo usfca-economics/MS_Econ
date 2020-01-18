@@ -28,7 +28,7 @@ Designing, running, and evaluating experiments is what puts the 'science' in 'da
 
 * What is being tested? (Usually a change to a product, service, or policy)
 
-* What is the intended outcome? (Usually a behavior change)
+* What is the intended outcome and how will it be measured? (Usually a behavior change)
 
 * How will treatment and control groups be chosen? (Usually a randomized processs)
 
@@ -100,7 +100,7 @@ It is useful to spend a minute here on the concept of 'power,' since the other t
 
 Here is a good visual representation of the two concepts together:
 
-![](lecture_materials/alpha_beta_power.png)
+![](../lecture_materials/alpha_beta_power.png)
 
 Usually power is set at 0.8 and alpha at 0.05, so what you are most interested in are effect size and sample size. You can use power analysis to determine sample size when you have the other three parameters established, which is useful in scoping out the length, size, and/or cost of an experiment.
 
